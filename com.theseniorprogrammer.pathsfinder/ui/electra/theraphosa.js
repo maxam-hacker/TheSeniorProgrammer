@@ -1,8 +1,8 @@
 const { remote } = require('electron');
-const phosa = require('../theraphosa/ace')
-const phosaTheme = require("../theraphosa/theme/monokai.js");
-const phosaMode = require("../theraphosa/mode/javascript.js").Mode;
+const Phosa = require('../theraphosa/ace')
+const PhosaTheme = require("../theraphosa/theme/monokai.js");
+const PhosaMode = require("../theraphosa/mode/javascript.js").Mode;
 
-var phosaEditor = phosa.edit('editor');
-phosaEditor.setTheme(phosaTheme);
-phosaEditor.getSession().setMode(new phosaMode());
+var phosaEditor = Phosa.edit('editor');
+phosaEditor.setTheme(PhosaTheme);
+phosaEditor.getSession().setMode(new PhosaMode());
