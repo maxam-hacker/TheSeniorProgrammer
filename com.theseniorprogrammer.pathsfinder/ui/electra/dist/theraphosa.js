@@ -940,7 +940,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const { remote } = __webpack_require__(/*! electron */ \"electron\");\nconst phosa = __webpack_require__(/*! ../theraphosa/ace */ \"../theraphosa/ace.js\")\n\nvar phosaEditor = phosa.edit('editor');\n\n\n//# sourceURL=webpack:///./theraphosa.js?");
+eval("const { remote } = __webpack_require__(/*! electron */ \"electron\");\nconst phosa = __webpack_require__(/*! ../theraphosa/ace */ \"../theraphosa/ace.js\")\n\nvar phosaEditor = phosa.edit('editor');\n//phosaEditor.setTheme(\"../theraphosa/theme/monokai.js\");\n//phosaEditor.getSession().setMode('../../theraphosa/mode/javascript.js');\n\n//# sourceURL=webpack:///./theraphosa.js?");
 
 /***/ }),
 
