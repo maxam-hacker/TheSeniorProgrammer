@@ -4,12 +4,15 @@ define(function(require, exports, module) {
 var Editor = require("./editor").Editor;
 
     var CodeMaster = function(renderer, session, options) {
-        this.editor = new Editor(renderer, session, options);
+        Editor.call(this, renderer, session, options);
+        //this.editor = new Editor(renderer, session, options);
     };
+
+    CodeMaster.prototype = Object.create(Editor.prototype);
 
     (function() {
 
-        this.expandCode = function() {
+        this.expandCode = function(line, row) {
 
         };
         

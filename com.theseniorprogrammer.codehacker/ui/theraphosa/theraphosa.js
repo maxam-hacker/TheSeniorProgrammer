@@ -43,7 +43,7 @@ define(function(require, exports, module) {
     var event = require("./lib/event");
     
     var Range = require("./range").Range;
-    var Editor = require("./editor").Editor;
+    var Editor = require("./codemaster").CodeMaster;
     var EditSession = require("./edit_session").EditSession;
     var UndoManager = require("./undomanager").UndoManager;
     var Renderer = require("./virtual_renderer").VirtualRenderer;

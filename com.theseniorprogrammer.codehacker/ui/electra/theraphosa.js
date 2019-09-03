@@ -1,5 +1,5 @@
 const { remote } = require('electron');
-const Phosa = require('../theraphosa/ace')
+const Phosa = require('../theraphosa/theraphosa')
 const PhosaTheme = require("../theraphosa/theme/monokai.js");
 const PhosaMode = require("../theraphosa/mode/javascript.js").Mode;
 
