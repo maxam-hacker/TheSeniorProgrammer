@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TheCodeHacker
+Bundle-SymbolicName: com.maxamhacker.thecodehacker;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: MaxamHacker
+Require-Bundle: org.eclipse.core.runtime,
+  org.eclipse.core.resources,
+  org.eclipse.ui,
+  org.eclipse.jface.text,
+  org.eclipse.jdt.core,
+  org.eclipse.jdt.ui
+Automatic-Module-Name: com.maxamhacker.thecodehacker
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

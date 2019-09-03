@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+ 		point="org.eclipse.ui.views">
+      <category
+            name="The Code Hacker"
+            id="com.maxamhacker.thecodehacker">
+      </category>
+      <view
+            id="com.maxamhacker.thecodehacker.views.TheMaxamHackerCallGraphView"
+            name="Call Graph"
+            icon="icons/sample.png"
+            class="com.maxamhacker.thecodehacker.views.TheMaxamHackerCallGraphView"
+            category="com.maxamhacker.thecodehacker"
+            inject="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="com.maxamhacker.thecodehacker.views.TheMaxamHackerCallGraphView"
+               relative="org.eclipse.ui.views.ProblemView"
+               relationship="right"
+               ratio="0.5">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   
+   <extension
+        point="org.eclipse.ui.menus">
+      	<menuContribution
+        	locationURI="menu:org.eclipse.ui.main.menu">
+        <menu
+            id="TheCodeHackerMenu"
+            label="TheCodeHacker">
+	        <command
+	            commandId="com.maxamhacker.thecodehacker.commands.StartCallGraph"
+	            label="Start Call Graph"
+	            style="push"
+	            tooltip="Start call graph">
+	        </command>
+        </menu>
+        </menuContribution>
+        <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <menu
+         	id="TheCodeHackerMenu"
+            label="TheCodeHacker">
+	        <command
+	            commandId="com.maxamhacker.thecodehacker.commands.StartCallGraph"
+	            label="Start Call Graph"
+	            style="push"
+	            tooltip="Start call graph">
+	        </command>
+         </menu>
+        </menuContribution>
+   </extension>
+   
+   <extension
+   		point="org.eclipse.ui.commands">
+        <command
+	    	defaultHandler="com.maxamhacker.thecodehacker.commands.StartCallGraphHandler"
+	        id="com.maxamhacker.thecodehacker.commands.StartCallGraph"
+	        name="StartCallGraph">
+   		</command>
+   </extension>
+  
+</plugin>
