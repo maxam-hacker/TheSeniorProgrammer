@@ -1,68 +1,70 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import NestedFileTreeView from 'react-nested-file-tree';
-import 'react-nested-file-tree/dist/default.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import FileView from './FileView'
+import FolderView from './FolderView'
 
-class Browser extends Component {
+function Browser (props) {
+  const { 
+    directory,
+  } = props
 
-    constructor (props) {
-      super(props)
-      this.state = {
-        selectedFile: 'some_folder/some_file',
-        directory: {
-        _contents: [
-          {
-            name: 'file_name1',
-            path: 'file_name1'
-          }
-        ],
-        folder_name1: {
-          _contents: [
-            {
-              name: 'file_name2',
-              path: 'folder_name1/file_name2'
-            }
-          ],
-          folder_name2: {
-            _contents: [
-              {
-                name: 'file_name3',
-                path: 'folder_name1/folder_name2/file_name3'
-              }
-            ]
-          }
-        }
+  const passedProps = {
+    fileClickHandler,
+    fileClassName,
+    folderClassName,
+    selectedFilePath,
+    selectedClassName,
+    fileTemplate
+  }
+
+  return (
+    <ul data-level='0' className={className}>
+      {
+        directory && directory['_contents'].map(file => {
+          return (
+            <FileView
+              key={`root-file-${file.path}`}
+              file={file}
+              {...passedProps} />
+          )
+        })
       }
-      };
-    }  
-  
-    handleFileClick (file) {
-      console.log(file)
-      this.setState({ selectedFile: file.path })
-    }
-  
-    handleFolderClick (folderName) {
-      console.log(folderName)
-    }
-  
-    render () {
-      return React.createElement(
-            NestedFileTreeView,
-            {
-                selectedFilePath: this.state.selectedFile, 
-                fileClickHandler: this.handleFileClick,
-                folderClickHandler: this.folderClickHandler,
-                directory: this.state.directory
-            }
-        );
-    }
+      {
+        directory && Object.keys(directory)
+        .filter(k => { return k !== '_contents' })
+        .map(prop => {
+          return (
+            <FolderView
+              key={`root-folder-${prop}`}
+              level={1}
+              expended={expended}
+              maxFolderLevel={maxFolderLevel}
+              folderObj={directory[prop]}
+              name={prop}
+              parentPath=''
+              folderClickHandler={folderClickHandler}
+              folderTemplate={folderTemplate}
+              {...passedProps} />
+          )
+        })
+      }
+    </ul>
+  )
 }
 
 Browser.propTypes = {
-  selectedFilePath: PropTypes.string,
+  directory: PropTypes.object.isRequired,
+  maxFolderLevel: PropTypes.number,
+  expended: PropTypes.bool,
+  className: PropTypes.string,
   fileClickHandler: PropTypes.func,
   folderClickHandler: PropTypes.func,
-  directory: PropTypes.object.isRequired
-};
+  fileClassName: PropTypes.string,
+  folderClassName: PropTypes.string,
+  selectedFilePath: PropTypes.string,
+  selectedClassName: PropTypes.string,
+  folderTemplate: PropTypes.func,
+  fileTemplate: PropTypes.func
+}
 
-export { Browser }
+export default Browser
