@@ -23,7 +23,9 @@ class Browser extends Component {
         if (stat.isFile())
           return React.createElement('li', {}, file);
         if (stat.isDirectory())
-          return React.createElement('ul', {}, file);
+          return React.createElement('li', {}, 
+            file,
+            React.createElement('ul', {}, file));
       })
 
     );
