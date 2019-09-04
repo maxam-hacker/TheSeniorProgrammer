@@ -1,13 +1,28 @@
 module.exports = {
 	mode: 'development',
-	entry: './theraphosa.js',
-	output: {
-		filename: "theraphosa.js"
-	},
+	entry: './app.js',
+	module: {
+		rules: [
+		  {
+			test: /\.css$/i,
+			use: ['style-loader', 'css-loader'],
+		  },
+		  {
+			test: /\.(js|jsx)$/,
+			exclude: /node_modules/,
+			use: {
+			  loader: 'babel-loader',
+			},
+		  },
+		],
+	  },
 	node: {
 		fs: "empty",
 		net: 'empty',
     	tls: 'empty',
+	},
+	output: {
+		filename: "theraphosa.js"
 	},
 	target: 'electron-renderer'
 };
