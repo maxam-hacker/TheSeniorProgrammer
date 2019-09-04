@@ -1,70 +1,19 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import FileView from './FileView'
-import FolderView from './FolderView'
 
-function Browser (props) {
-  const { 
-    directory,
-  } = props
+class Browser extends Component {
 
-  const passedProps = {
-    fileClickHandler,
-    fileClassName,
-    folderClassName,
-    selectedFilePath,
-    selectedClassName,
-    fileTemplate
+  constructor(props) {
+    super(props);
   }
 
-  return (
-    <ul data-level='0' className={className}>
-      {
-        directory && directory['_contents'].map(file => {
-          return (
-            <FileView
-              key={`root-file-${file.path}`}
-              file={file}
-              {...passedProps} />
-          )
-        })
-      }
-      {
-        directory && Object.keys(directory)
-        .filter(k => { return k !== '_contents' })
-        .map(prop => {
-          return (
-            <FolderView
-              key={`root-folder-${prop}`}
-              level={1}
-              expended={expended}
-              maxFolderLevel={maxFolderLevel}
-              folderObj={directory[prop]}
-              name={prop}
-              parentPath=''
-              folderClickHandler={folderClickHandler}
-              folderTemplate={folderTemplate}
-              {...passedProps} />
-          )
-        })
-      }
-    </ul>
-  )
+  render() {
+    return React.createElement(
+      'ul', {},
+      React.createElement('li', {}, 'test0.txt'),
+      React.createElement('li', {}, 'test1.txt')
+    );
+  }
 }
 
-Browser.propTypes = {
-  directory: PropTypes.object.isRequired,
-  maxFolderLevel: PropTypes.number,
-  expended: PropTypes.bool,
-  className: PropTypes.string,
-  fileClickHandler: PropTypes.func,
-  folderClickHandler: PropTypes.func,
-  fileClassName: PropTypes.string,
-  folderClassName: PropTypes.string,
-  selectedFilePath: PropTypes.string,
-  selectedClassName: PropTypes.string,
-  folderTemplate: PropTypes.func,
-  fileTemplate: PropTypes.func
-}
-
-export default Browser
+export {Browser}

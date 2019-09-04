@@ -7,8 +7,8 @@ class Electra extends Component {
 
     render() {
         return React.createElement(SplitterLayout, {}, 
-            React.createElement(Browser),
-            React.createElement(Browser)
+            React.createElement(Browser, {}),
+            "Hello world"
         );
     }
 }
