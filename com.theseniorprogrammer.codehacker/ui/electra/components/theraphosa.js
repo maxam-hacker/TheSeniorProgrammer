@@ -3,11 +3,6 @@ import PropTypes from 'prop-types'
 import Phosa from '../../theraphosa/theraphosa'
 import PhosaTheme from '../../theraphosa/theme/monokai.js'
 import {Mode} from '../../theraphosa/mode/javascript.js'
-//const PhosaMode = require("../theraphosa/mode/javascript.js").Mode;
-
-//var phosaEditor = Phosa.edit('editor');
-//phosaEditor.setTheme(PhosaTheme);
-//phosaEditor.getSession().setMode(new PhosaMode());
 
 
 class Theraphosa extends Component {
