@@ -2,13 +2,17 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import fs from 'fs'
 
+import {FileView} from './file'
+
 class Browser extends Component {
 
   constructor(props) {
     super(props);
 
+    var basePath = props.path;
+
     this.state = {
-      dir: fs.readdirSync('./')
+      dir: fs.readdirSync(basePath)
     };
     
   }
@@ -19,9 +23,12 @@ class Browser extends Component {
       'ul', {},
 
       this.state.dir.map(file => {
+
         var stat = fs.statSync(file);
+
         if (stat.isFile())
-          return React.createElement('li', {}, file);
+          return React.createElement(FileView, { name: file, path: './' + file });
+
         if (stat.isDirectory())
           return React.createElement('li', {}, 
             file,
@@ -31,5 +38,9 @@ class Browser extends Component {
     );
   }
 }
+
+Browser.propTypes = {
+  path: PropTypes.string.isRequired
+};
 
 export {Browser}

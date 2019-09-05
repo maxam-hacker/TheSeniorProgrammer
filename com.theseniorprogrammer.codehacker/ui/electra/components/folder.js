@@ -1,104 +1,25 @@
-import React, { Component } from 'react'
-import FileView from './FileView'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 class FolderView extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: props.expended || false
-    }
+
+  constructor(props) {
+    super(props);
   }
 
-  toggleFolder () {
-    const { open } = this.state
-    const { name, parentPath, folderObj } = this.props
-    const currentPath = parentPath + '/' + name
-
-    this.setState({ open: !open }, () => {
-      let fn = this.props.folderClickHandler
-      fn && fn(name, currentPath, folderObj)
-    })
+  onFolderClick(e) {
+    console.log(this.props.path);
   }
 
-  render () {
-    const { level,
-      name,
-      parentPath,
-      folderObj,
-      maxFolderLevel,
-      expended,
-      folderTemplate,
-      fileTemplate,
-      fileClassName,
-      folderClassName,
-      fileClickHandler,
-      selectedFilePath,
-      folderClickHandler } = this.props
-    const { open } = this.state
-    let styl = open ? {'display': 'block'} : {'display': 'none'}
-    let cns = (folderClassName || '') + ' subFolder'
-    let passedFolderProps = {
-      maxFolderLevel,
-      expended,
-      folderTemplate,
-      fileTemplate,
-      fileClickHandler,
-      fileClassName,
-      folderClassName,
-      selectedFilePath,
-      folderClickHandler
-    }
-
-    return (
-      <li key={`folder-${name}`} className={open ? `open ${cns}` : cns}>
-        {
-          folderTemplate &&
-          folderTemplate({
-            name,
-            folderObj,
-            currentPath: parentPath + '/' + name,
-            onclick: this.toggleFolder.bind(this)
-          }) ||
-          <a onClick={::this.toggleFolder}>/{name}</a>
-        }
-
-        <ul style={styl} data-level={level}>
-          {
-            folderObj && folderObj['_contents'].map(f => {
-              return (
-                <FileView
-                  key={`file-${f.path}`}
-                  file={f}
-                  fileTemplate={fileTemplate}
-                  fileClickHandler={fileClickHandler}
-                  fileClassName={fileClassName}
-                  selectedFilePath={selectedFilePath} />
-              )
-            })
-          }
-          {
-            parseInt(maxFolderLevel) && (maxFolderLevel > level) || isNaN(parseInt(maxFolderLevel))
-            ? (
-              folderObj && Object.keys(folderObj)
-              .filter(k => { return k !== '_contents' })
-              .map(prop => {
-                return (
-                  <FolderView
-                    key={`folder-${name}-${prop}`}
-                    level={level + 1}
-                    name={prop}
-                    parentPath={parentPath + '/' + name}
-                    folderObj={folderObj[prop]}
-                    {...passedFolderProps} />
-                )
-              })
-            )
-            : <span className='more'>...</span>
-          }
-        </ul>
-      </li>
-    )
+  render() {
+    return React.createElement('li', { onClick: this.onFolderClick.bind(this) }, this.props.name);
   }
+
 }
 
-export default FolderView
+FolderView.propTypes = {
+  name: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired
+};
+
+export {FolderView}

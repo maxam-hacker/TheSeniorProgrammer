@@ -1,31 +1,25 @@
-import React from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-const FileView = (props) => {
-  let { file,
-    fileClickHandler,
-    selectedFilePath,
-    fileTemplate } = props
+class FileView extends Component {
 
-  let fileClassName = (props.fileClassName || '') + ' item'
-  let selectedClassName = props.selectedClassName || 'active'
-  let cns = selectedFilePath === file.path
-    ? selectedClassName + ' ' + fileClassName
-    : fileClassName
-  let onclickFn = () => {
-    fileClickHandler && fileClickHandler(file)
+  constructor(props) {
+    super(props);
   }
 
-  return (
-    <li
-      key={`file-${file.path}`}
-      className={cns}
-      onClick={onclickFn}>
-      {
-        fileTemplate && fileTemplate({ name: file.name }) ||
-        <a>|__{file.name}</a>
-      }
-    </li>
-  )
+  onFileClick(e) {
+    console.log(this.props.path);
+  }
+
+  render() {
+    return React.createElement('li', { onClick: this.onFileClick.bind(this) }, this.props.name);
+  }
+
 }
 
-export default FileView
+FileView.propTypes = {
+  name: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired
+};
+
+export {FileView}
