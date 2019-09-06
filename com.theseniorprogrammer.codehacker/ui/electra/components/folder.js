@@ -15,7 +15,8 @@ class FolderView extends Component {
     };
 
     this.onFolderClick = function(e) {
-      BrowserToTheraphosaEventBus.publish(this.props.path);
+      e.stopPropagation();
+      //BrowserToTheraphosaEventBus.publish(this.props.path);
   
       var command = '';
       var content = this.state.dir;
@@ -28,7 +29,6 @@ class FolderView extends Component {
   
       this.setState({folderState: command, dir: content});
       this.forceUpdate();
-      e.stopPropagation();
     }
   }
 

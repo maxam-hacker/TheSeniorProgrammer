@@ -1,9 +1,10 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import Phosa from '../../theraphosa/theraphosa'
-import PhosaTheme from '../../theraphosa/theme/monokai.js'
-import {Mode} from '../../theraphosa/mode/javascript.js'
-import {BrowserToTheraphosaEventBus} from './eventbus.js'
+import fs from 'fs';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import Phosa from '../../theraphosa/theraphosa';
+import PhosaTheme from '../../theraphosa/theme/monokai.js';
+import {Mode} from '../../theraphosa/mode/javascript.js';
+import {BrowserToTheraphosaEventBus} from './eventbus.js';
 
 
 class Theraphosa extends Component {
@@ -24,7 +25,8 @@ class Theraphosa extends Component {
 
     this.FileAndFolderClick = function(data) {
         //console.log('browser - to - theraphosa: ' + data);
-        this.phosaEditor.setValue(data);
+        var text = fs.readFileSync(data);
+        this.phosaEditor.setValue(text.toString());
     };
     BrowserToTheraphosaEventBus.subscribe(this.FileAndFolderClick.bind(this));
   }
