@@ -23,7 +23,7 @@ class Theraphosa extends Component {
     this.phosaEditor.getSession().setMode(new Mode());
 
     this.FileAndFolderClick = function(data) {
-        console.log('browser - to - theraphosa: ' + data);
+        //console.log('browser - to - theraphosa: ' + data);
         this.phosaEditor.setValue(data);
     };
     BrowserToTheraphosaEventBus.subscribe(this.FileAndFolderClick.bind(this));

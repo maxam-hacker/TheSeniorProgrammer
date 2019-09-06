@@ -10,6 +10,7 @@ class FileView extends Component {
 
   onFileClick(e) {
     BrowserToTheraphosaEventBus.publish(this.props.path);
+    e.stopPropagation();
   }
 
   render() {

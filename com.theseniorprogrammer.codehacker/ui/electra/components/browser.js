@@ -1,9 +1,8 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import fs from 'fs'
-
-import {FileView} from './file'
-import {FolderView} from './folder'
+import fs from 'fs';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {FileView} from './file';
+import {FolderView} from './folder';
 
 class Browser extends Component {
 
