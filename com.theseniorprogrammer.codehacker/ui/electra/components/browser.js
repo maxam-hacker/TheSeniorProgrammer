@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import fs from 'fs'
 
 import {FileView} from './file'
+import {FolderView} from './folder'
 
 class Browser extends Component {
 
@@ -30,9 +31,7 @@ class Browser extends Component {
           return React.createElement(FileView, { name: file, path: './' + file });
 
         if (stat.isDirectory())
-          return React.createElement('li', {}, 
-            file,
-            React.createElement('ul', {}, file));
+          return React.createElement(FolderView, { name: file, path: './' + file });
       })
 
     );

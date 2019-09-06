@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {BrowserToTheraphosaEventBus} from './eventbus.js'
 
 class FileView extends Component {
 
@@ -8,7 +9,7 @@ class FileView extends Component {
   }
 
   onFileClick(e) {
-    console.log(this.props.path);
+    BrowserToTheraphosaEventBus.publish(this.props.path);
   }
 
   render() {
