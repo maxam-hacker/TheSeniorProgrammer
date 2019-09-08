@@ -24,7 +24,6 @@ class Theraphosa extends Component {
     this.phosaEditor.getSession().setMode(new Mode());
 
     this.FileAndFolderClick = function(data) {
-        //console.log('browser - to - theraphosa: ' + data);
         var text = fs.readFileSync(data);
         this.phosaEditor.setValue(text.toString());
     };
