@@ -20,8 +20,7 @@ class PathMaster extends Component {
                         React.createElement('tr', {},
                                 React.createElement('input', {})
                         )
-                ),
-                React.createElement(Theraphosa, { path: './', id: '_methods' })
+                )
         );
     }
 }
