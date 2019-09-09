@@ -21,14 +21,16 @@ class PathCell {
         var jsonified = '{\n';
 
         jsonified += 'calls:\n'
-        this.TheCell.calls.forEach(call => jsonified += '${call.toJson()},\n');
+        this.TheCell.calls.forEach(call => jsonified += `${call.toJson()},\n`);
 
         jsonified += 'methods:\n'
-        this.TheCell.methods.forEach(method => jsonified += '${method.toJson()},\n');
+        this.TheCell.methods.forEach(method => jsonified += `${method.toJson()},\n`);
 
-        jsonified = '}';
+        jsonified += '}';
 
         return jsonified;
     }
 
 }
+
+export {PathCell}

@@ -5,6 +5,7 @@ import Phosa from '../../theraphosa/theraphosa';
 import PhosaTheme from '../../theraphosa/theme/monokai.js';
 import {Mode} from '../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaEventBus} from './eventbus.js';
+import {ThePathWeb} from '../paths'
 
 
 class Theraphosa extends Component {

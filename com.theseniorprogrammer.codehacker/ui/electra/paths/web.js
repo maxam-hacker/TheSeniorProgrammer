@@ -42,12 +42,14 @@ class PathWeb {
         var jsonified = '{\n';
 
         for (var filename in this.TheWeb)
-            jsonified += '${filename}: ${this.TheWeb[filename].toJson()}\n';
+            jsonified += `${filename}: ${this.TheWeb[filename].toJson()}\n`;
 
-        jsonified = '}';
+        jsonified += '}';
 
         return jsonified;
     }
 
 }
+
+export {PathWeb}
 

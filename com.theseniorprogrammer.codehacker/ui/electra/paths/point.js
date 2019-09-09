@@ -18,7 +18,7 @@ class PathPoint {
     }
 
     startToJson() {
-        return '{ line: ${this.start.line}, column: ${this.start.column} }';
+        return `{ line: ${this.start.line}, column: ${this.start.column} }`;
     }
 
     setEnd(line, column) {
@@ -27,7 +27,9 @@ class PathPoint {
     }
 
     endToJson() {
-        return '{ line: ${this.end.line}, column: ${this.end.column} }';
+        return `{ line: ${this.end.line}, column: ${this.end.column} }`;
     }
 
 }
+
+export default PathPoint

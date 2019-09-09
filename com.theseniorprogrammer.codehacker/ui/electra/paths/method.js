@@ -6,9 +6,12 @@
 //  }
 *******************************************************/
 
+import PathPoint from './point'
+
 class PathMethod extends PathPoint {
 
     constructor() {
+        super();
         this.name = null;
     }
 
@@ -16,12 +19,10 @@ class PathMethod extends PathPoint {
         this.name = name;
     }
 
-    setPath(path) {
-        this.path = path;
-    }
-
     toJson() {
-        return '{ name: ${this.name}, start: ${startToJson()}, end: ${endToJson()} }';
+        return `{ name: ${this.name}, start: ${this.startToJson()}, end: ${this.endToJson()} }`;
     }
 
 }
+
+export {PathMethod}

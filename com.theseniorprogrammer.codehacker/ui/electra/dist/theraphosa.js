@@ -1079,7 +1079,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Theraphosa\", function() { return Theraphosa; });\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ \"./node_modules/prop-types/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../theraphosa/theraphosa */ \"../theraphosa/theraphosa.js\");\n/* harmony import */ var _theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../theraphosa/theme/monokai.js */ \"../theraphosa/theme/monokai.js\");\n/* harmony import */ var _theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../theraphosa/mode/javascript.js */ \"../theraphosa/mode/javascript.js\");\n/* harmony import */ var _theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./eventbus.js */ \"./components/eventbus.js\");\n\n\n\n\n\n\n\n\nclass Theraphosa extends react__WEBPACK_IMPORTED_MODULE_1__[\"Component\"] {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement('div', {\n      id: 'editor'\n    });\n  }\n\n  componentDidMount() {\n    var element = document.getElementById('editor');\n    this.phosaEditor = _theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3___default.a.edit(element);\n    this.phosaEditor.setTheme(_theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4___default.a);\n    this.phosaEditor.getSession().setMode(new _theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5__[\"Mode\"]());\n\n    this.FileAndFolderClick = function (data) {\n      var text = fs__WEBPACK_IMPORTED_MODULE_0___default.a.readFileSync(data);\n      this.phosaEditor.setValue(text.toString());\n    };\n\n    _eventbus_js__WEBPACK_IMPORTED_MODULE_6__[\"BrowserToTheraphosaEventBus\"].subscribe(this.FileAndFolderClick.bind(this));\n  }\n\n}\n\nTheraphosa.propTypes = {\n  path: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string\n};\n\n\n//# sourceURL=webpack:///./components/theraphosa.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Theraphosa\", function() { return Theraphosa; });\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ \"./node_modules/prop-types/index.js\");\n/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../theraphosa/theraphosa */ \"../theraphosa/theraphosa.js\");\n/* harmony import */ var _theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../theraphosa/theme/monokai.js */ \"../theraphosa/theme/monokai.js\");\n/* harmony import */ var _theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../theraphosa/mode/javascript.js */ \"../theraphosa/mode/javascript.js\");\n/* harmony import */ var _theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _eventbus_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./eventbus.js */ \"./components/eventbus.js\");\n/* harmony import */ var _paths__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../paths */ \"./paths/index.js\");\n\n\n\n\n\n\n\n\n\nclass Theraphosa extends react__WEBPACK_IMPORTED_MODULE_1__[\"Component\"] {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement('div', {\n      id: 'editor'\n    });\n  }\n\n  componentDidMount() {\n    var element = document.getElementById('editor');\n    this.phosaEditor = _theraphosa_theraphosa__WEBPACK_IMPORTED_MODULE_3___default.a.edit(element);\n    this.phosaEditor.setTheme(_theraphosa_theme_monokai_js__WEBPACK_IMPORTED_MODULE_4___default.a);\n    this.phosaEditor.getSession().setMode(new _theraphosa_mode_javascript_js__WEBPACK_IMPORTED_MODULE_5__[\"Mode\"]());\n\n    this.FileAndFolderClick = function (data) {\n      var text = fs__WEBPACK_IMPORTED_MODULE_0___default.a.readFileSync(data);\n      this.phosaEditor.setValue(text.toString());\n    };\n\n    _eventbus_js__WEBPACK_IMPORTED_MODULE_6__[\"BrowserToTheraphosaEventBus\"].subscribe(this.FileAndFolderClick.bind(this));\n  }\n\n}\n\nTheraphosa.propTypes = {\n  path: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string\n};\n\n\n//# sourceURL=webpack:///./components/theraphosa.js?");
 
 /***/ }),
 
@@ -1338,6 +1338,78 @@ eval("module.exports = function() {\n\tthrow new Error(\"define cannot be used i
 /***/ (function(module, exports) {
 
 eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\tmodule.deprecate = function() {};\n\t\tmodule.paths = [];\n\t\t// module.parent = undefined by default\n\t\tif (!module.children) module.children = [];\n\t\tObject.defineProperty(module, \"loaded\", {\n\t\t\tenumerable: true,\n\t\t\tget: function() {\n\t\t\t\treturn module.l;\n\t\t\t}\n\t\t});\n\t\tObject.defineProperty(module, \"id\", {\n\t\t\tenumerable: true,\n\t\t\tget: function() {\n\t\t\t\treturn module.i;\n\t\t\t}\n\t\t});\n\t\tmodule.webpackPolyfill = 1;\n\t}\n\treturn module;\n};\n\n\n//# sourceURL=webpack:///(webpack)/buildin/module.js?");
+
+/***/ }),
+
+/***/ "./paths/call.js":
+/*!***********************!*\
+  !*** ./paths/call.js ***!
+  \***********************/
+/*! exports provided: PathCall */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"PathCall\", function() { return PathCall; });\n/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./point */ \"./paths/point.js\");\n/*******************************************************\n//  call = {\n//       name: callName,\n//       start: { line, column },\n//       end: { line, column },\n//       path : { file: file, method: method}\n//  }\n*******************************************************/\n\n\nclass PathCall extends _point__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  constructor() {\n    super();\n    this.name = null;\n    this.path = null;\n  }\n\n  setName(name) {\n    this.name = name;\n  }\n\n  setPath(path) {\n    this.path = {};\n    this.path.file = path.file;\n    this.path.method = path.method;\n  }\n\n  toJson() {\n    return `{ name: ${this.name}, start: ${this.startToJson()}, end: ${this.endToJson()}, path: ${this.path.method.toJson()} }`;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./paths/call.js?");
+
+/***/ }),
+
+/***/ "./paths/cell.js":
+/*!***********************!*\
+  !*** ./paths/cell.js ***!
+  \***********************/
+/*! exports provided: PathCell */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"PathCell\", function() { return PathCell; });\n/*******************************************************\n//  cell = { calls: [ calls ], methods: [ methods ] }\n*******************************************************/\nclass PathCell {\n  constructor() {\n    this.TheCell = {\n      calls: [],\n      methods: []\n    };\n  }\n\n  addCall(call) {\n    this.TheCell.calls.push(call);\n  }\n\n  addMethod(method) {\n    this.TheCell.methods.push(method);\n  }\n\n  toJson() {\n    var jsonified = '{\\n';\n    jsonified += 'calls:\\n';\n    this.TheCell.calls.forEach(call => jsonified += `${call.toJson()},\\n`);\n    jsonified += 'methods:\\n';\n    this.TheCell.methods.forEach(method => jsonified += `${method.toJson()},\\n`);\n    jsonified += '}';\n    return jsonified;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./paths/cell.js?");
+
+/***/ }),
+
+/***/ "./paths/index.js":
+/*!************************!*\
+  !*** ./paths/index.js ***!
+  \************************/
+/*! exports provided: ThePathWeb */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ThePathWeb\", function() { return ThePathWeb; });\n/* harmony import */ var _web__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./web */ \"./paths/web.js\");\n/* harmony import */ var _cell__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cell */ \"./paths/cell.js\");\n/* harmony import */ var _call__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./call */ \"./paths/call.js\");\n/* harmony import */ var _method__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./method */ \"./paths/method.js\");\n\n\n\n\nvar ThePathWeb = new _web__WEBPACK_IMPORTED_MODULE_0__[\"PathWeb\"]();\nvar method = {};\nvar call = {};\nvar cell = {};\nvar path = {};\nmethod = new _method__WEBPACK_IMPORTED_MODULE_3__[\"PathMethod\"]();\nmethod.setName('constructor(name, start, end)');\nmethod.setStart(14, 0);\nmethod.setEnd(18, 5);\ncell = new _cell__WEBPACK_IMPORTED_MODULE_1__[\"PathCell\"]();\ncell.addMethod(method);\nThePathWeb.addCell('method.js', cell);\nvar call = new _call__WEBPACK_IMPORTED_MODULE_2__[\"PathCall\"]();\ncall.setName('new PathMethod()');\ncall.setStart(6, 9);\ncall.setEnd(6, 25);\ncall.setPath({\n  file: 'method.js',\n  method: method\n});\ncell = new _cell__WEBPACK_IMPORTED_MODULE_1__[\"PathCell\"]();\ncell.addCall(call);\nThePathWeb.addCell('index.js', cell);\nconsole.log(ThePathWeb.toJson());\n\n\n//# sourceURL=webpack:///./paths/index.js?");
+
+/***/ }),
+
+/***/ "./paths/method.js":
+/*!*************************!*\
+  !*** ./paths/method.js ***!
+  \*************************/
+/*! exports provided: PathMethod */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"PathMethod\", function() { return PathMethod; });\n/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./point */ \"./paths/point.js\");\n/*******************************************************\n//  method = {\n//      name: callName,\n//      start: { line, column },\n//      end: { line, column }\n//  }\n*******************************************************/\n\n\nclass PathMethod extends _point__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  constructor() {\n    super();\n    this.name = null;\n  }\n\n  setName(name) {\n    this.name = name;\n  }\n\n  toJson() {\n    return `{ name: ${this.name}, start: ${this.startToJson()}, end: ${this.endToJson()} }`;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./paths/method.js?");
+
+/***/ }),
+
+/***/ "./paths/point.js":
+/*!************************!*\
+  !*** ./paths/point.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/*******************************************************\n//  point = {\n//       start: { line, column },\n//       end: { line, column }\n//  }\n*******************************************************/\nclass PathPoint {\n  constructor() {\n    this.start = {\n      line: -1,\n      column: -1\n    };\n    this.end = {\n      line: -1,\n      column: -1\n    };\n  }\n\n  setStart(line, column) {\n    this.start.line = line;\n    this.start.column = column;\n  }\n\n  startToJson() {\n    return `{ line: ${this.start.line}, column: ${this.start.column} }`;\n  }\n\n  setEnd(line, column) {\n    this.end.line = line;\n    this.end.column = column;\n  }\n\n  endToJson() {\n    return `{ line: ${this.end.line}, column: ${this.end.column} }`;\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (PathPoint);\n\n//# sourceURL=webpack:///./paths/point.js?");
+
+/***/ }),
+
+/***/ "./paths/web.js":
+/*!**********************!*\
+  !*** ./paths/web.js ***!
+  \**********************/
+/*! exports provided: PathWeb */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"PathWeb\", function() { return PathWeb; });\n/*******************************************************\n//  TheWeb\n//  {\n//      filename : cell,\n//      filename : cell,,\n//      filename : cell,,\n//  }\n//\n//  cell = { calls: [ calls ], methods: [ methods ] }\n//\n//  calls = call, call, ...\n//\n//  call = {\n//      name: callName,\n//      start: { line, column },\n//      end: { line, column },\n//      path : method\n//  }\n//\n//  methods = method, method, ...\n//\n//  method = {\n//      name: methodName,\n//      start: { line, column },\n//      end: { line, column },\n//  }\n*******************************************************/\nclass PathWeb {\n  constructor() {\n    this.TheWeb = {};\n  }\n\n  addCell(filename, cell) {\n    this.TheWeb[filename] = cell;\n  }\n\n  toJson() {\n    var jsonified = '{\\n';\n\n    for (var filename in this.TheWeb) jsonified += `${filename}: ${this.TheWeb[filename].toJson()}\\n`;\n\n    jsonified += '}';\n    return jsonified;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./paths/web.js?");
 
 /***/ }),
 
