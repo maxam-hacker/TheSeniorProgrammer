@@ -15,11 +15,11 @@ class Theraphosa extends Component {
   }
 
   render() {
-    return React.createElement('div', { id: 'editor' });
+    return React.createElement('div', { id: 'editor' + this.props.id });
   }
 
   componentDidMount() {
-    var element = document.getElementById('editor');
+    var element = document.getElementById('editor' + this.props.id);
     this.phosaEditor = Phosa.edit(element);
     this.phosaEditor.setTheme(PhosaTheme);
     this.phosaEditor.getSession().setMode(new Mode());
@@ -33,6 +33,7 @@ class Theraphosa extends Component {
 }
 
 Theraphosa.propTypes = {
+  id: PropTypes.string,
   path: PropTypes.string
 };
 

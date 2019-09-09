@@ -7,9 +7,12 @@ import {Theraphosa} from './theraphosa'
 class Electra extends Component {
 
     render() {
-        return React.createElement(SplitterLayout, {}, 
+        return React.createElement(SplitterLayout, { primaryIndex: 0, percentage: true, secondaryInitialSize: 80 }, 
             React.createElement(Browser, { path: './' }),
-            React.createElement(Theraphosa, { path: './' })
+            React.createElement(SplitterLayout, { primaryIndex: 0, percentage: true, secondaryInitialSize: 50 }, 
+                    React.createElement(Theraphosa, { path: './', id: '_calls' }),
+                    React.createElement(Theraphosa, { path: './', id: '_methods' })
+            )
         );
     }
 }

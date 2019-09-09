@@ -59,8 +59,7 @@ class FolderView extends Component {
                         return React.createElement(FileView, { name: file, path: this.props.path + '/' + file });
                       if (stat.isDirectory())
                         return React.createElement(FolderView, { name: file, path: this.props.path + '/' + file });
-                    }
-                  )
+                    })
                 )
               );
     } else if (this.state.folderState === 'closed') {
