@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1),
+    width: 90
   },
   input: {
     display: 'none',
@@ -73,14 +74,14 @@ export default function PathMasterView() {
               React.createElement(Paper, { className: classes.paper}, 'xs=6')
             ),
 
-            React.createElement(Grid, { item: true, xs: 4 },
-                React.createElement(Button, { variant: 'contained', className: classes.button }, 'new'),
+            React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
+                React.createElement(Button, { variant: 'contained', className: classes.button }, 'call'),
             ),
-            React.createElement(Grid, { item: true, xs: 4 },
+            React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'center' },
               React.createElement(Button, { variant: 'contained', className: classes.button }, 'bind'),
             ),
-            React.createElement(Grid, { item: true, xs: 4 },
-              React.createElement(Button, { variant: 'contained', className: classes.button }, 'new'),
+            React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-start' },
+              React.createElement(Button, { variant: 'contained', className: classes.button }, 'method'),
             )
         )
   )
