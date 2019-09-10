@@ -13,6 +13,7 @@ class EventBus {
     }
 }
 
-const BrowserToTheraphosaEventBus = new EventBus();
+const BrowserToTheraphosaCallsEventBus = new EventBus();
+const BrowserToTheraphosaMethodsEventBus = new EventBus();
 
-export {BrowserToTheraphosaEventBus}
+export {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus}

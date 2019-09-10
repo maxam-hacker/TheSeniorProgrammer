@@ -1,11 +1,11 @@
 import fs from 'fs';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Phosa from '../../theraphosa/theraphosa';
-import PhosaTheme from '../../theraphosa/theme/monokai.js';
-import {Mode} from '../../theraphosa/mode/javascript.js';
-import {BrowserToTheraphosaEventBus} from './eventbus.js';
-import {ThePathWeb} from '../paths'
+import Phosa from '../../../theraphosa/theraphosa';
+import PhosaTheme from '../../../theraphosa/theme/monokai.js';
+import {Mode} from '../../../theraphosa/mode/javascript.js';
+import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
+import {ThePathWeb} from '../../paths'
 
 
 class Theraphosa extends Component {
@@ -28,13 +28,17 @@ class Theraphosa extends Component {
         var text = fs.readFileSync(data);
         this.phosaEditor.setValue(text.toString());
     };
-    BrowserToTheraphosaEventBus.subscribe(this.FileAndFolderClick.bind(this));
+    if (this.props.type === 'calls')
+      BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
+    else if (this.props.type === 'methods')
+      BrowserToTheraphosaMethodsEventBus.subscribe(this.FileAndFolderClick.bind(this));
   }
 }
 
 Theraphosa.propTypes = {
   id: PropTypes.string,
-  path: PropTypes.string
+  path: PropTypes.string,
+  type: PropTypes.string
 };
 
 export {Theraphosa}

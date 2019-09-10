@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {BrowserToTheraphosaEventBus} from './eventbus.js'
+import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js'
 
 class FileView extends Component {
 
@@ -8,9 +8,12 @@ class FileView extends Component {
     super(props);
   }
 
-  onFileClick(e) {
-    e.stopPropagation();
-    BrowserToTheraphosaEventBus.publish(this.props.path);
+  onFileClick(event) {
+    event.stopPropagation();
+    if (this.props.type === 'calls')
+      BrowserToTheraphosaCallsEventBus.publish(this.props.path);
+    else if (this.props.type === 'methods')
+      BrowserToTheraphosaMethodsEventBus.publish(this.props.path);
   }
 
   render() {
@@ -35,7 +38,8 @@ class FileView extends Component {
 
 FileView.propTypes = {
   name: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired
+  path: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export {FileView}

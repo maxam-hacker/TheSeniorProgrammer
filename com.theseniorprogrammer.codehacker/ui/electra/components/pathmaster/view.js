@@ -34,24 +34,53 @@ export default function PathMasterView() {
 
   return React.createElement('div', { className: classes.root },
         React.createElement(Grid, { container: true, spacing: 1 },
-            React.createElement(Grid, { item: true, xs: 12 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=12')
-            ),
             React.createElement(Grid, { item: true, xs: 6 },
                 React.createElement(Paper, { className: classes.paper}, 'xs=6')
             ),
             React.createElement(Grid, { item: true, xs: 6 },
                 React.createElement(Paper, { className: classes.paper}, 'xs=6')
             ),
-            React.createElement(Grid, { item: true, xs: 6 },
+
+            React.createElement(Grid, { item: true, xs: 2 },
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+
+            React.createElement(Grid, { item: true, xs: 2 },
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+            React.createElement(Grid, { item: true, xs: 1 },
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            ),
+
+            React.createElement(Grid, { item: true, xs: 4 },
                 React.createElement(Button, { variant: 'contained', className: classes.button }, 'new'),
-                React.createElement(Button, { variant: 'contained', className: classes.button }, 'clear')
             ),
-            React.createElement(Grid, { item: true, xs: 6 },
-                React.createElement('input', { id: 'inPath', className: classes.input, id: 'text-button-file', multiple: true, type: 'file' }),
-                React.createElement('label', { htmlFor: 'text-button-file' },
-                        React.createElement(Button, { variant: 'contained', component: 'span', className: classes.button }, 'save')
-                )
+            React.createElement(Grid, { item: true, xs: 4 },
+              React.createElement(Button, { variant: 'contained', className: classes.button }, 'bind'),
+            ),
+            React.createElement(Grid, { item: true, xs: 4 },
+              React.createElement(Button, { variant: 'contained', className: classes.button }, 'new'),
             )
         )
   )
@@ -84,5 +113,12 @@ export default function PathMasterView() {
       </Grid>
     </div>
   );
+
+  React.createElement(Grid, { item: true, xs: 6 },
+                React.createElement('input', { id: 'inPath', className: classes.input, id: 'text-button-file', multiple: true, type: 'file' }),
+                React.createElement('label', { htmlFor: 'text-button-file' },
+                        React.createElement(Button, { variant: 'contained', component: 'span', className: classes.button }, 'save')
+                )
+            )
   */
 }

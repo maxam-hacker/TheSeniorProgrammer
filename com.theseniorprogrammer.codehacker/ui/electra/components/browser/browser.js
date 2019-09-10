@@ -27,7 +27,7 @@ class Browser extends Component {
         var stat = fs.statSync(file);
 
         if (stat.isFile())
-          return React.createElement(FileView, { name: file, path: './' + file });
+          return React.createElement(FileView, { name: file, path: './' + file, type: this.props.type });
 
         if (stat.isDirectory())
           return React.createElement(FolderView, { name: file, path: './' + file });
@@ -38,7 +38,8 @@ class Browser extends Component {
 }
 
 Browser.propTypes = {
-  path: PropTypes.string.isRequired
+  path: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export {Browser}

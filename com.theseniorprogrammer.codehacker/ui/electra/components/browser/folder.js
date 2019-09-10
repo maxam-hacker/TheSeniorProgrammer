@@ -1,7 +1,6 @@
 import fs from 'fs';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {BrowserToTheraphosaEventBus} from './eventbus.js';
 import {FileView} from './file';
 
 
@@ -14,9 +13,8 @@ class FolderView extends Component {
       dir: fs.readdirSync(props.path)
     };
 
-    this.onFolderClick = function(e) {
-      e.stopPropagation();
-      //BrowserToTheraphosaEventBus.publish(this.props.path);
+    this.onFolderClick = function(event) {
+      event.stopPropagation();
   
       var command = '';
       var content = this.state.dir;
