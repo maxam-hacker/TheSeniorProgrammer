@@ -5,6 +5,28 @@
         <style>
             #editor_calls { position: absolute; width: 100%; height: 100%; }
             #editor_methods { position: absolute; width: 100%; height: 100%; }
+            
+            section:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+
+            /* Style the footer */
+            footer {
+            background-color: #777;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            }
+
+            /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+            @media (max-width: 600px) {
+            nav, article {
+                width: 100%;
+                height: auto;
+            }
+            }
         </style>
     </head>
 
