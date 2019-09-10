@@ -7,20 +7,29 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 class PathMaster extends Component {
 
     constructor(props) {
         super(props);
         this.repo = [];
-        this.repo.push(new FolderItem(props.path, this));
+        this.repo.push(new FolderItem('', props.path));
+    }
+
+    handleChange(event, dir) {
+        console.log(dir);
+        var prefix = this.repo[this.repo.length - 1].path;
+        this.repo.push(new FolderItem(prefix + '/', event.target.value));
+        this.forceUpdate();
     }
 
     render() {
 
-        return React.createElement('form', {}, 
+        return React.createElement('form', { id: 'form' }, 
                         this.repo.map(dir => {
-                                return React.createElement(FormControl, {},
-                                                React.createElement(Select, { defaultValue: dir.path, onChange: dir.handleChange.bind(this) },
+                                return React.createElement(FormControl, { id: 'formControl' },
+                                                React.createElement(InputLabel, {}, dir.file),
+                                                React.createElement(Select, { onChange: event => { this.handleChange(event, dir) } },
                                                         dir.content.map(file => {
                                                                 return React.createElement(MenuItem, { value: file }, file)  
                                                         })
@@ -38,8 +47,9 @@ PathMaster.propTypes = {
 
 class FolderItem {
 
-        constructor(path) {
-                this.path = path;
+        constructor(prefix, file) {
+                this.file = file;
+                this.path = prefix + file;
                 this.content = [];
 
                 var stat = fs.statSync(this.path);
@@ -47,13 +57,6 @@ class FolderItem {
                         this.content = fs.readdirSync(this.path);
                 else if (stat.isFile())
                         this.content.push(this.path);
-        }
-
-        handleChange(event) {
-                console.log(event.target);
-                var prefix = this.repo[this.repo.length - 1].path;
-                this.repo.push(new FolderItem(prefix + '/' + event.target.value));
-                this.forceUpdate();
         }
 
 }
