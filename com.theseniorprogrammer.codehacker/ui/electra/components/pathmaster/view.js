@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import {CallToTheraphosaEventBus} from '../eventbus'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,12 +26,12 @@ const useStyles = makeStyles(theme => ({
 export default function PathMasterView() {
   const classes = useStyles();
 
-  const clickHandle = function(event) {
+  const onCallClick = function(event) {
         console.log(event);
-        var input = document.getElementById("inPath");
-        input.onchange = function() {
-            console.log(input.text);
+        const selectedHandler = function(pathToFile, selectedText, selectedRange) {
+          console.log(pathToFile, selectedText, selectedRange);
         };
+        CallToTheraphosaEventBus.publish(selectedHandler);
   };
 
   return React.createElement('div', { className: classes.root },
@@ -75,7 +76,7 @@ export default function PathMasterView() {
             ),
 
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
-                React.createElement(Button, { variant: 'contained', className: classes.button }, 'call'),
+                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick }, 'call'),
             ),
             React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'center' },
               React.createElement(Button, { variant: 'contained', className: classes.button }, 'bind'),

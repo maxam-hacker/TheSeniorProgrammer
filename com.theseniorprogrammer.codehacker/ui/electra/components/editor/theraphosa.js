@@ -5,6 +5,7 @@ import Phosa from '../../../theraphosa/theraphosa';
 import PhosaTheme from '../../../theraphosa/theme/monokai.js';
 import {Mode} from '../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
+import {CallToTheraphosaEventBus} from '../eventbus'
 import {ThePathWeb} from '../../paths'
 
 
@@ -23,15 +24,24 @@ class Theraphosa extends Component {
     this.phosaEditor = Phosa.edit(element);
     this.phosaEditor.setTheme(PhosaTheme);
     this.phosaEditor.getSession().setMode(new Mode());
+    this.pathToFile = '';
 
-    this.FileAndFolderClick = function(data) {
-        var text = fs.readFileSync(data);
+    this.FileAndFolderClick = function(pathToFile) {
+        this.pathToFile = pathToFile;
+        var text = fs.readFileSync(pathToFile);
         this.phosaEditor.setValue(text.toString());
     };
     if (this.props.type === 'calls')
       BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
     else if (this.props.type === 'methods')
       BrowserToTheraphosaMethodsEventBus.subscribe(this.FileAndFolderClick.bind(this));
+
+    this.CallCreator = function(callback) {
+      var selectedText = this.phosaEditor.getSelectedText();
+      var selectedRange = this.phosaEditor.getSelectionRange();
+      callback(this.pathToFile, selectedText, selectedRange);
+    }; 
+    CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
   }
 }
 
