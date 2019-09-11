@@ -39,10 +39,13 @@ var callsExtractor = require("../electra/paths").getCallsForFile;
         };
 
         this.expandCall = function(editor, call) {
-            var text = "\n" + call.path.method.text;
+            var text = call.path.method.text;
             var session = editor.session;
             var mode = session.getMode();
-            var cursor = { row: call.end.line, column: call.end.column + 1};
+            var cursor = { row: call.end.line + 1, column: call.end.column + 1};
+
+            var line = session.getLine(call.end.line);
+            session.insert({ row: call.end.line, column: line.length + 1 }, "\n");
             
             if (text == "\t")
                 text = editor.session.getTabString();
