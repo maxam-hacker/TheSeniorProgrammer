@@ -38,7 +38,7 @@ export default function PathMasterView() {
   const onCallClick = function(event) {
       event.preventDefault();
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-        if (pathToFile === '' && selectedText ===' ')
+        if (pathToFile === '' && selectedText === '')
           return;
         setCallFile(pathToFile);
       };
@@ -46,8 +46,9 @@ export default function PathMasterView() {
   };
 
   const onMethodClick = function(event) {
+      event.preventDefault();
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-        if (pathToFile === '' && selectedText ===' ')
+        if (pathToFile === '' && selectedText === '')
           return;
         setMethodFile(pathToFile);
       };
