@@ -36,20 +36,14 @@ export default function PathMasterView() {
   const [methodFile, setMethodFile] = useState('');
 
   const onCallClick = function(event) {
-      event.preventDefault();
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-        if (pathToFile === '' && selectedText === '')
-          return;
         setCallFile(pathToFile);
       };
       CallToTheraphosaEventBus.publish(selectedHandler);
   };
 
   const onMethodClick = function(event) {
-      event.preventDefault();
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-        if (pathToFile === '' && selectedText === '')
-          return;
         setMethodFile(pathToFile);
       };
       MethodToTheraphosaEventBus.publish(selectedHandler);

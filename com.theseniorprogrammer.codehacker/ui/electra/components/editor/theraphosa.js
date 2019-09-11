@@ -31,24 +31,26 @@ class Theraphosa extends Component {
         var text = fs.readFileSync(pathToFile);
         this.phosaEditor.setValue(text.toString());
     };
-    if (this.props.type === 'calls')
-      BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
-    else if (this.props.type === 'methods')
-      BrowserToTheraphosaMethodsEventBus.subscribe(this.FileAndFolderClick.bind(this));
-
-    this.CallCreator = function(callback) {
-      var selectedText = this.phosaEditor.getSelectedText();
-      var selectedRange = this.phosaEditor.getSelectionRange();
-      callback(this.pathToFile, selectedText, selectedRange);
-    }; 
-    CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
 
     this.MethodCreator = function(callback) {
       var selectedText = this.phosaEditor.getSelectedText();
       var selectedRange = this.phosaEditor.getSelectionRange();
       callback(this.pathToFile, selectedText, selectedRange);
-    }; 
-    MethodToTheraphosaEventBus.subscribe(this.MethodCreator.bind(this));
+    };
+
+    this.CallCreator = function(callback) {
+      var selectedText = this.phosaEditor.getSelectedText();
+      var selectedRange = this.phosaEditor.getSelectionRange();
+      callback(this.pathToFile, selectedText, selectedRange);
+    };
+
+    if (this.props.type === 'calls') {
+      BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
+      CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
+    } else if (this.props.type === 'methods') {
+      BrowserToTheraphosaMethodsEventBus.subscribe(this.FileAndFolderClick.bind(this));
+      MethodToTheraphosaEventBus.subscribe(this.MethodCreator.bind(this));
+    }
   }
 }
 
