@@ -24,6 +24,10 @@ class PathWeb {
         this.ThePaths[filename].push(path);
     }
 
+    getCalls(filename) {
+        return this.TheCalls[filename];
+    }
+
     toJson() {
 
         var jsonified = '{\n';

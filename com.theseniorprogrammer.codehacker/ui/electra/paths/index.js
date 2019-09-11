@@ -37,4 +37,8 @@ const ingestPath = function(file, call, method) {
     return path;
 }
 
-export { ingestCall, ingestMethod, ingestPath }
+const getCallsForFile = function(file) {
+    return ThePathWeb.getCalls(file);
+}
+
+export { ingestCall, ingestMethod, ingestPath, getCallsForFile }

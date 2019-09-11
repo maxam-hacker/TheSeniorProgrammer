@@ -29,6 +29,7 @@ class Theraphosa extends Component {
     this.FileAndFolderClick = function(pathToFile) {
         this.pathToFile = pathToFile;
         var text = fs.readFileSync(pathToFile);
+        this.phosaEditor.setCurrentFile(pathToFile);
         this.phosaEditor.setValue(text.toString());
     };
 
