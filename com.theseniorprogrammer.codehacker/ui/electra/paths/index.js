@@ -1,31 +1,40 @@
 import {PathWeb} from './web'
-import {PathCell} from './cell'
 import {PathCall} from './call'
 import {PathMethod} from './method'
+import {CallMethodPath} from './path'
 
 var ThePathWeb = new PathWeb();
-var method = {};
-var call = {};
-var cell = {};
-var path = {};
 
-method = new PathMethod();
-method.setName('constructor(name, start, end)');
-method.setStart(14, 0);
-method.setEnd(18, 5);
-cell = new PathCell();
-cell.addMethod(method);
-ThePathWeb.addCell('method.js', cell);
+const ingestCall = function(file, text, start, end) {
+    var call = new PathCall();
+    call.setFile(file);
+    call.setText(text);
+    call.setStart(start.line, start.column);
+    call.setEnd(end.line, end.column);
+    ThePathWeb.addCall(file, call);
 
-var call = new PathCall();
-call.setName('new PathMethod()');
-call.setStart(6, 9);
-call.setEnd(6, 25);
-call.setPath({file: 'method.js', method: method});
-cell = new PathCell();
-cell.addCall(call);
-ThePathWeb.addCell('index.js', cell);
+    return call;
+}
 
-console.log(ThePathWeb.toJson());
+const ingestMethod = function(file, text, start, end) {
+    var method = new PathMethod();
+    method.setFile(file);
+    method.setText(text);
+    method.setStart(start.line, start.column);
+    method.setEnd(end.line, end.column);
+    ThePathWeb.addMethod(file, method);
 
-export { ThePathWeb }
+    return method;
+}
+
+const ingestPath = function(file, call, method) {
+    var path = new CallMethodPath();
+    path.setFile(file);
+    path.setCall(call);
+    path.setMethod(method);
+    ThePathWeb.addPath(file, path);
+
+    return path;
+}
+
+export { ingestCall, ingestMethod, ingestPath }

@@ -12,15 +12,20 @@ class PathMethod extends PathPoint {
 
     constructor() {
         super();
-        this.name = null;
+        this.text = null;
+        this.file = null;
     }
 
-    setName(name) {
-        this.name = name;
+    setText(text) {
+        this.text = text;
+    }
+
+    setFile(file) {
+        this.file = file;
     }
 
     toJson() {
-        return `{ name: ${this.name}, start: ${this.startToJson()}, end: ${this.endToJson()} }`;
+        return `{ file: ${this.file}, text: "${this.text}", start: ${this.startToJson()}, end: ${this.endToJson()} }`;
     }
 
 }

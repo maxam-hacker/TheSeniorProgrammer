@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
+import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus';
+import {ingestCall, ingestMethod, ingestPath} from '../../paths'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,14 +37,14 @@ export default function PathMasterView() {
   const [callEndRow, setCallEndRow] = useState(0);
   const [callStartColumn, setCallStartColumn] = useState(0);
   const [callEndColumn, setCallEndColumn] = useState(0);
-  const [callName, setCallName] = useState('undefined');
+  const [callText, setCallText] = useState('');
 
   const [methodFile, setMethodFile] = useState('');
   const [methodStartRow, setMethodStartRow] = useState(0);
   const [methodEndRow, setMethodEndRow] = useState(0);
   const [methodStartColumn, setMethodStartColumn] = useState(0);
   const [methodEndColumn, setMethodEndColumn] = useState(0);
-  const [methodName, setMethodName] = useState('undefined');
+  const [methodText, setMethodText] = useState('');
 
   const onCallClick = function(event) {
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
@@ -53,6 +53,7 @@ export default function PathMasterView() {
         setCallEndRow(selectedRange.end.row);
         setCallStartColumn(selectedRange.start.column);
         setCallEndColumn(selectedRange.end.column);
+        setCallText(selectedText);
       };
       CallToTheraphosaEventBus.publish(selectedHandler);
   };
@@ -64,8 +65,31 @@ export default function PathMasterView() {
         setMethodEndRow(selectedRange.end.row);
         setMethodStartColumn(selectedRange.start.column);
         setMethodEndColumn(selectedRange.end.column);
+        setMethodText(selectedText);
       };
       MethodToTheraphosaEventBus.publish(selectedHandler);
+  };
+
+  const onBindClick = function(event) {
+
+    var call = ingestCall(
+        callFile, 
+        callText, 
+        {line: callStartRow, column: callStartColumn}, 
+        {line: callEndRow, column: callEndColumn});
+
+    var method = ingestMethod(
+        methodFile, 
+        methodText, 
+        {line: methodStartRow, column: methodEndColumn}, 
+        {line: methodEndRow, column: methodEndColumn});
+
+    var path = ingestPath(callFile, call, method);
+
+    call.setPath(path);
+
+    console.log(call.toJson());
+    console.log(method.toJson());
   };
 
   return React.createElement('div', { className: classes.root },
@@ -78,7 +102,7 @@ export default function PathMasterView() {
             ),
 
             React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: callName, className: classes.textField, margin: 'normal', variant: 'outlined'})
+                React.createElement(TextField, { value: callText, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
             React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
                 React.createElement(TextField, { value: callStartRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
@@ -94,7 +118,7 @@ export default function PathMasterView() {
             ),
 
             React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: methodName, className: classes.textField, margin: 'normal', variant: 'outlined'})
+                React.createElement(TextField, { value: methodText, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
             React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
                 React.createElement(TextField, { value: methodStartRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
@@ -110,51 +134,14 @@ export default function PathMasterView() {
             ),
 
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
-                 React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick }, 'call'),
+                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick }, 'call'),
             ),
             React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'center' },
-              React.createElement(Button, { variant: 'contained', className: classes.button }, 'bind'),
+                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onBindClick }, 'bind'),
             ),
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-start' },
-              React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onMethodClick }, 'method'),
+                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onMethodClick }, 'method'),
             )
         )
   )
-
-  /*
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>xs=12</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  );
-
-  React.createElement(Grid, { item: true, xs: 6 },
-                React.createElement('input', { id: 'inPath', className: classes.input, id: 'text-button-file', multiple: true, type: 'file' }),
-                React.createElement('label', { htmlFor: 'text-button-file' },
-                        React.createElement(Button, { variant: 'contained', component: 'span', className: classes.button }, 'save')
-                )
-            )
-  */
 }

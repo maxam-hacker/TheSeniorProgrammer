@@ -54,9 +54,9 @@ class FolderView extends Component {
                     this.state.dir.map(file => {
                       var stat = fs.statSync(this.props.path + '/' + file);
                       if (stat.isFile())
-                        return React.createElement(FileView, { name: file, path: this.props.path + '/' + file });
+                        return React.createElement(FileView, { name: file, path: this.props.path + '/' + file, type: this.props.type });
                       if (stat.isDirectory())
-                        return React.createElement(FolderView, { name: file, path: this.props.path + '/' + file });
+                        return React.createElement(FolderView, { name: file, path: this.props.path + '/' + file, type: this.props.type });
                     })
                 )
               );
@@ -72,7 +72,8 @@ class FolderView extends Component {
 
 FolderView.propTypes = {
   name: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired
+  path: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export {FolderView}

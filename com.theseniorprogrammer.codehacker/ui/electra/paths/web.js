@@ -1,40 +1,27 @@
-/*******************************************************
-//  TheWeb
-//  {
-//      filename : cell,
-//      filename : cell,,
-//      filename : cell,,
-//  }
-//
-//  cell = { calls: [ calls ], methods: [ methods ] }
-//
-//  calls = call, call, ...
-//
-//  call = {
-//      name: callName,
-//      start: { line, column },
-//      end: { line, column },
-//      path : method
-//  }
-//
-//  methods = method, method, ...
-//
-//  method = {
-//      name: methodName,
-//      start: { line, column },
-//      end: { line, column },
-//  }
-*******************************************************/
-
-
 class PathWeb {
 
     constructor() {
-        this.TheWeb = {};
+        this.TheCalls = {};
+        this.TheMethods = {};
+        this.ThePaths = {};
     }
 
-    addCell(filename, cell) {
-        this.TheWeb[filename] = cell;
+    addCall(filename, call) {
+        if (this.TheCalls[filename] === undefined)
+            this.TheCalls[filename] = [];
+        this.TheCalls[filename].push(call);
+    }
+
+    addMethod(filename, method) {
+        if (this.TheMethods[filename] === undefined)
+            this.TheMethods[filename] = [];
+        this.TheMethods[filename].push(method);
+    }
+
+    addPath(filename, path) {
+        if (this.ThePaths[filename] === undefined)
+            this.ThePaths[filename] = [];
+        this.ThePaths[filename].push(path);
     }
 
     toJson() {

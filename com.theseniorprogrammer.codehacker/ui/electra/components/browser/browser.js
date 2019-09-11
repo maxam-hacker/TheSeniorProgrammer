@@ -30,7 +30,7 @@ class Browser extends Component {
           return React.createElement(FileView, { name: file, path: './' + file, type: this.props.type });
 
         if (stat.isDirectory())
-          return React.createElement(FolderView, { name: file, path: './' + file });
+          return React.createElement(FolderView, { name: file, path: './' + file, type: this.props.type });
       })
 
     );
