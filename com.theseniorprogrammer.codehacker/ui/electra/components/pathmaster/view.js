@@ -33,11 +33,26 @@ export default function PathMasterView() {
   const classes = useStyles();
 
   const [callFile, setCallFile] = useState('');
+  const [callStartRow, setCallStartRow] = useState(0);
+  const [callEndRow, setCallEndRow] = useState(0);
+  const [callStartColumn, setCallStartColumn] = useState(0);
+  const [callEndColumn, setCallEndColumn] = useState(0);
+  const [callName, setCallName] = useState('undefined');
+
   const [methodFile, setMethodFile] = useState('');
+  const [methodStartRow, setMethodStartRow] = useState(0);
+  const [methodEndRow, setMethodEndRow] = useState(0);
+  const [methodStartColumn, setMethodStartColumn] = useState(0);
+  const [methodEndColumn, setMethodEndColumn] = useState(0);
+  const [methodName, setMethodName] = useState('undefined');
 
   const onCallClick = function(event) {
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
         setCallFile(pathToFile);
+        setCallStartRow(selectedRange.start.row);
+        setCallEndRow(selectedRange.end.row);
+        setCallStartColumn(selectedRange.start.column);
+        setCallEndColumn(selectedRange.end.column);
       };
       CallToTheraphosaEventBus.publish(selectedHandler);
   };
@@ -45,6 +60,10 @@ export default function PathMasterView() {
   const onMethodClick = function(event) {
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
         setMethodFile(pathToFile);
+        setMethodStartRow(selectedRange.start.row);
+        setMethodEndRow(selectedRange.end.row);
+        setMethodStartColumn(selectedRange.start.column);
+        setMethodEndColumn(selectedRange.end.column);
       };
       MethodToTheraphosaEventBus.publish(selectedHandler);
   };
@@ -58,36 +77,36 @@ export default function PathMasterView() {
                 React.createElement(TextField, { value: methodFile, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
 
-            React.createElement(Grid, { item: true, xs: 2 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: callName, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: callStartRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: callEndRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: callStartColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start'},
+                React.createElement(TextField, { value: callEndColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
 
-            React.createElement(Grid, { item: true, xs: 2 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: methodName, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: methodStartRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: methodEndRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: methodStartColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 1 },
-              React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start'},
+                React.createElement(TextField, { value: methodEndColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
 
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
