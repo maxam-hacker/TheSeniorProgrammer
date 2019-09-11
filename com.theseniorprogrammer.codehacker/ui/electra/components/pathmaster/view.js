@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import {CallToTheraphosaEventBus} from '../eventbus'
+import TextField from '@material-ui/core/TextField';
+import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,26 +22,45 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: 'none',
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
 }));
 
 export default function PathMasterView() {
+
   const classes = useStyles();
 
+  const [callFile, setCallFile] = useState('');
+  const [methodFile, setMethodFile] = useState('');
+
   const onCallClick = function(event) {
-        console.log(event);
-        const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-          console.log(pathToFile, selectedText, selectedRange);
-        };
-        CallToTheraphosaEventBus.publish(selectedHandler);
+      event.preventDefault();
+      const selectedHandler = function(pathToFile, selectedText, selectedRange) {
+        if (pathToFile === '' && selectedText ===' ')
+          return;
+        setCallFile(pathToFile);
+      };
+      CallToTheraphosaEventBus.publish(selectedHandler);
+  };
+
+  const onMethodClick = function(event) {
+      const selectedHandler = function(pathToFile, selectedText, selectedRange) {
+        if (pathToFile === '' && selectedText ===' ')
+          return;
+        setMethodFile(pathToFile);
+      };
+      MethodToTheraphosaEventBus.publish(selectedHandler);
   };
 
   return React.createElement('div', { className: classes.root },
         React.createElement(Grid, { container: true, spacing: 1 },
-            React.createElement(Grid, { item: true, xs: 6 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 6, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: callFile, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
-            React.createElement(Grid, { item: true, xs: 6 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+            React.createElement(Grid, { container: true, xs: 6, direction: 'row', justify: 'flex-start' },
+                React.createElement(TextField, { value: methodFile, className: classes.textField, margin: 'normal', variant: 'outlined'})
             ),
 
             React.createElement(Grid, { item: true, xs: 2 },
@@ -53,7 +73,7 @@ export default function PathMasterView() {
               React.createElement(Paper, { className: classes.paper}, 'xs=6')
             ),
             React.createElement(Grid, { item: true, xs: 1 },
-                React.createElement(Paper, { className: classes.paper}, 'xs=6')
+              React.createElement(Paper, { className: classes.paper}, 'xs=6')
             ),
             React.createElement(Grid, { item: true, xs: 1 },
               React.createElement(Paper, { className: classes.paper}, 'xs=6')
@@ -76,13 +96,13 @@ export default function PathMasterView() {
             ),
 
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
-                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick }, 'call'),
+                 React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick }, 'call'),
             ),
             React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'center' },
               React.createElement(Button, { variant: 'contained', className: classes.button }, 'bind'),
             ),
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-start' },
-              React.createElement(Button, { variant: 'contained', className: classes.button }, 'method'),
+              React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onMethodClick }, 'method'),
             )
         )
   )

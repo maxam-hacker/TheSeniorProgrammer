@@ -5,7 +5,7 @@ import Phosa from '../../../theraphosa/theraphosa';
 import PhosaTheme from '../../../theraphosa/theme/monokai.js';
 import {Mode} from '../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
-import {CallToTheraphosaEventBus} from '../eventbus'
+import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
 import {ThePathWeb} from '../../paths'
 
 
@@ -42,6 +42,13 @@ class Theraphosa extends Component {
       callback(this.pathToFile, selectedText, selectedRange);
     }; 
     CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
+
+    this.MethodCreator = function(callback) {
+      var selectedText = this.phosaEditor.getSelectedText();
+      var selectedRange = this.phosaEditor.getSelectionRange();
+      callback(this.pathToFile, selectedText, selectedRange);
+    }; 
+    MethodToTheraphosaEventBus.subscribe(this.MethodCreator.bind(this));
   }
 }
 

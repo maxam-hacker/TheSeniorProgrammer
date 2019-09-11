@@ -16,5 +16,6 @@ class EventBus {
 const BrowserToTheraphosaCallsEventBus = new EventBus();
 const BrowserToTheraphosaMethodsEventBus = new EventBus();
 const CallToTheraphosaEventBus = new EventBus();
+const MethodToTheraphosaEventBus = new EventBus();
 
-export {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus, CallToTheraphosaEventBus}
+export {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus, CallToTheraphosaEventBus, MethodToTheraphosaEventBus}
