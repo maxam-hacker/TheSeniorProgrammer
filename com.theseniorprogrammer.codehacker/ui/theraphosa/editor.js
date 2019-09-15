@@ -421,8 +421,8 @@ Editor.$uid = 0;
      * @returns {String} The current document value
      * @related Document.setValue
      **/
-    this.setValue = function(val, cursorPos) {
-        this.session.doc.setValue(val);
+    this.setValue = function(val, cursorPos, tag) {
+        this.session.doc.setValue(val, tag);
 
         if (!cursorPos)
             this.selectAll();

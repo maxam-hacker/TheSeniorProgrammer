@@ -51,17 +51,18 @@ var Anchor = require("./anchor").Anchor;
  * @constructor
  **/
 
-var Document = function(textOrLines) {
+var Document = function(textOrLines, tag) {
     this.$lines = [""];
+    this.$tags = [];
 
     // There has to be one line at least in the document. If you pass an empty
     // string to the insert function, nothing will happen. Workaround.
     if (textOrLines.length === 0) {
         this.$lines = [""];
     } else if (Array.isArray(textOrLines)) {
-        this.insertMergedLines({row: 0, column: 0}, textOrLines);
+        this.insertMergedLines({row: 0, column: 0}, textOrLines, tag);
     } else {
-        this.insert({row: 0, column:0}, textOrLines);
+        this.insert({row: 0, column:0}, textOrLines, tag);
     }
 };
 
@@ -74,10 +75,10 @@ var Document = function(textOrLines) {
      *
      * @param {String} text The text to use
      **/
-    this.setValue = function(text) {
+    this.setValue = function(text, tag) {
         var len = this.getLength() - 1;
         this.remove(new Range(0, 0, len, this.getLine(len).length));
-        this.insert({row: 0, column: 0}, text);
+        this.insert({row: 0, column: 0}, text, tag);
     };
 
     /**
@@ -184,6 +185,15 @@ var Document = function(textOrLines) {
     };
 
     /**
+     * Returns a verbatim copy of the given tag as it is in the document
+     * @param {Number} row The row index to retrieve
+     *
+     **/
+    this.getTag = function(row) {
+        return this.$tags[row] || "";
+    };
+
+    /**
      * Returns an array of strings of the rows between `firstRow` and `lastRow`. This function is inclusive of `lastRow`.
      * @param {Number} firstRow The first row index to retrieve
      * @param {Number} lastRow The final row index to retrieve
@@ -260,12 +270,12 @@ var Document = function(textOrLines) {
      * @returns {Object} The position ({row, column}) of the last line of `text`. If the length of `text` is 0, this function simply returns `position`. 
      *
      **/
-    this.insert = function(position, text) {
+    this.insert = function(position, text, tag) {
         // Only detect new lines if the document has no line break yet.
         if (this.getLength() <= 1)
             this.$detectNewLine(text);
         
-        return this.insertMergedLines(position, this.$split(text));
+        return this.insertMergedLines(position, this.$split(text), tag);
     };
     
     /**
@@ -400,7 +410,7 @@ var Document = function(textOrLines) {
      *   ```
      *
      **/    
-    this.insertMergedLines = function(position, lines) {
+    this.insertMergedLines = function(position, lines, tag) {
         var start = this.clippedPos(position.row, position.column);
         var end = {
             row: start.row + lines.length - 1,
@@ -411,7 +421,8 @@ var Document = function(textOrLines) {
             start: start,
             end: end,
             action: "insert",
-            lines: lines
+            lines: lines,
+            tag, tag
         });
         
         return this.clonePos(end);
@@ -579,7 +590,7 @@ var Document = function(textOrLines) {
             this.$splitAndapplyLargeDelta(delta, 20000);
         }
         else {
-            applyDelta(this.$lines, delta, doNotValidate);
+            applyDelta(this.$lines, delta, doNotValidate, this.$tags);
             this._signal("change", delta);
         }
     };

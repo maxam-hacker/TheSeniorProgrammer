@@ -17,39 +17,50 @@ oop.inherits(CodeMaster, Editor);
 (function() {
 
     this.onMouseClick = function(event) {
-        var editor = event.editor;
         var cursor = this.getCursorPosition();
-        var currentRow = cursor.row;
-        var currentColumn = cursor.column;
-        var currentCall = undefined;
-        var calls = callsExtractor(this.currentFile);
+        var row = cursor.row;
+        var column = cursor.column;
+
+        var tgtCall = undefined;
+
+        var tag = this.session.doc.getTag(row);
+        var file = tag.path;
+        var deltaX = tag.deltaX;
+        var deltaY = tag.deltaY;
+
+        if (file === undefined || file === "")
+            file = this.currentFile;
+        var calls = callsExtractor(file);
 
         if (calls !== undefined) 
             calls.forEach(call => {
-                if (currentRow >= call.start.line && 
-                    currentRow <= call.end.line &&
-                    currentColumn >= call.start.column && 
-                    currentColumn <= call.end.column)
-                    currentCall = call;
+                if (row >= call.start.line + deltaY && row <= call.end.line + deltaY &&
+                    column >= call.start.column && column <= call.end.column)
+                    tgtCall = call;
             });
 
-            if (currentCall !== undefined)
-                this.expandCall(currentCall);
+        if (tgtCall !== undefined)
+            this.expandCall(tgtCall, deltaX, deltaY);
+    };
+
+    this.setValueWithTag = function (val, tag) {
+        this.session.doc.setValue(val, tag);
     };
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
     };
 
-    this.expandCall = function(call) {
-        var text = call.path.method.text;
+    this.expandCall = function(call, deltaX, deltaY) {
+        var method = call.path.method;
+        var text = method.text;
         var session = this.session;
-        var cursor = { row: call.end.line + 1, column: call.end.column + 1};
+        var cursor = { row: call.end.line + 1 + deltaY, column: call.end.column + 1};
 
-        var line = session.getLine(call.end.line);
-        session.insert({ row: call.end.line, column: line.length + 1 }, "\n");
+        var line = session.getLine(call.end.line + deltaY);
+        session.insert({ row: call.end.line + deltaY, column: line.length + 1 }, "\n");
             
-        session.insert(cursor, text);
+        session.insert(cursor, text, { path: method.file, deltaX: 0, deltaY: cursor.row - method.start.line });
     }
         
 }).call(CodeMaster.prototype);

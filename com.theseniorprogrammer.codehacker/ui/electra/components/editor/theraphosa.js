@@ -30,7 +30,7 @@ class Theraphosa extends Component {
         this.pathToFile = pathToFile;
         var text = fs.readFileSync(pathToFile);
         this.phosaEditor.setCurrentFile(pathToFile);
-        this.phosaEditor.setValue(text.toString());
+        this.phosaEditor.setValueWithTag(text.toString(), { path: pathToFile, deltaX: 0, deltaY: 0 });
     };
 
     this.MethodCreator = function(callback) {

@@ -282,8 +282,8 @@ EditSession.$uid = 0;
      * @param {String} text The new text to place
      *
      **/
-    this.setValue = function(text) {
-        this.doc.setValue(text);
+    this.setValue = function(text, tag) {
+        this.doc.setValue(text, tag);
         this.selection.moveTo(0, 0);
 
         this.$resetRowCache(0);
@@ -1111,8 +1111,8 @@ EditSession.$uid = 0;
      *
      *
      **/
-    this.insert = function(position, text) {
-        return this.doc.insert(position, text);
+    this.insert = function(position, text, tag) {
+        return this.doc.insert(position, text, tag);
     };
 
     /**

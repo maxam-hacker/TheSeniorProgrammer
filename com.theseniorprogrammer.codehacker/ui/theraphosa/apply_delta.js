@@ -71,7 +71,7 @@ function validateDelta(docLines, delta) {
         throwDeltaError(delta, "delta.range must match delta lines");
 }
 
-exports.applyDelta = function(docLines, delta, doNotValidate) {
+exports.applyDelta = function(docLines, delta, doNotValidate, docTags) {
     // disabled validation since it breaks autocompletion popup
     // if (!doNotValidate)
     //    validateDelta(docLines, delta);
@@ -84,11 +84,17 @@ exports.applyDelta = function(docLines, delta, doNotValidate) {
             var lines = delta.lines;
             if (lines.length === 1) {
                 docLines[row] = line.substring(0, startColumn) + delta.lines[0] + line.substring(startColumn);
+                if (docTags && delta.tag !== undefined)
+                    docTags[row] = delta.tag;
             } else {
                 var args = [row, 1].concat(delta.lines);
                 docLines.splice.apply(docLines, args);
                 docLines[row] = line.substring(0, startColumn) + docLines[row];
                 docLines[row + delta.lines.length - 1] += line.substring(startColumn);
+                if (docTags && delta.tag !== undefined) {
+                    for (var idx = 0; idx < lines.length; idx ++)
+                        docTags.splice(row, 0, delta.tag);
+                }
             }
             break;
         case "remove":
