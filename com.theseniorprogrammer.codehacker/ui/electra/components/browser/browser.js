@@ -24,13 +24,13 @@ class Browser extends Component {
 
       this.state.dir.map(file => {
 
-        var stat = fs.statSync(file);
+        var stat = fs.statSync(this.props.path + file);
 
         if (stat.isFile())
-          return React.createElement(FileView, { name: file, path: './' + file, type: this.props.type });
+          return React.createElement(FileView, { name: file, path: this.props.path + file, type: this.props.type });
 
         if (stat.isDirectory())
-          return React.createElement(FolderView, { name: file, path: './' + file, type: this.props.type });
+          return React.createElement(FolderView, { name: file, path: this.props.path + file, type: this.props.type });
       })
 
     );
