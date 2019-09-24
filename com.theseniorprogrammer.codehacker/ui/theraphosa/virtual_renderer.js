@@ -37,6 +37,7 @@ var config = require("./config");
 var GutterLayer = require("./layer/gutter").Gutter;
 var MarkerLayer = require("./layer/marker").Marker;
 var TextLayer = require("./layer/text").Text;
+var ExpandersLayer = require("./layer/expanders").Expanders;
 var CursorLayer = require("./layer/cursor").Cursor;
 var HScrollBar = require("./scrollbar").HScrollBar;
 var VScrollBar = require("./scrollbar").VScrollBar;
@@ -95,6 +96,8 @@ var VirtualRenderer = function(container, theme) {
 
     var textLayer = this.$textLayer = new TextLayer(this.content);
     this.canvas = textLayer.element;
+
+    this.$expandersLayer = new ExpandersLayer(this.content);
 
     this.$markerFront = new MarkerLayer(this.content);
 
