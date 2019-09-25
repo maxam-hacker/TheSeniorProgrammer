@@ -591,7 +591,7 @@ var Document = function(textOrLines, tag) {
         }
         else {
             applyDelta(this.$lines, delta, doNotValidate, this.$tags);
-            this._signal("change", delta);
+            this._signal("change", delta, this.$tags);
         }
     };
     

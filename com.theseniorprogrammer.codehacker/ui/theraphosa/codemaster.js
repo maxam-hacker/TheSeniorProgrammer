@@ -59,8 +59,29 @@ oop.inherits(CodeMaster, Editor);
 
         var line = session.getLine(call.end.line + deltaY);
         session.insert({ row: call.end.line + deltaY, column: line.length + 1 }, "\n");
+
+        var doc = session.getDocument();
+        doc.on("change", this.$onChange.bind(this));
             
-        session.insert(cursor, text, { path: method.file, deltaX: 0, deltaY: cursor.row - method.start.line });
+        session.insert(cursor, text, { call: call, method : method, path: method.file, deltaX: 0, deltaY: cursor.row - method.start.line });
+    }
+
+    this.$onChange = function(delta, tags) {
+        if (tags === undefined)
+            return;
+
+        var expanders = this.renderer.$expandersLayer;
+        var lineHeight = this.renderer.$textLayer.getLineHeight();
+        var lineWidth = this.renderer.$textLayer.getCharacterWidth();
+        var call = tags.call;
+        var method = tags.method;
+
+        expanders.$svg
+                .append("circle")
+                .attr("cx", lineWidth * delta.start.column)
+                .attr("cy", lineHeight * delta.start.row)
+                .attr("r", 50)
+                .attr("stroke", "white");
     }
         
 }).call(CodeMaster.prototype);
