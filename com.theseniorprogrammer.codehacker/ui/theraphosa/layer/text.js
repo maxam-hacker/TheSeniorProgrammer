@@ -344,7 +344,7 @@ var Text = function(parentEl) {
         if (token.type === "e_corner") {
             var span = this.dom.createElement("span");
             span.className = "expandres-corner";
-            span.textContent = "|";
+            span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
             return screenColumn + 1;
@@ -352,7 +352,7 @@ var Text = function(parentEl) {
         } else if (token.type === "e_menu") {
             var span = this.dom.createElement("span");
             span.className = "expandres-menu";
-            span.textContent = "_";
+            span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
             return screenColumn + 1;
@@ -360,7 +360,7 @@ var Text = function(parentEl) {
         } else if (token.type === "e_line") {
             var span = this.dom.createElement("span");
             span.className = "expandres-line";
-            span.textContent = "-";
+            span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
             return screenColumn + 1;
