@@ -422,7 +422,7 @@ var Document = function(textOrLines, tag) {
             end: end,
             action: "insert",
             lines: lines,
-            tag, tag
+            tag: tag
         });
         
         return this.clonePos(end);

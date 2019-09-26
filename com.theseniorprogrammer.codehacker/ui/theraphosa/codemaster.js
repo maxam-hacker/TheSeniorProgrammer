@@ -60,28 +60,31 @@ oop.inherits(CodeMaster, Editor);
         var line = session.getLine(call.end.line + deltaY);
         session.insert({ row: call.end.line + deltaY, column: line.length + 1 }, "\n");
 
-        var doc = session.getDocument();
-        doc.on("change", this.$onChange.bind(this));
-            
-        session.insert(cursor, text, { call: call, method : method, path: method.file, deltaX: 0, deltaY: cursor.row - method.start.line });
-    }
+        var startPoint = call.start.column;
+        var deltaPoints = 5;
 
-    this.$onChange = function(delta, tags) {
-        if (tags === undefined)
-            return;
+        var firstLinePrefix = "";
+        var linePrefix = "";
+        for (var idx = 0; idx < startPoint; idx ++)
+            firstLinePrefix += " ";
+        for (var idx = 0; idx < startPoint + deltaPoints; idx ++)
+            linePrefix += " ";
+        firstLinePrefix += "<e_corner/>";
+        firstLinePrefix += "<e_menu/>";
+        firstLinePrefix += "<e_line/>";
+        firstLinePrefix += "<e_line/>";
+        firstLinePrefix += "<e_line/>";
+        
+        var textLines = text.split("\n");
 
-        var expanders = this.renderer.$expandersLayer;
-        var lineHeight = this.renderer.$textLayer.getLineHeight();
-        var lineWidth = this.renderer.$textLayer.getCharacterWidth();
-        var call = tags.call;
-        var method = tags.method;
+        var shiftedLines = [];
+        shiftedLines.push(firstLinePrefix + textLines[0]);
+        for (var idx = 1; idx < textLines.length; idx ++)
+            shiftedLines.push(linePrefix + textLines[idx]);
 
-        expanders.$svg
-                .append("circle")
-                .attr("cx", lineWidth * delta.start.column)
-                .attr("cy", lineHeight * delta.start.row)
-                .attr("r", 50)
-                .attr("stroke", "white");
+        text = shiftedLines.join("\n"); 
+
+        session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
     }
         
 }).call(CodeMaster.prototype);

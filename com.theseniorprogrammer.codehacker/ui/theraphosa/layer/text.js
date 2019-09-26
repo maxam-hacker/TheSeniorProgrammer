@@ -341,6 +341,31 @@ var Text = function(parentEl) {
         
         var valueFragment = this.dom.createFragment(this.element);
 
+        if (token.type === "e_corner") {
+            var span = this.dom.createElement("span");
+            span.className = "expandres-corner";
+            span.textContent = "|";
+            valueFragment.appendChild(span);
+            parent.appendChild(valueFragment);
+            return screenColumn + 1;
+
+        } else if (token.type === "e_menu") {
+            var span = this.dom.createElement("span");
+            span.className = "expandres-menu";
+            span.textContent = "_";
+            valueFragment.appendChild(span);
+            parent.appendChild(valueFragment);
+            return screenColumn + 1;
+
+        } else if (token.type === "e_line") {
+            var span = this.dom.createElement("span");
+            span.className = "expandres-line";
+            span.textContent = "-";
+            valueFragment.appendChild(span);
+            parent.appendChild(valueFragment);
+            return screenColumn + 1;
+        }
+
         var m;
         var i = 0;
         while (m = re.exec(value)) {
@@ -501,6 +526,7 @@ var Text = function(parentEl) {
     };
 
     this.$renderSimpleLine = function(parent, tokens) {
+        tokens = this.$transfromTokensForExpanders(tokens);
         var screenColumn = 0;
         var token = tokens[0];
         var value = token.value;
@@ -515,6 +541,33 @@ var Text = function(parentEl) {
                 return this.$renderOverflowMessage(parent, screenColumn, token, value);
             screenColumn = this.$renderToken(parent, screenColumn, token, value);
         }
+    };
+
+    this.$transfromTokensForExpanders = function(tokens) {
+        var tarnsformed = [];
+        for (var idx = 0; idx < tokens.length; idx ++) {
+            var token = tokens[idx];
+            if (token !== undefined && token.value === "<") {
+                var expType = tokens[idx + 1];
+                if (expType !== undefined) {
+                    if (expType.value === "e_corner") {
+                        tarnsformed.push({ type: "e_corner", value: " " });
+                        idx += 2;
+                        continue;
+                    } else if (expType.value === "e_menu") {
+                        tarnsformed.push({ type: "e_menu", value: " " });
+                        idx += 2;
+                        continue;
+                    } else if (expType.value === "e_line") {
+                        tarnsformed.push({ type: "e_line", value: " " });
+                        idx += 2;
+                        continue;
+                    }
+                }
+            }
+            tarnsformed.push(token);
+        }
+        return tarnsformed;
     };
     
     this.$renderOverflowMessage = function(parent, screenColumn, token, value, hide) {
