@@ -35,7 +35,7 @@ oop.inherits(CodeMaster, Editor);
         if (calls !== undefined) 
             calls.forEach(call => {
                 if (row >= call.start.line + deltaY && row <= call.end.line + deltaY &&
-                    column >= call.start.column && column <= call.end.column)
+                    column >= call.start.column + deltaX && column <= call.end.column + deltaX)
                     tgtCall = call;
             });
 
@@ -60,7 +60,7 @@ oop.inherits(CodeMaster, Editor);
         var line = session.getLine(call.end.line + deltaY);
         session.insert({ row: call.end.line + deltaY, column: line.length + 1 }, "\n");
 
-        var startPoint = call.start.column;
+        var startPoint = call.start.column + deltaX;
         var deltaPoints = 4;
 
         var firstLinePrefix = "";
@@ -84,7 +84,7 @@ oop.inherits(CodeMaster, Editor);
 
         text = shiftedLines.join("\n"); 
 
-        session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
+        session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: deltaX + startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
     }
         
 }).call(CodeMaster.prototype);
