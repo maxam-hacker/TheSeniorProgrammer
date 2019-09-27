@@ -344,6 +344,7 @@ var Text = function(parentEl) {
         if (token.type === "e_corner") {
             var span = this.dom.createElement("span");
             span.className = "expandres-corner";
+            dom.setStyle(span.style, "user-select", "none");
             span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
@@ -354,6 +355,7 @@ var Text = function(parentEl) {
             span.className = "ace_fold-widget ace_start ace_open";
             dom.setStyle(span.style, "height", 16);
             dom.setStyle(span.style, "display", "inline-block");
+            dom.setStyle(span.style, "user-select", "none");
             span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
@@ -362,6 +364,7 @@ var Text = function(parentEl) {
         } else if (token.type === "e_line") {
             var span = this.dom.createElement("span");
             span.className = "expandres-line";
+            dom.setStyle(span.style, "user-select", "none");
             span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
