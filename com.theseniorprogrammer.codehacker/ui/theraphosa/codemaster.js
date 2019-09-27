@@ -61,7 +61,7 @@ oop.inherits(CodeMaster, Editor);
         session.insert({ row: call.end.line + deltaY, column: line.length + 1 }, "\n");
 
         var startPoint = call.start.column;
-        var deltaPoints = 5;
+        var deltaPoints = 4;
 
         var firstLinePrefix = "";
         var linePrefix = "";

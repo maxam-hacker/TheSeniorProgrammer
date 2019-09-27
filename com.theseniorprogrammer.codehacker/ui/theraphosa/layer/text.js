@@ -351,7 +351,9 @@ var Text = function(parentEl) {
 
         } else if (token.type === "e_menu") {
             var span = this.dom.createElement("span");
-            span.className = "expandres-menu";
+            span.className = "ace_fold-widget ace_start ace_open";
+            dom.setStyle(span.style, "height", 16);
+            dom.setStyle(span.style, "display", "inline-block");
             span.textContent = " ";
             valueFragment.appendChild(span);
             parent.appendChild(valueFragment);
