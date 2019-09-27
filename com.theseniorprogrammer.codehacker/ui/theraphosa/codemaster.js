@@ -10,14 +10,15 @@ var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
     var mouseTarget = this.renderer.getMouseEventTarget();
-    event.addListener(mouseTarget, 'click', this.onMouseClick.bind(this));
+    this.addEventListener('click', this.onMouseClick.bind(this));
 };
 oop.inherits(CodeMaster, Editor);
 
 (function() {
 
     this.onMouseClick = function(event) {
-        var cursor = this.getCursorPosition();
+        //var cursor = this.getCursorPosition();
+        var cursor = event.getDocumentPosition();
         var row = cursor.row;
         var column = cursor.column;
 
@@ -74,6 +75,10 @@ oop.inherits(CodeMaster, Editor);
         firstLinePrefix += "<e_line/>";
         firstLinePrefix += "<e_line/>";
         firstLinePrefix += "<e_line/>";
+
+        var start = { row: call.end.line + deltaY + 1, column: startPoint };
+        var end = { row: call.end.line + deltaY + 1, column: startPoint + deltaPoints };
+        this.renderer.$expanderLayer.add(start, end);
         
         var textLines = text.split("\n");
 
