@@ -352,6 +352,13 @@ styles.join("\n")
     box-sizing: border-box;
 }
 
+.ace_marker-layer .phosa_call-word {
+    position: absolute;
+    z-index: 4;
+    box-sizing: border-box;
+    border: 2px solid rgb(73, 74, 128);
+}
+
 .ace_line .ace_fold {
     box-sizing: border-box;
 

@@ -137,3 +137,7 @@
   background-position: bottom;
   background-repeat: repeat-x;
 }
+
+.ace-monokai .phosa_call_underline {
+  text-decoration: underline;
+}

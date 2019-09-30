@@ -5,21 +5,21 @@ var Editor = require("./editor").Editor;
 var callsExtractor = require("../electra/paths").getCallsForFile;
 var oop = require("./lib/oop")
 var Expanders = require("./expanders").Expanders
-var Calls = require("./callsmodel").CallsModel
+var Range = require("./range").Range
+
 
 var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
     this.expanders = new Expanders();
-    this.calls = new Calls();
     this.addEventListener('click', this.onMouseClick.bind(this));
 };
 oop.inherits(CodeMaster, Editor);
 
+
 (function() {
 
     this.onMouseClick = function(event) {
-        //var cursor = this.getCursorPosition();
         var cursor = event.getDocumentPosition();
         var row = cursor.row;
         var column = cursor.column;
@@ -35,15 +35,27 @@ oop.inherits(CodeMaster, Editor);
             file = this.currentFile;
         var calls = callsExtractor(file);
 
-        if (calls !== undefined) 
+        if (calls !== undefined) {
             calls.forEach(call => {
                 if (row >= call.start.line + deltaY && row <= call.end.line + deltaY &&
                     column >= call.start.column + deltaX && column <= call.end.column + deltaX)
                     tgtCall = call;
-            });
 
-        if (tgtCall !== undefined)
+                this.session.addMarker(
+                    new Range(
+                        call.start.line + deltaY, 
+                        call.start.column + deltaX, 
+                        call.end.line + deltaY, 
+                        call.end.column + deltaX), 
+                    "phosa_call-word", 
+                    "text");
+            });
+        }
+
+        if (tgtCall !== undefined) {
+            tgtCall.isOpen = true;
             this.expandCall(tgtCall, deltaX, deltaY);
+        }
     };
 
     this.setValueWithTag = function (val, tag) {
@@ -52,14 +64,11 @@ oop.inherits(CodeMaster, Editor);
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
-        var calls = callsExtractor(this.currentFile);
-        this.calls.addCalls(this.currentFile, calls);
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
         var method = call.path.method;
         var text = method.text;
-        var file = method.file;
         var session = this.session;
         var cursor = { row: call.end.line + 1 + deltaY, column: call.end.column + 1};
 
