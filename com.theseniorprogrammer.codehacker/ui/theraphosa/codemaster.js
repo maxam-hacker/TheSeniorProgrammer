@@ -4,12 +4,14 @@ define(function(require, exports, module) {
 var Editor = require("./editor").Editor;
 var callsExtractor = require("../electra/paths").getCallsForFile;
 var oop = require("./lib/oop")
-var event = require("./lib/event")
+var Expanders = require("./expanders").Expanders
+var Calls = require("./callsmodel").CallsModel
 
 var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
-    var mouseTarget = this.renderer.getMouseEventTarget();
+    this.expanders = new Expanders();
+    this.calls = new Calls();
     this.addEventListener('click', this.onMouseClick.bind(this));
 };
 oop.inherits(CodeMaster, Editor);
@@ -50,11 +52,14 @@ oop.inherits(CodeMaster, Editor);
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
+        var calls = callsExtractor(this.currentFile);
+        this.calls.addCalls(this.currentFile, calls);
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
         var method = call.path.method;
         var text = method.text;
+        var file = method.file;
         var session = this.session;
         var cursor = { row: call.end.line + 1 + deltaY, column: call.end.column + 1};
 
@@ -78,7 +83,7 @@ oop.inherits(CodeMaster, Editor);
 
         var start = { row: call.end.line + deltaY + 1, column: startPoint };
         var end = { row: call.end.line + deltaY + 1, column: startPoint + deltaPoints };
-        this.renderer.$expanderLayer.add(start, end);
+        this.expanders.add(start, end);
         
         var textLines = text.split("\n");
 

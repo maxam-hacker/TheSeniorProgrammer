@@ -31,10 +31,7 @@
 define(function(require, exports, module) {
     "use strict";
     
-    var Range = require("../range").Range;
-    var dom = require("../lib/dom");
-    
-    var Expander = function(parentEl) {
+    var Expanders = function() {
         this.$expanders = [];
     };
     
@@ -56,8 +53,8 @@ define(function(require, exports, module) {
             return tgtExp;
         };
       
-    }).call(Expander.prototype);
+    }).call(Expanders.prototype);
     
-    exports.Expander = Expander;
+    exports.Expanders = Expanders;
     
     });

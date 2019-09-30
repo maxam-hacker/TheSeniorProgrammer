@@ -47,7 +47,7 @@ define(function(require, exports, module) {
             var row = cursor.row;
             var column = cursor.column;
 
-            var exp = this.editor.renderer.$expanderLayer.get(row, column);
+            var exp = this.editor.expanders.get(row, column);
             if (exp === undefined)
                 return;
 

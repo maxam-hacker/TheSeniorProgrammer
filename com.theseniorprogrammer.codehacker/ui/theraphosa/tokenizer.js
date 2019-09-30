@@ -265,7 +265,7 @@ var Tokenizer = function(rules) {
                 } else {
                     if (token.type)
                         tokens.push(token);
-                    token = {type: type, value: skipped};
+                    token = {type: type, value: skipped, start: match.index - skipped.length};
                 }
             }
 
@@ -310,7 +310,7 @@ var Tokenizer = function(rules) {
                     } else {
                         if (token.type)
                             tokens.push(token);
-                        token = {type: type, value: value};
+                        token = {type: type, value: value, start: match.index};
                     }
                 } else if (type) {
                     if (token.type)
