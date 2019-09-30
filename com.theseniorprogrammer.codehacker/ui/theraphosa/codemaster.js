@@ -3,15 +3,17 @@ define(function(require, exports, module) {
 
 var Editor = require("./editor").Editor;
 var callsExtractor = require("../electra/paths").getCallsForFile;
-var oop = require("./lib/oop")
-var Expanders = require("./expanders").Expanders
-var Range = require("./range").Range
+var oop = require("./lib/oop");
+var Expanders = require("./expanders").Expanders;
+var Range = require("./range").Range;
+var CallsRegistry = require("./callsregistry").CallsRegistry;
 
 
 var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
     this.expanders = new Expanders();
+    this.callsRegistry = new CallsRegistry();
     this.addEventListener('click', this.onMouseClick.bind(this));
 };
 oop.inherits(CodeMaster, Editor);
@@ -40,15 +42,6 @@ oop.inherits(CodeMaster, Editor);
                 if (row >= call.start.line + deltaY && row <= call.end.line + deltaY &&
                     column >= call.start.column + deltaX && column <= call.end.column + deltaX)
                     tgtCall = call;
-
-                this.session.addMarker(
-                    new Range(
-                        call.start.line + deltaY, 
-                        call.start.column + deltaX, 
-                        call.end.line + deltaY, 
-                        call.end.column + deltaX), 
-                    "phosa_call-word", 
-                    "text");
             });
         }
 
@@ -64,11 +57,34 @@ oop.inherits(CodeMaster, Editor);
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
+        this.clearAllMarkers();
+        var calls = callsExtractor(this.currentFile);
+        if (calls !== undefined) {
+            calls.forEach(call => {
+                var marker = this.session.addMarker(
+                    new Range(
+                        call.start.line, 
+                        call.start.column, 
+                        call.end.line, 
+                        call.end.column), 
+                    "phosa_call-word", 
+                    "text");
+                this.callsRegistry.add(this.currentFile, call, marker);
+            });
+        }
+    };
+
+    this.clearAllMarkers = function() {
+        if (this.callsRegistry === undefined)
+            return;
+        var markers = this.callsRegistry.getAllMarkers();
+        markers.forEach(marker => this.session.removeMarker(marker));
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
         var method = call.path.method;
         var text = method.text;
+        var file = method.file;
         var session = this.session;
         var cursor = { row: call.end.line + 1 + deltaY, column: call.end.column + 1};
 
@@ -103,7 +119,24 @@ oop.inherits(CodeMaster, Editor);
 
         text = shiftedLines.join("\n"); 
 
-        session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: deltaX + startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
+        session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
+
+        var inMethodCalls = callsExtractor(file);
+        if (inMethodCalls !== undefined) {
+            inMethodCalls.forEach(inCall => {
+                if (inCall.start.line >= method.start.line && inCall.end.line <= method.end.line) {
+                    var marker = this.session.addMarker(
+                        new Range(
+                            inCall.start.line + cursor.row - method.start.line, 
+                            inCall.start.column + startPoint + deltaPoints, 
+                            inCall.end.line + cursor.row - method.start.line, 
+                            inCall.end.column + startPoint + deltaPoints), 
+                        "phosa_call-word", 
+                        "text");
+                    this.callsRegistry.add(file, inCall, marker);
+                }
+            });
+        }
     }
         
 }).call(CodeMaster.prototype);

@@ -31,22 +31,29 @@
 define(function(require, exports, module) {
     "use strict";
     
-    var CallsModel = function() {
-        this.$calls = {};
+    var CallsRegistry = function() {
+        this.$calls = [];
     };
     
     (function() {
     
-        this.addCalls = function(file, calls) {
+        this.add = function(file, call, marker) {
+            var callHandler = { file: file, call: call, marker: marker };
+            this.$calls.push(callHandler);
+        };
+
+        this.get = function(file, call) {
 
         };
 
-        this.getCalls = function(file, calls) {
-
+        this.getAllMarkers = function() {
+            var markers = [];
+            this.$calls.forEach(call => markers.push(call.marker));
+            return markers;
         };
       
-    }).call(CallsModel.prototype);
+    }).call(CallsRegistry.prototype);
     
-    exports.CallsModel = CallsModel;
+    exports.CallsRegistry = CallsRegistry;
     
     });
