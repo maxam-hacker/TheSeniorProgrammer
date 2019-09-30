@@ -665,7 +665,12 @@ EditSession.$uid = 0;
     };
 
     this.toggleMarker = function(markerId) {
+        var marker = this.$frontMarkers[markerId] || this.$backMarkers[markerId];
+        if (!marker)
+            return;
 
+        
+        this._signal(marker.inFront ? "changeFrontMarker" : "changeBackMarker");
     }
 
     /**
