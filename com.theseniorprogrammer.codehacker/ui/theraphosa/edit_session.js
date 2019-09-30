@@ -598,7 +598,7 @@ EditSession.$uid = 0;
      *
      * @return {Number} The new marker id
      **/
-    this.addMarker = function(range, clazz, type, inFront) {
+    this.addMarker = function(range, clazz, type, inFront, enabledClazz, disabledClazz) {
         var id = this.$markerId++;
 
         var marker = {
@@ -607,7 +607,10 @@ EditSession.$uid = 0;
             renderer: typeof type == "function" ? type : null,
             clazz : clazz,
             inFront: !!inFront,
-            id: id
+            id: id,
+            enabled: activeClazz,
+            disabled: disabledClazz,
+            enblaed: true
         };
 
         if (inFront) {
@@ -660,6 +663,10 @@ EditSession.$uid = 0;
         delete (markers[markerId]);
         this._signal(marker.inFront ? "changeFrontMarker" : "changeBackMarker");
     };
+
+    this.toggleMarker = function(markerId) {
+
+    }
 
     /**
      * Returns an object containing all of the markers, either front or back.
