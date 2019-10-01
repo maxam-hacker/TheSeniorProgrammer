@@ -46,7 +46,12 @@ oop.inherits(CodeMaster, Editor);
         }
 
         if (tgtCall !== undefined) {
-            tgtCall.isOpen = true;
+            var callHandler = this.callsRegistry.getHandlerByCall(tgtCall);
+            if (callHandler !== undefined) {
+                if (callHandler.isOpen === true)
+                    return;
+                callHandler.isOpen = true;
+            }
             this.expandCall(tgtCall, deltaX, deltaY);
         }
     };

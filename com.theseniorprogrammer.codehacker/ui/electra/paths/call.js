@@ -16,7 +16,6 @@ class PathCall extends PathPoint {
         this.text = null;
         this.path = null;
         this.file = null;
-        this.isOpen = false;
     }
 
     setText(text) {

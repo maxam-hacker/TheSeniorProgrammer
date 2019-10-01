@@ -38,7 +38,7 @@ define(function(require, exports, module) {
     (function() {
     
         this.add = function(file, call, marker) {
-            var callHandler = { file: file, call: call, marker: marker };
+            var callHandler = { file: file, call: call, marker: marker, isOpen: false };
             this.$calls.push(callHandler);
         };
 
