@@ -4,7 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus';
-import {ingestCall, ingestMethod, ingestPath} from '../../paths'
+import {ingestCall, ingestMethod, ingestPath} from '../../paths';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,7 +19,9 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1),
-    width: 90
+    background: lightBlue[500],
+    width: '90px',
+    height: '27px'
   },
   input: {
     display: 'none',
@@ -29,6 +33,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function PathMasterView() {
+
+  const [callInvisible, setCallInvisible] = React.useState(true);
+  const [methodInvisible, setMethodInvisible] = React.useState(true);
 
   const classes = useStyles();
 
@@ -56,6 +63,7 @@ export default function PathMasterView() {
         setCallText(selectedText);
       };
       CallToTheraphosaEventBus.publish(selectedHandler);
+      setCallInvisible(false);
   };
 
   const onMethodClick = function(event) {
@@ -68,6 +76,7 @@ export default function PathMasterView() {
         setMethodText(selectedText);
       };
       MethodToTheraphosaEventBus.publish(selectedHandler);
+      setMethodInvisible(false);
   };
 
   const onBindClick = function(event) {
@@ -88,59 +97,28 @@ export default function PathMasterView() {
 
     call.setPath(path);
 
-    console.log(call.toJson());
-    console.log(method.toJson());
+    setCallInvisible(true);
+    setMethodInvisible(true);
   };
 
   return React.createElement('div', { className: classes.root },
         React.createElement(Grid, { container: true, spacing: 1 },
-            React.createElement(Grid, { container: true, xs: 6, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: callFile, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 6, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: methodFile, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-
-            React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: callText, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: callStartRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: callEndRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: callStartColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start'},
-                React.createElement(TextField, { value: callEndColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-
-            React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: methodText, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: methodStartRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: methodEndRow, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start' },
-                React.createElement(TextField, { value: methodStartColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-            React.createElement(Grid, { container: true, xs: 1, direction: 'row', justify: 'flex-start'},
-                React.createElement(TextField, { value: methodEndColumn, className: classes.textField, margin: 'normal', variant: 'outlined'})
-            ),
-
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
-                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick }, 'call'),
+                React.createElement(Badge, { color: 'primary', variant: 'dot', invisible: callInvisible, anchorOrigin: { vertical: 'bottom', horizontal: 'left' } }),
+                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onCallClick, size: 'small' }, 
+                    'call'
+                ),
             ),
             React.createElement(Grid, { container: true, xs: 2, direction: 'row', justify: 'center' },
-                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onBindClick }, 'bind'),
+                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onBindClick, size: 'small' }, 
+                    'bind'
+                ),
             ),
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-start' },
-                React.createElement(Button, { variant: 'contained', className: classes.button, onClick: onMethodClick }, 'method'),
+                React.createElement(Badge, { color: 'primary', variant: 'dot', invisible: methodInvisible, anchorOrigin: { vertical: 'bottom', horizontal: 'left' } }),
+                React.createElement(Button, { variant: 'text', className: classes.button, onClick: onMethodClick, size: 'small' }, 
+                    'Method'
+                ),
             )
         )
   )
