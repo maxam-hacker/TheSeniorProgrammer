@@ -359,6 +359,20 @@ styles.join("\n")
     border: 2px solid rgb(73, 74, 128);
 }
 
+.ace_marker-layer .phosa_call-word-enabled {
+    position: absolute;
+    z-index: 4;
+    box-sizing: border-box;
+    border: 2px solid rgb(73, 74, 128);
+}
+
+.ace_marker-layer .phosa_call-word-disabled {
+    position: absolute;
+    z-index: 4;
+    box-sizing: border-box;
+    border: 0px solid rgb(73, 74, 128);
+}
+
 .ace_line .ace_fold {
     box-sizing: border-box;
 

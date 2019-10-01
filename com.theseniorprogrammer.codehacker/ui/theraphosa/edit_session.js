@@ -608,9 +608,9 @@ EditSession.$uid = 0;
             clazz : clazz,
             inFront: !!inFront,
             id: id,
-            enabled: activeClazz,
-            disabled: disabledClazz,
-            enblaed: true
+            enabledClazz: enabledClazz,
+            disabledClazz: disabledClazz,
+            enabled: true
         };
 
         if (inFront) {
@@ -669,7 +669,17 @@ EditSession.$uid = 0;
         if (!marker)
             return;
 
-        
+        if (marker.enabledClazz === undefined || marker.disabledClazz === undefined)
+            return;
+
+        if (marker.enabled === true) {
+            marker.enabled = false;
+            marker.clazz = marker.disabledClazz;
+        } else {
+            marker.enabled = true;
+            marker.clazz = marker.enabledClazz;
+        }
+
         this._signal(marker.inFront ? "changeFrontMarker" : "changeBackMarker");
     }
 

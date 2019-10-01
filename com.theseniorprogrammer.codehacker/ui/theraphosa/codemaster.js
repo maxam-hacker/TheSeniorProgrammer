@@ -68,7 +68,9 @@ oop.inherits(CodeMaster, Editor);
                         call.end.line, 
                         call.end.column), 
                     "phosa_call-word", 
-                    "text");
+                    "text",
+                    false,
+                    "phosa_call-word-enabled", "phosa_call-word-disabled");
                 this.callsRegistry.add(this.currentFile, call, marker);
             });
         }
@@ -132,10 +134,17 @@ oop.inherits(CodeMaster, Editor);
                             inCall.end.line + cursor.row - method.start.line, 
                             inCall.end.column + startPoint + deltaPoints), 
                         "phosa_call-word", 
-                        "text");
+                        "text",
+                        false,
+                        "phosa_call-word-enabled", "phosa_call-word-disabled");
                     this.callsRegistry.add(file, inCall, marker);
                 }
             });
+        }
+
+        var callHandler = this.callsRegistry.getHandlerByCall(call);
+        if (callHandler !== undefined) {
+            this.session.toggleMarker(callHandler.marker);
         }
     }
         

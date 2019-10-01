@@ -30,6 +30,18 @@ class PathPoint {
         return `{ line: ${this.end.line}, column: ${this.end.column} }`;
     }
 
+    startEquals(start) {
+        if (this.start.line === start.line && this.start.column === start.column)
+            return true;
+        return false;
+    }
+
+    endEquals(end) {
+        if (this.end.line === end.line && this.end.column === end.column)
+            return true;
+        return false;
+    }
+
 }
 
 export default PathPoint

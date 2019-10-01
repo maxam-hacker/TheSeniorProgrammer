@@ -35,6 +35,12 @@ class PathCall extends PathPoint {
         return `{ file: ${this.file}, text: "${this.text}", start: ${this.startToJson()}, end: ${this.endToJson()}, path: ${this.path.toJson()} }`;
     }
 
+    equals(call) {
+        if (this.file === call.file && this.startEquals(call.start) && this.endEquals(call.end))
+            return true;
+        return false;
+    }
+
 }
 
 export {PathCall}

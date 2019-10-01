@@ -42,8 +42,13 @@ define(function(require, exports, module) {
             this.$calls.push(callHandler);
         };
 
-        this.get = function(file, call) {
-
+        this.getHandlerByCall = function(tgtCall) {
+            var handler = undefined;
+            this.$calls.forEach(callHandler => {
+                if (callHandler.call.equals(tgtCall))
+                    handler = callHandler;
+            });
+            return handler;
         };
 
         this.getAllMarkers = function() {
