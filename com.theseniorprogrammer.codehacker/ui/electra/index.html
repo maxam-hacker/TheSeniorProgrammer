@@ -16,6 +16,16 @@
                 min-width: 100px;
             }
 
+            .splitter-box {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+            }
+
             .vertical-resizer {
                 background: blue;
                 height: 100%;
@@ -23,6 +33,25 @@
                 position: relative;
                 z-index: 10;
                 cursor: col-resize;
+            }
+
+            .vertical-resizer-left {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                width: 400px;
+                height: 100%;
+                min-width: 216px;
+            }
+
+            .vertical-resizer-right {
+                -webkit-box-flex: 1;
+                -webkit-flex-grow: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                position: relative;
             }
 
             .horizontal-resizer {
@@ -40,47 +69,6 @@
     <doby>
 
         <!--
-
-        <div id="mainContainer" width="100%" height="100%">
-
-                <div id="splitter" class="vertical-resizer" onmousedown="onMouseDown(event)"></div>
-
-        </div>
-
-        <script type="text/javascript">
-
-            // onmousemove="onMouseMove(event)" onmouseup="onMouseUp(event)"
-
-            var isDown = false;
-            var initialX = 0;
-            var currentX = 0;
-        
-            function onMouseDown(e) {
-                isDown = true;
-                initialX = e.x;
-                console.log(e);
-            }
-
-            function onMouseMove(e) {
-                if (isDown) {
-                    var deltaX = e.x - initialX;
-                    initialX = e.x;
-                    currentX = currentX + deltaX;
-                    var command = `translate(${currentX}px)`;
-                    console.log(command);
-                    document.getElementById("splitter").style.transform = command;
-                    console.log(e);
-                }
-            }
-
-            function onMouseUp(e) {
-                isDown = false;
-                console.log(e);
-            }
-        
-        </script>
-
-        
         <div id="editor"></div>
         -->
 

@@ -36,7 +36,7 @@ class VerticalSplitter extends Component {
     }
 
     render() {
-        return React.createElement('div', { width: '100%', height: '100%'},
+        return React.createElement('div', { className: 'splitter-box' },
                     this.props.children[0],
                     React.createElement('div', { id: 'splitter', className: 'vertical-resizer', onMouseDown: this.onMouseDown.bind(this) }),
                     this.props.children[1]
