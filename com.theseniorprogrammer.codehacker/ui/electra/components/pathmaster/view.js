@@ -61,9 +61,9 @@ export default function PathMasterView() {
         setCallStartColumn(selectedRange.start.column);
         setCallEndColumn(selectedRange.end.column);
         setCallText(selectedText);
+        setCallInvisible(false);
       };
       CallToTheraphosaEventBus.publish(selectedHandler);
-      setCallInvisible(false);
   };
 
   const onMethodClick = function(event) {
@@ -74,9 +74,9 @@ export default function PathMasterView() {
         setMethodStartColumn(selectedRange.start.column);
         setMethodEndColumn(selectedRange.end.column);
         setMethodText(selectedText);
+        setMethodInvisible(false);
       };
       MethodToTheraphosaEventBus.publish(selectedHandler);
-      setMethodInvisible(false);
   };
 
   const onBindClick = function(event) {
