@@ -15,15 +15,81 @@
                 max-width: 320px;
                 min-width: 100px;
             }
+
+            .vertical-resizer {
+                background: blue;
+                height: 100%;
+                width: 14px;
+                position: relative;
+                z-index: 10;
+                cursor: col-resize;
+            }
+
+            .horizontal-resizer {
+                background: blue;
+                height: 14px;
+                width: 100%;
+                position: relative;
+                z-index: 10;
+                cursor: col-resize;
+            }
+
         </style>
     </head>
 
     <doby>
+
         <!--
+
+        <div id="mainContainer" width="100%" height="100%">
+
+                <div id="splitter" class="vertical-resizer" onmousedown="onMouseDown(event)"></div>
+
+        </div>
+
+        <script type="text/javascript">
+
+            // onmousemove="onMouseMove(event)" onmouseup="onMouseUp(event)"
+
+            var isDown = false;
+            var initialX = 0;
+            var currentX = 0;
+        
+            function onMouseDown(e) {
+                isDown = true;
+                initialX = e.x;
+                console.log(e);
+            }
+
+            function onMouseMove(e) {
+                if (isDown) {
+                    var deltaX = e.x - initialX;
+                    initialX = e.x;
+                    currentX = currentX + deltaX;
+                    var command = `translate(${currentX}px)`;
+                    console.log(command);
+                    document.getElementById("splitter").style.transform = command;
+                    console.log(e);
+                }
+            }
+
+            function onMouseUp(e) {
+                isDown = false;
+                console.log(e);
+            }
+        
+        </script>
+
+        
         <div id="editor"></div>
         -->
-        <div id="app"></div>
+
+        <div id="mainContainer" width="100%" height="100%">
+            <div id="app"></div>
+        </div>
+
         <script src="./dist/theraphosa.js" type="text/javascript" charset="utf-8"></script>
+       
     </doby>
 
 </html>
