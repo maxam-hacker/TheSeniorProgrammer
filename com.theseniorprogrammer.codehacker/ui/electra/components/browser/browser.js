@@ -18,22 +18,16 @@ class Browser extends Component {
   }
 
   render() {
-    return React.createElement(
-
-      'ul', {},
-
-      this.state.dir.map(file => {
-
-        var stat = fs.statSync(this.props.path + file);
-
-        if (stat.isFile())
-          return React.createElement(FileView, { name: file, path: this.props.path + file, type: this.props.type });
-
-        if (stat.isDirectory())
-          return React.createElement(FolderView, { name: file, path: this.props.path + file, type: this.props.type });
-      })
-
-    );
+    return React.createElement('div', { className: 'split-pane' },
+              React.createElement('ul', {},
+                this.state.dir.map(file => {
+                  var stat = fs.statSync(this.props.path + file);
+                  if (stat.isFile())
+                    return React.createElement(FileView, { name: file, path: this.props.path + file, type: this.props.type });
+                  if (stat.isDirectory())
+                    return React.createElement(FolderView, { name: file, path: this.props.path + file, type: this.props.type });
+                })
+              ));
   }
 }
 
