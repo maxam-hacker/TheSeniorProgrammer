@@ -30,15 +30,15 @@ class VerticalSplitter extends Component {
             var deltaX = event.screenX - this.$initialX;
             this.$initialX = event.screenX;
             this.$currentX = this.$currentX + deltaX;
-            var command = `translate(${this.$currentX}px)`;
-            document.getElementById("splitter").style.transform = command;
+            document.getElementById(this.props.name).style.transform = `translate(${this.$currentX}px)`;
         }
     }
 
     render() {
+        this.$splitter = React.createElement('div', { id: this.props.name, className: 'vertical-resizer', onMouseDown: this.onMouseDown.bind(this) });
         return React.createElement('div', { className: 'splitter-box' },
                     this.props.children[0],
-                    React.createElement('div', { id: 'splitter', className: 'vertical-resizer', onMouseDown: this.onMouseDown.bind(this) }),
+                    this.$splitter,
                     this.props.children[1]
         );
     }
