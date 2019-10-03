@@ -1,4 +1,9 @@
 import React, {Component} from 'react';
+import {ElectraHeader} from './electra-header';
+import {ElectraContent} from './electra-content';
+import {ElectraFooter} from './electra-footer';
+
+
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 import {Browser} from './browser/browser';
@@ -26,10 +31,30 @@ class Electra extends Component {
         )};
     */
 
+    /*
     render() {
-        return React.createElement(VerticalSplitter, {},
-                    React.createElement(Browser, { path: './', type: 'calls' }),
-                    React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' })
+        return React.createElement('div', { className: 'electra' }, 
+                    React.createElement('div', { className: 'electra-header' }), 
+                    React.createElement('div', { className: 'electra-content' },
+                        React.createElement(VerticalSplitter, {},
+                                    React.createElement(Browser, { path: './', type: 'calls' }),
+                                    React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' })
+                        )
+                    ),
+                    React.createElement('div', { className: 'electra-footer' })
+        );
+    }
+    */
+
+    render() {
+        this.electraHeader = React.createElement(ElectraHeader, {});
+        this.electraContent = React.createElement(ElectraContent, {});
+        this.electraFooter = React.createElement(ElectraFooter, {});
+
+        return React.createElement('div', { className: 'electra' },
+                    this.electraHeader,
+                    this.electraContent,
+                    this.electraFooter
         );
     }
 }
