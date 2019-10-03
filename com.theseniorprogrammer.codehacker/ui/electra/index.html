@@ -17,37 +17,38 @@
             }
 
             .electra {
+                position: absolute;
                 width: 100%;
                 height: 100%;
             }
 
             .electra-header {
                 background: #202229;
+                position: absolute;
                 width: 100%;
                 height: 53px;
-                margin: 3px;
                 top: 0;
                 left: 0;
             }
 
             .electra-left {
                 background: #202229;
-                width: 53;
-                height: 100%;
-                margin: 3px;
+                position: absolute;
+                width: 53px;
+                height: calc(100% - 70px);
                 top: 53px;
                 bottom: 70px;
-                display: flex;
             }
 
             .electra-content {
-                width: 100%;
-                height: calc(100% - 70px);
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
+                position: absolute;
+                width: calc(100% - 53px);
+                height: calc(100% - 53px);
+                top: 53px;
+                left: 53px;
+                bottom: 70px;
+                padding: 5px;
                 display: flex;
-                margin: 3px;
             }
 
             .electra-footer {
@@ -55,7 +56,6 @@
                 position: absolute;
                 width: 100%;
                 height: 70px;
-                margin: 3px;
                 bottom: 0;
                 left: 0;
                 z-index: 11;

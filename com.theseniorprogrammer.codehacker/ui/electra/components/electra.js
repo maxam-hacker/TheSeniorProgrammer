@@ -55,7 +55,7 @@ class Electra extends Component {
 
         return React.createElement('div', { className: 'electra' },
                     this.electraHeader,
-                    //this.electraLeft,
+                    this.electraLeft,
                     this.electraContent,
                     this.electraFooter
         );
