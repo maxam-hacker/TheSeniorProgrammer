@@ -27,11 +27,9 @@ class Electra extends Component {
     */
 
     render() {
-        return React.createElement(VerticalSplitter, { name: 'vsplitter-calls-phosa-left' },
-                    React.createElement(Browser, { path: './', type: 'calls', className: 'vertical-resizer-left' }),
-                    React.createElement('div', { className: 'vertical-resizer-right' },
-                            React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' })
-                    )
+        return React.createElement(VerticalSplitter, {},
+                    React.createElement(Browser, { path: './', type: 'calls' }),
+                    React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' })
         );
     }
 }

@@ -11,6 +11,10 @@ class VerticalSplitter extends Component {
         this.$currentX = 0;
         this.$isCaptured = false;
 
+        this.$splitterRef = React.createRef();
+        this.$leftWrapperRef = React.createRef();
+        this.$rightWrapperRef = React.createRef();
+
         this.$mainContainer = document.getElementById("mainContainer");
         this.$mainContainer.addEventListener("mousemove", this.onMouseMove.bind(this))
         this.$mainContainer.addEventListener("mouseup", this.onMouseUp.bind(this))
@@ -30,17 +34,22 @@ class VerticalSplitter extends Component {
             var deltaX = event.screenX - this.$initialX;
             this.$initialX = event.screenX;
             this.$currentX = this.$currentX + deltaX;
-            document.getElementById(this.props.name).style.transform = `translate(${this.$currentX}px)`;
+            this.$leftWrapperRef.current.style.width = this.$leftWrapperRef.current.clientWidth + deltaX;
         }
     }
 
     render() {
-        this.$splitter = React.createElement('div', { id: this.props.name, className: 'vertical-resizer', onMouseDown: this.onMouseDown.bind(this) });
-        return React.createElement('div', { className: 'splitter-box' },
-                    this.props.children[0],
-                    this.$splitter,
-                    this.props.children[1]
-        );
+
+        this.$splitter = React.createElement('div', { ref: this.$splitterRef, id: this.props.name, className: 'vertical-resizer', onMouseDown: this.onMouseDown.bind(this) });
+        this.$leftWrapper = React.createElement('div', { ref: this.$leftWrapperRef, className: 'vertical-resizer-left' }, this.props.children[0]);
+        this.$rightWrapper = React.createElement('div', { ref: this.$rightWrapperRef, className: 'vertical-resizer-right' }, this.props.children[1]);
+
+        this.$mainWrapper = React.createElement('div', { className: 'splitter-box' }, 
+            this.$leftWrapper,
+            this.$splitter,
+            this.$rightWrapper);
+
+        return this.$mainWrapper;
     }
 }
 
