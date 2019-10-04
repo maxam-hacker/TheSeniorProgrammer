@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {FileView} from './file';
 import {FolderView} from './folder';
+import PathMasterView from '../pathmaster/view';
 
 class Browser extends Component {
 
@@ -18,8 +19,9 @@ class Browser extends Component {
   }
 
   render() {
-    return React.createElement('div', { className: 'split-pane' },
-              React.createElement('ul', {},
+    return React.createElement('div', {},
+              React.createElement(PathMasterView, {}),
+              React.createElement('ul', { className: 'split-pane'  },
                 this.state.dir.map(file => {
                   var stat = fs.statSync(this.props.path + file);
                   if (stat.isFile())
