@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ElectraHeader} from './electra-header';
-import {ElectraLeft} from './electra-left';
+import {ElectraLeftMenu} from './electra-left-menu';
 import {ElectraContent} from './electra-content';
 import {ElectraFooter} from './electra-footer';
 
@@ -49,13 +49,13 @@ class Electra extends Component {
 
     render() {
         this.electraHeader = React.createElement(ElectraHeader, {});
-        this.electraLeft = React.createElement(ElectraLeft, {});
+        this.electraLeftMenu = React.createElement(ElectraLeftMenu, {});
         this.electraContent = React.createElement(ElectraContent, {});
         this.electraFooter = React.createElement(ElectraFooter, {});
 
         return React.createElement('div', { className: 'electra' },
                     this.electraHeader,
-                    this.electraLeft,
+                    this.electraLeftMenu,
                     this.electraContent,
                     this.electraFooter
         );
