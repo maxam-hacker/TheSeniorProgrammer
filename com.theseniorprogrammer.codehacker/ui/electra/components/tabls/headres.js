@@ -4,13 +4,22 @@ import React, {Component} from 'react';
 class PhosaScrollingTabsHeaders extends Component {
 
     render() {
-        var closeIcon = React.createElement('div', {className: 'tablink-icon-close'});
+        var closeIcon0 = React.createElement('div', {className: 'tablink-icon-close'});
+        var closeIcon1 = React.createElement('div', {className: 'tablink-icon-close'});
+        var closeIcon2 = React.createElement('div', {className: 'tablink-icon-close'});
+        var closeIcon3 = React.createElement('div', {className: 'tablink-icon-close'});
+        var closeIcon4 = React.createElement('div', {className: 'tablink-icon-close'});
+        var closeIcon5 = React.createElement('div', {className: 'tablink-icon-close'});
 
-        var listItem0 = React.createElement('div', {className: 'tablink'}, 'Terraphosa', closeIcon);
-        var listItem1 = React.createElement('div', {className: 'tablink'}, 'Terra');
-        var listItem2 = React.createElement('div', {className: 'tablink'}, 'Terra');
+        var listItem0 = React.createElement('div', {className: 'tablink'}, 'Terraphosa', closeIcon0);
+        var listItem1 = React.createElement('div', {className: 'tablink'}, 'id', closeIcon1);
+        var listItem2 = React.createElement('div', {className: 'tablink'}, 'Super', closeIcon2);
+        var listItem3 = React.createElement('div', {className: 'tablink'}, 'Editor', closeIcon3);
+        var listItem4 = React.createElement('div', {className: 'tablink'}, 'TerraTerraTerra', closeIcon4);
+        var listItem5 = React.createElement('div', {className: 'tablink'}, 'TerraTerraTerra', closeIcon5);
 
-        var tabsHeders = React.createElement('div', {className: 'tablink-container'}, listItem0, listItem1, listItem2);
+        var tabsHeders = React.createElement('div', {className: 'tablink-container'}, 
+          listItem0, listItem1, listItem2, listItem3, listItem4, listItem5);
 
         return tabsHeders;
     }
