@@ -10,6 +10,7 @@
                 --header-height: 60px; 
                 --footer-height: 27px; 
                 --left-width: 60px; 
+                --right-width: 60px; 
             }
 
             body {
@@ -52,9 +53,19 @@
                 bottom: var(--footer-height);
             }
 
+            .electra-right {
+                background: #202229;
+                position: absolute;
+                width: var(--right-width);
+                height: calc(100% - var(--header-height) - var(--footer-height));
+                top: var(--header-height);
+                bottom: var(--footer-height);
+                left: calc(100% - var(--left-width));
+            }
+
             .electra-content {
                 position: absolute;
-                width: calc(100% - var(--left-width));
+                width: calc(100% - var(--left-width) - var(--right-width));
                 height: calc(100% - var(--header-height) - var(--footer-height));
                 top: var(--header-height);
                 left: var(--left-width);
