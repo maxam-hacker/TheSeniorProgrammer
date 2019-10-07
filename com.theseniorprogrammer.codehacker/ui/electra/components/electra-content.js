@@ -15,12 +15,13 @@ class ElectraContent extends Component {
         this.callsBrowserSplitter = React.createElement(
                                         VerticalSplitter, {}, 
                                             this.callsBrowser, 
-                                            React.createElement('div', {},
+                                            this.callsPhosa
+                                            /*React.createElement('div', {},
                                                 React.createElement(VerticalSplitter, {},
                                                     this.callsPhosa,
                                                     this.methodsBrowser
                                                 )
-                                            )
+                                            )*/
                                     );
 
         this.theContent = React.createElement('div', {className: 'electra-content'}, this.callsBrowserSplitter);

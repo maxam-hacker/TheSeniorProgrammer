@@ -6,14 +6,14 @@
             #editor_calls { position: absolute; width: 100%; height: 100%; }
             #editor_methods { position: absolute; width: 100%; height: 100%; }
 
-            #form {
-                display: flex;
-                flex-wrap: 'wrap';
+            :root {
+                --header-height: 60px; 
+                --footer-height: 27px; 
+                --left-width: 60px; 
             }
 
-            #formControl {
-                max-width: 320px;
-                min-width: 100px;
+            body {
+                overflow-y: hidden;
             }
 
             .electra {
@@ -26,48 +26,45 @@
                 background: #202229;
                 position: absolute;
                 width: 100%;
-                height: 53px;
+                height: var(--header-height);
                 top: 0;
                 left: 0;
             }
 
-            .electra-left {
-                background: #202229;
-                position: absolute;
-                width: 53px;
-                height: calc(100% - 70px);
-                top: 53px;
-                bottom: 70px;
-            }
-
-            .electra-content {
-                position: absolute;
-                width: calc(100% - 53px);
-                height: calc(100% - 53px - 70px);
-                top: 53px;
-                left: 53px;
-                bottom: 70px;
-                padding: 5px;
-                display: flex;
-            }
-
             .electra-footer {
-                background: #202229;
+                background: #0331d8;
                 position: absolute;
                 width: 100%;
-                height: 70px;
+                height: var(--footer-height);
                 bottom: 0;
                 left: 0;
                 z-index: 11;
                 display: flex;
             }
 
+            .electra-left {
+                background: #202229;
+                position: absolute;
+                width: var(--left-width);
+                height: calc(100% - var(--header-height) - var(--footer-height));
+                top: var(--header-height);
+                bottom: var(--footer-height);
+            }
+
+            .electra-content {
+                position: absolute;
+                width: calc(100% - var(--left-width));
+                height: calc(100% - var(--header-height) - var(--footer-height));
+                top: var(--header-height);
+                left: var(--left-width);
+                bottom: var(--footer-height);
+                padding: 0px;
+                display: flex;
+            }
+
             .splitter-box {
                 width: 100%;
                 height: 100%;
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
                 display: flex;
             }
 
