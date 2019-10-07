@@ -4,9 +4,11 @@ import React, {Component} from 'react';
 class PhosaScrollingTabsHeaders extends Component {
 
     render() {
-        var listItem0 = React.createElement('button', {className: 'tablink'}, 'Terra');
-        var listItem1 = React.createElement('button', {className: 'tablink'}, 'Terra');
-        var listItem2 = React.createElement('button', {className: 'tablink'}, 'Terra');
+        var closeIcon = React.createElement('div', {className: 'tablink-icon-close'});
+
+        var listItem0 = React.createElement('div', {className: 'tablink'}, 'Terraphosa', closeIcon);
+        var listItem1 = React.createElement('div', {className: 'tablink'}, 'Terra');
+        var listItem2 = React.createElement('div', {className: 'tablink'}, 'Terra');
 
         var tabsHeders = React.createElement('div', {className: 'tablink-container'}, listItem0, listItem1, listItem2);
 
