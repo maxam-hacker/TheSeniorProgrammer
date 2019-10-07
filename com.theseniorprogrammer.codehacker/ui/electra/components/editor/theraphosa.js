@@ -45,13 +45,9 @@ class Theraphosa extends Component {
       callback(this.pathToFile, selectedText, selectedRange);
     };
 
-    if (this.props.type === 'calls') {
-      BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
-      CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
-    } else if (this.props.type === 'methods') {
-      BrowserToTheraphosaMethodsEventBus.subscribe(this.FileAndFolderClick.bind(this));
-      MethodToTheraphosaEventBus.subscribe(this.MethodCreator.bind(this));
-    }
+    BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
+    CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
+    MethodToTheraphosaEventBus.subscribe(this.MethodCreator.bind(this));
   }
 }
 
