@@ -25,6 +25,18 @@ class PathMaster extends Component {
 
     render() {
 
+        this.callButton = React.createElement('div', {className: 'button-wrapper'});
+        this.methodButton = React.createElement('div', {className: 'button-wrapper'});
+        this.linkButton = React.createElement('div', {className: 'button-wrapper'});
+
+        this.buttonsPanel = React.createElement('div', {className: 'browser-buttons-wrapper'}, 
+                                                        this.callButton, 
+                                                        this.methodButton, 
+                                                        this.linkButton);
+
+        return this.buttonsPanel;
+
+        /*
         return React.createElement('form', { id: 'form' }, 
                         this.repo.map(dir => {
                                 return React.createElement(FormControl, { id: 'formControl' },
@@ -37,6 +49,7 @@ class PathMaster extends Component {
                                 )
                         })
         );
+        */
     }
 }
 

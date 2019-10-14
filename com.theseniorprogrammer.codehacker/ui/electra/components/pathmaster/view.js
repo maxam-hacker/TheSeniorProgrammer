@@ -101,6 +101,68 @@ export default function PathMasterView() {
     setMethodInvisible(true);
   };
 
+  var borderPath = React.createElement('path', { className: 'button-border-line',
+    d: '\
+    M2, 10 \
+    A7, 7, 0 0,1 10 2 \
+    L30, 2 \
+    A7, 7, 0 0,1 38 10 \
+    L38, 30 \
+    A7, 7, 0 0,1 30 38 \
+    L10, 38 \
+    A7, 7, 0 0,1 2 30 \
+    L2, 10 \
+    '
+  });
+  var callSym = React.createElement('path', { className: 'button-image-line',
+    d: '\
+    M12, 10 \
+    L12, 27 \
+    L31, 27 \
+    L22, 24 \
+    L31, 27 \
+    L22, 30 \
+    '
+  });
+  var callPoint = React.createElement('path', { className: 'button-image-filled',
+    d: '\
+    M12, 10 \
+    A3, 3, 0 0,1 12 16 \
+    A3, 3, 0 0,1 12 10 \
+    '
+  });
+  var callSvg = React.createElement('svg', {className: 'button-svg'}, borderPath, callSym, callPoint);
+  var callButton = React.createElement('div', {className: 'button-wrapper'}, callSvg);
+
+  var methodPath = React.createElement('path', { className: 'button-lines',
+    d: '\
+    M0, 0 \
+    L0, 40 \
+    L40, 40 \
+    L40, 0 \
+    L0, 0 \
+    '
+  });
+  var methodSvg = React.createElement('svg', {className: 'button-svg'}, methodPath);
+  var methodButton = React.createElement('div', {className: 'button-wrapper'}, methodSvg);
+
+  var linkPath = React.createElement('path', { className: 'button-lines',
+    d: '\
+    M0, 0 \
+    L0, 40 \
+    L40, 40 \
+    L40, 0 \
+    L0, 0 \
+    '
+  });
+  var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkPath);
+  var linkButton = React.createElement('div', {className: 'button-wrapper'}, linkSvg);
+
+  var buttonsPanel = React.createElement('div', {className: 'browser-buttons-wrapper'}, callButton, methodButton, linkButton);
+
+  return buttonsPanel;
+
+  /*
   return React.createElement('div', { className: classes.root },
         React.createElement(Grid, { container: true, spacing: 1 },
             React.createElement(Grid, { container: true, xs: 5, direction: 'row', justify: 'flex-end' },
@@ -122,4 +184,5 @@ export default function PathMasterView() {
             )
         )
   )
+  */
 }

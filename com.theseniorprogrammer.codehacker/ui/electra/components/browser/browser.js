@@ -20,7 +20,7 @@ class Browser extends Component {
 
   render() {
     return React.createElement('div', {className: 'browser-container'},
-              React.createElement(PathMasterView, {className: 'browser-buttons-wrapper'}),
+              React.createElement(PathMasterView, {}),
               React.createElement('ul', { className: 'split-pane browser-files'  },
                 this.state.dir.map(file => {
                   var stat = fs.statSync(this.props.path + file);
