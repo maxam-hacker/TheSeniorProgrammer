@@ -154,6 +154,14 @@ export default function PathMasterView() {
     L2, 10 \
     '
   });
+  var methodSym = React.createElement('path', { className: 'button-image-line',
+    d: '\
+    M8,  14 L30, 14 \
+    M14, 18 L30, 18 \
+    M14, 22 L30, 22 \
+    M14, 26 L30, 26 \
+    '
+  });
   var methodBindInvisiblePoint = React.createElement('path', { className: 'button-image-invisible',
     d: '\
     M0, 0 \
@@ -161,7 +169,7 @@ export default function PathMasterView() {
     A4, 4, 0 0,1 0 0 \
     '
   });
-  var methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodBindInvisiblePoint);
+  var methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodSym, methodBindInvisiblePoint);
   var methodButton = React.createElement('div', {className: 'button-wrapper'}, methodSvg);
 
   var linkBorderPath = React.createElement('path', { className: 'button-border-line',
@@ -177,14 +185,7 @@ export default function PathMasterView() {
     L2, 10 \
     '
   });
-  var linkBindInvisiblePoint = React.createElement('path', { className: 'button-image-invisible',
-    d: '\
-    M0, 0 \
-    A4, 4, 0 0,1 0 8 \
-    A4, 4, 0 0,1 0 0 \
-    '
-  });
-  var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkBorderPath, linkBindInvisiblePoint);
+  var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkBorderPath);
   var linkButton = React.createElement('div', {className: 'button-wrapper'}, linkSvg);
 
   var buttonsPanel = React.createElement('div', {className: 'browser-buttons-wrapper'}, callButton, methodButton, linkButton);
