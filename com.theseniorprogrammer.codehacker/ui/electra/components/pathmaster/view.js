@@ -138,8 +138,12 @@ export default function PathMasterView() {
     A4, 4, 0 0,1 0 0 \
     '
   });
-  var callSvg = React.createElement('svg', {className: 'button-svg'}, callBorderPath, callSym, callPoint, callBindInvisiblePoint);
-  var callButton = React.createElement('div', {className: 'button-wrapper'}, callSvg);
+  var callSvg = null;
+  if (callInvisible)
+      callSvg = React.createElement('svg', {className: 'button-svg'}, callBorderPath, callSym, callPoint);
+  else
+      callSvg = React.createElement('svg', {className: 'button-svg'}, callBorderPath, callSym, callPoint, callBindInvisiblePoint);
+  var callButton = React.createElement('div', {className: 'button-wrapper', onClick: onCallClick}, callSvg);
 
   var methodBorderPath = React.createElement('path', { className: 'button-border-line',
     d: '\
@@ -169,8 +173,12 @@ export default function PathMasterView() {
     A4, 4, 0 0,1 0 0 \
     '
   });
-  var methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodSym, methodBindInvisiblePoint);
-  var methodButton = React.createElement('div', {className: 'button-wrapper'}, methodSvg);
+  var methodSvg = null;
+  if (methodInvisible)
+      methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodSym);
+  else
+      methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodSym, methodBindInvisiblePoint);
+  var methodButton = React.createElement('div', {className: 'button-wrapper', onClick: onMethodClick}, methodSvg);
 
   var linkBorderPath = React.createElement('path', { className: 'button-border-line',
     d: '\
@@ -208,7 +216,7 @@ export default function PathMasterView() {
     '
   });
   var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkBorderPath, linkSym, linkPoint0, linkPoint1);
-  var linkButton = React.createElement('div', {className: 'button-wrapper'}, linkSvg);
+  var linkButton = React.createElement('div', {className: 'button-wrapper', onClick: onBindClick}, linkSvg);
 
   var buttonsPanel = React.createElement('div', {className: 'browser-buttons-wrapper'}, callButton, methodButton, linkButton);
 
