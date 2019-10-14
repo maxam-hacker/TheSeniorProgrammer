@@ -185,7 +185,29 @@ export default function PathMasterView() {
     L2, 10 \
     '
   });
-  var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkBorderPath);
+  var linkSym = React.createElement('path', { className: 'button-image-line',
+    d: '\
+    M22, 10 \
+    A10, 10, 0 0,1 22 30 \
+    M18, 10 \
+    A10, 10, 0 0,0 18 30 \
+    '
+  });
+  var linkPoint0 = React.createElement('path', { className: 'button-image-filled',
+    d: '\
+    M22, 10 \
+    A3, 3, 0 0,1 28 13 \
+    A3, 3, 0 0,1 22 10 \
+    '
+  });
+  var linkPoint1 = React.createElement('path', { className: 'button-image-filled',
+    d: '\
+    M18, 30 \
+    A3, 3, 0 0,1 12 27 \
+    A3, 3, 0 0,1 18 30 \
+    '
+  });
+  var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkBorderPath, linkSym, linkPoint0, linkPoint1);
   var linkButton = React.createElement('div', {className: 'button-wrapper'}, linkSvg);
 
   var buttonsPanel = React.createElement('div', {className: 'browser-buttons-wrapper'}, callButton, methodButton, linkButton);
