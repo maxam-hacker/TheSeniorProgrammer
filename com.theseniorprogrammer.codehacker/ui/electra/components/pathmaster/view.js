@@ -66,6 +66,42 @@ export default function PathMasterView() {
       CallToTheraphosaEventBus.publish(selectedHandler);
   };
 
+  var callRef = React.createRef();
+
+  const onCallEnter = function(event) {
+    callRef.current.style.stroke = '#2b3ff7de';
+    callRef.current.style.fill = '#2b3ff7de';
+  };
+
+  const onCallLeave = function(event) {
+    callRef.current.style.stroke = '#2b40f7';
+    callRef.current.style.fill = '#2b40f7';
+  };
+
+  var methodRef = React.createRef();
+
+  const onMethodEnter = function(event) {
+    methodRef.current.style.stroke = '#2b3ff7de';
+    methodRef.current.style.fill = '#2b3ff7de';
+  };
+
+  const onMethodLeave = function(event) {
+    methodRef.current.style.stroke = '#2b40f7';
+    methodRef.current.style.fill = '#2b40f7';
+  };
+
+  var bindRef = React.createRef();
+
+  const onBindEnter = function(event) {
+    bindRef.current.style.stroke = '#2b3ff7de';
+    bindRef.current.style.fill = '#2b3ff7de';
+  };
+
+  const onBindLeave = function(event) {
+    bindRef.current.style.stroke = '#2b40f7';
+    bindRef.current.style.fill = '#2b40f7';
+  };
+
   const onMethodClick = function(event) {
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
         setMethodFile(pathToFile);
@@ -101,7 +137,8 @@ export default function PathMasterView() {
     setMethodInvisible(true);
   };
 
-  var callBorderPath = React.createElement('path', { className: 'button-border-line',
+  var callBorderPath = React.createElement('path', { className: 'button-border-line', ref: callRef,
+    onClick: onCallClick, onMouseEnter: onCallEnter, onMouseLeave: onCallLeave,
     d: '\
     M2, 10 \
     A7, 7, 0 0,1 10 2 \
@@ -115,6 +152,7 @@ export default function PathMasterView() {
     '
   });
   var callSym = React.createElement('path', { className: 'button-image-line',
+    onClick: onCallClick, onMouseEnter: onCallEnter, onMouseLeave: onCallLeave,
     d: '\
     M12, 10 \
     L12, 27 \
@@ -125,6 +163,7 @@ export default function PathMasterView() {
     '
   });
   var callPoint = React.createElement('path', { className: 'button-image-filled',
+    onClick: onCallClick, onMouseEnter: onCallEnter, onMouseLeave: onCallLeave,
     d: '\
     M12, 10 \
     A3, 3, 0 0,1 12 16 \
@@ -132,6 +171,7 @@ export default function PathMasterView() {
     '
   });
   var callBindInvisiblePoint = React.createElement('path', { className: 'button-image-invisible',
+    onClick: onCallClick, onMouseEnter: onCallEnter, onMouseLeave: onCallLeave,
     d: '\
     M0, 0 \
     A4, 4, 0 0,1 0 8 \
@@ -143,9 +183,10 @@ export default function PathMasterView() {
       callSvg = React.createElement('svg', {className: 'button-svg'}, callBorderPath, callSym, callPoint);
   else
       callSvg = React.createElement('svg', {className: 'button-svg'}, callBorderPath, callSym, callPoint, callBindInvisiblePoint);
-  var callButton = React.createElement('div', {className: 'button-wrapper', onClick: onCallClick}, callSvg);
+  var callButton = React.createElement('div', {className: 'button-wrapper'}, callSvg);
 
-  var methodBorderPath = React.createElement('path', { className: 'button-border-line',
+  var methodBorderPath = React.createElement('path', { className: 'button-border-line', ref: methodRef,
+    onClick: onMethodClick, onMouseEnter: onMethodEnter, onMouseLeave: onMethodLeave,
     d: '\
     M2, 10 \
     A7, 7, 0 0,1 10 2 \
@@ -159,6 +200,7 @@ export default function PathMasterView() {
     '
   });
   var methodSym = React.createElement('path', { className: 'button-image-line',
+    onClick: onMethodClick, onMouseEnter: onMethodEnter, onMouseLeave: onMethodLeave,
     d: '\
     M8,  14 L30, 14 \
     M14, 18 L30, 18 \
@@ -167,6 +209,7 @@ export default function PathMasterView() {
     '
   });
   var methodBindInvisiblePoint = React.createElement('path', { className: 'button-image-invisible',
+    onClick: onMethodClick, onMouseEnter: onMethodEnter, onMouseLeave: onMethodLeave,
     d: '\
     M0, 0 \
     A4, 4, 0 0,1 0 8 \
@@ -178,9 +221,10 @@ export default function PathMasterView() {
       methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodSym);
   else
       methodSvg = React.createElement('svg', {className: 'button-svg'}, methodBorderPath, methodSym, methodBindInvisiblePoint);
-  var methodButton = React.createElement('div', {className: 'button-wrapper', onClick: onMethodClick}, methodSvg);
+  var methodButton = React.createElement('div', {className: 'button-wrapper'}, methodSvg);
 
-  var linkBorderPath = React.createElement('path', { className: 'button-border-line',
+  var linkBorderPath = React.createElement('path', { className: 'button-border-line', ref: bindRef,
+    onClick: onBindClick, onMouseEnter: onBindEnter, onMouseLeave: onBindLeave,
     d: '\
     M2, 10 \
     A7, 7, 0 0,1 10 2 \
@@ -194,6 +238,7 @@ export default function PathMasterView() {
     '
   });
   var linkSym = React.createElement('path', { className: 'button-image-line',
+    onClick: onBindClick, onMouseEnter: onBindEnter, onMouseLeave: onBindLeave,
     d: '\
     M22, 10 \
     A10, 10, 0 0,1 22 30 \
@@ -202,6 +247,7 @@ export default function PathMasterView() {
     '
   });
   var linkPoint0 = React.createElement('path', { className: 'button-image-filled',
+    onClick: onBindClick, onMouseEnter: onBindEnter, onMouseLeave: onBindLeave,
     d: '\
     M22, 10 \
     A3, 3, 0 0,1 28 13 \
@@ -209,6 +255,7 @@ export default function PathMasterView() {
     '
   });
   var linkPoint1 = React.createElement('path', { className: 'button-image-filled',
+    onClick: onBindClick, onMouseEnter: onBindEnter, onMouseLeave: onBindLeave,
     d: '\
     M18, 30 \
     A3, 3, 0 0,1 12 27 \
@@ -216,7 +263,7 @@ export default function PathMasterView() {
     '
   });
   var linkSvg = React.createElement('svg', {className: 'button-svg'}, linkBorderPath, linkSym, linkPoint0, linkPoint1);
-  var linkButton = React.createElement('div', {className: 'button-wrapper', onClick: onBindClick}, linkSvg);
+  var linkButton = React.createElement('div', {className: 'button-wrapper'}, linkSvg);
 
   var buttonsPanel = React.createElement('div', {className: 'browser-buttons-wrapper'}, callButton, methodButton, linkButton);
 
