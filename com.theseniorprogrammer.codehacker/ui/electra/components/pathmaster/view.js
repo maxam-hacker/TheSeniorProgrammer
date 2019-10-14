@@ -131,7 +131,14 @@ export default function PathMasterView() {
     A3, 3, 0 0,1 12 10 \
     '
   });
-  var callSvg = React.createElement('svg', {className: 'button-svg'}, borderPath, callSym, callPoint);
+  var callBindInvisiblePoint = React.createElement('path', { className: 'button-image-invisible',
+    d: '\
+    M0, 0 \
+    A4, 4, 0 0,1 0 8 \
+    A4, 4, 0 0,1 0 0 \
+    '
+  });
+  var callSvg = React.createElement('svg', {className: 'button-svg'}, borderPath, callSym, callPoint, callBindInvisiblePoint);
   var callButton = React.createElement('div', {className: 'button-wrapper'}, callSvg);
 
   var methodPath = React.createElement('path', { className: 'button-lines',
