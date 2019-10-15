@@ -6,14 +6,6 @@ import {ElectraContent} from './electra-content';
 import {ElectraFooter} from './electra-footer';
 
 
-import SplitterLayout from 'react-splitter-layout';
-import 'react-splitter-layout/lib/index.css';
-import {Browser} from './browser/browser';
-import {Theraphosa} from './editor/theraphosa'
-import {PathMaster} from './pathmaster'
-import PathMasterView from './pathmaster/view'
-import {VerticalSplitter} from './vsplitter'
-
 class Electra extends Component {
 
     render() {
