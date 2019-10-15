@@ -9,9 +9,7 @@ class Browser extends Component {
 
   constructor(props) {
     super(props);
-
     var basePath = props.path;
-
     this.state = {
       dir: fs.readdirSync(basePath)
     };
@@ -21,16 +19,17 @@ class Browser extends Component {
   render() {
     return React.createElement('div', {className: 'browser-container'},
               React.createElement(PathMasterView, {}),
-              React.createElement('ul', { className: 'split-pane browser-files'  },
+              React.createElement('div', { className: 'split-pane browser-files'  },
                 this.state.dir.map(file => {
                   var stat = fs.statSync(this.props.path + file);
                   if (stat.isFile())
-                    return React.createElement(FileView, { name: file, path: this.props.path + file, type: this.props.type });
+                    return React.createElement(FileView, { name: file, path: this.props.path + file, type: this.props.type, level: 0 });
                   if (stat.isDirectory())
-                    return React.createElement(FolderView, { name: file, path: this.props.path + file, type: this.props.type });
+                    return React.createElement(FolderView, { name: file, path: this.props.path + file, type: this.props.type, level: 0 });
                 })
               ));
   }
+
 }
 
 Browser.propTypes = {
