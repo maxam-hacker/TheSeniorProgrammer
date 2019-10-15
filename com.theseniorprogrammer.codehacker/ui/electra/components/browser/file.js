@@ -29,9 +29,9 @@ class FileView extends Component {
         '<path d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" stroke="#2b40f7"></path>' +
       '</svg>'};
 
-    var fileImage = React.createElement('svg', { onClick: this.onFileClick.bind(this), width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-    var fileName = React.createElement('span', { onClick: this.onFileClick.bind(this), style: {color: '#d4d4d4'} }, this.props.name);
-    var fileNamedImage = React.createElement('div', { onClick: this.onFileClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px' } }, fileImage, fileName);
+    var fileImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
+    var fileName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.name);
+    var fileNamedImage = React.createElement('div', { style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, fileImage, fileName);
     var fileWrapper = React.createElement('div', { onClick: this.onFileClick.bind(this) }, fileNamedImage);
 
     return fileWrapper;

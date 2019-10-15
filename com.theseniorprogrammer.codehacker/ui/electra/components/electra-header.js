@@ -16,7 +16,7 @@ class ElectraHeader extends Component {
         L45, 40 \
         A47,25 0 0,1 45,3 \
         '});
-        this.logoSvg = React.createElement('svg', {}, this.logoPath);
+        this.logoSvg = React.createElement('svg', {className: 'logo-svg'}, this.logoPath);
         this.logoWrapper = React.createElement('div', {className: 'logo-wrapper'}, this.logoSvg);
 
         this.titleSp = React.createElement('span', {className: 'title-senior-programmer'}, 'TheSeniorProgrammer');

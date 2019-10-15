@@ -51,7 +51,7 @@ class FolderView extends Component {
       
       var folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
       var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.name);
-      var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px' } }, folderImage, folderName);
+      var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, folderImage, folderName);
       var folderWrapper = React.createElement('div', {}, folderNamedImage, contentWrapper);
 
       return folderWrapper;
@@ -60,7 +60,7 @@ class FolderView extends Component {
 
       var folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
       var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.name);
-      var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px' } }, folderImage, folderName);
+      var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, folderImage, folderName);
       var folderWrapper = React.createElement('div', {}, folderNamedImage);
 
       return folderWrapper;
