@@ -3,6 +3,7 @@ import {Browser} from './browser/browser';
 import {Theraphosa} from './editor/theraphosa'
 import {VerticalSplitter} from './vsplitter'
 import {PhosaTabsContainer} from './tabs/container'
+import PathMasterLine from './pathmaster/line'
 
 
 class ElectraContent extends Component {
@@ -17,7 +18,7 @@ class ElectraContent extends Component {
                                         VerticalSplitter, {}, 
                                             this.callsBrowser, 
                                             React.createElement('div', {style: {marginTop: '1px'}},
-                                                //React.createElement(PhosaTabsContainer, {}),
+                                                React.createElement(PathMasterLine, {}),
                                                 this.callsPhosa
                                             )
                                     );
