@@ -16,8 +16,8 @@ class ElectraContent extends Component {
         this.callsBrowserSplitter = React.createElement(
                                         VerticalSplitter, {}, 
                                             this.callsBrowser, 
-                                            React.createElement('div', {},
-                                                React.createElement(PhosaTabsContainer, {}),
+                                            React.createElement('div', {style: {marginTop: '1px'}},
+                                                //React.createElement(PhosaTabsContainer, {}),
                                                 this.callsPhosa
                                             )
                                     );
