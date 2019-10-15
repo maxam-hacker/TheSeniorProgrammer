@@ -16,6 +16,7 @@
             body {
                 overflow-y: hidden;
                 overflow-x: hidden;
+                background-color: rgb(54, 53, 53);
                 margin: 0px;
             }
 
@@ -113,16 +114,8 @@
                 position: relative;
             }
 
-            .split-pane {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                overflow-y: auto;
-            }
-
             .tab-container {
-                width: calc(100% - 10px);
+                width: 450px;
                 height: 37px;
                 border: none;
                 outline: none;
@@ -142,13 +135,11 @@
             .tab {
                 background-color: rgb(56, 55, 55);
                 height: 100%;
-                color: white;
                 cursor: pointer;
                 padding-left: 10px;
                 padding-top: 6px;
                 box-sizing: border-box;
                 border-right: 1px solid rgb(37, 37, 38);
-                font-size: 14px;
                 display: flex;
             }
 

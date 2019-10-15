@@ -35,6 +35,7 @@ class VerticalSplitter extends Component {
             this.$initialX = event.screenX;
             this.$currentX = this.$currentX + deltaX;
             this.$leftWrapperRef.current.style.width = this.$leftWrapperRef.current.clientWidth + deltaX;
+            this.$rightWrapperRef.current.style.width = this.$rigthWrapperRef.current.clientWidth - deltaX;
         }
     }
 
