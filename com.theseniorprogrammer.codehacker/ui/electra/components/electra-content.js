@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Browser} from './browser/browser';
 import {Theraphosa} from './editor/theraphosa'
 import {VerticalSplitter} from './vsplitter'
-import {PhosaScrollingTabsHeaders} from './tabls/headres'
+import {PhosaTabsContainer} from './tabs/container'
 
 
 class ElectraContent extends Component {
@@ -17,7 +17,7 @@ class ElectraContent extends Component {
                                         VerticalSplitter, {}, 
                                             this.callsBrowser, 
                                             React.createElement('div', {},
-                                                React.createElement(PhosaScrollingTabsHeaders, {}),
+                                                React.createElement(PhosaTabsContainer, {}),
                                                 this.callsPhosa
                                             )
                                     );
