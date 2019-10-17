@@ -283,11 +283,11 @@
 
             .magaz-menu {
                 position: absolute;
-                top: 20px;
+                top: var(--header-height);
                 left: 20px;
                 width: 240px;
-                height: calc(100% - 40px);
-                border-radius: 20px;
+                height: calc(100% - 20px - var(--header-height));
+                border-radius: 9px;
                 overflow: hidden;
                 background: #06dd9c;
             }
@@ -313,11 +313,11 @@
             .magaz-hacks {
                 background: #282831;
                 width: calc(100% - 300px);
-                height: calc(100% - 40px);
+                height: calc(100% - 20px - var(--header-height));
                 position: relative;
-                top: 20px;
+                top: var(--header-height);
                 left: 280px;
-                border-radius: 20px;
+                border-radius: 9px;
             }
 
         </style>
