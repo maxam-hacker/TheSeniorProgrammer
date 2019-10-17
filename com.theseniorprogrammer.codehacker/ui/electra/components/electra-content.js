@@ -9,23 +9,14 @@ import PathMasterLine from './pathmaster/line'
 class ElectraContent extends Component {
 
     render() {
-        
-        this.callsBrowser = React.createElement(Browser, { path: './', type: 'calls' });
-        this.methodsBrowser = React.createElement(Browser, { path: './', type: 'calls' });
-        this.callsPhosa = React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' });
 
-        this.callsBrowserSplitter = React.createElement(
-                                        VerticalSplitter, {}, 
-                                            this.callsBrowser, 
-                                            React.createElement('div', {style: {marginTop: '1px'}},
-                                                React.createElement(PathMasterLine, {}),
-                                                this.callsPhosa
-                                            )
-                                    );
+        this.browser = React.createElement(Browser, { path: './', type: 'calls' });
+        this.phosa = React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' });
+        this.pathLine = React.createElement(PathMasterLine, {});
+        this.editor = React.createElement('div', {}, this.pathLine, this.phosa);
+        this.content = React.createElement(VerticalSplitter, {}, this.browser, this.editor);
 
-        this.theContent = React.createElement('div', {className: 'electra-content'}, this.callsBrowserSplitter);
-
-        return this.theContent;
+        return React.createElement('div', {className: 'electra-content'}, this.content);
     }
 }
 
