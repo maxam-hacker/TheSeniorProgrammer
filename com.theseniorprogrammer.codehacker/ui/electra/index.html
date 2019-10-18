@@ -311,29 +311,25 @@
             }
 
             .magaz-pages {
-                width: 100%;
-                height: 100%;
+                width: calc(100% - 300px);
+                height: calc(100% - 20px - var(--header-height));
                 position: relative;
                 left: 280px;
-                overflow-y: auto;
-            }
-
-            .magaz-hacks-page-line-0 {
-                width: 100%;
-                height: 320px;
-                position: relative;
                 top: var(--header-height);
-                left: 20px;
-                display: flex;
-                overflow-x: hidden;
+                overflow-y: auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 240px);
+                grid-template-rows: repeat(auto-fill, 190px);
+                grid-gap: 20px;
             }
 
             .magaz-hacks-spring {
                 background: #282831;
                 width: 240px;
-                height: 290px;
-                position: relative;
-                border-radius: 9px;
+                height: 190px;
+                border-radius: 11px;
+                color: white;
+                text-align: center;
             }
 
         </style>
