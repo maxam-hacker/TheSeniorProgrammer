@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {ElectraHeader} from './electra-header';
-import {ElectraLeftMenu} from './electra-left-menu';
-import {ElectraRightMenu} from './electra-right-menu';
-import {ElectraContent} from './electra-content';
-import {ElectraFooter} from './electra-footer';
-import {Magaz} from './seniorprogrammer/magaz'
+import {ElectraHeader} from './electraHeader';
+import {ElectraLeftMenu} from './electraLeftMenu';
+import {ElectraRightMenu} from './electraRightMenu';
+import {ElectraContent} from './electraContent';
+import {ElectraFooter} from './electraFooter';
+import {Senior} from './seniorprogrammer/senior'
 
 class Electra extends Component {
 
@@ -15,17 +15,17 @@ class Electra extends Component {
         this.electraRightMenu = React.createElement(ElectraRightMenu, {});
         this.electraContent = React.createElement(ElectraContent, {});
         this.electraFooter = React.createElement(ElectraFooter, {});
-        this.codeHacker = React.createElement('div', { className: 'electra' },
+        this.TheCodeHacker = React.createElement('div', { className: 'electra' },
                     this.electraHeader,
                     this.electraLeftMenu,
                     this.electraContent,
                     this.electraRightMenu,
                     this.electraFooter
         );
-        return this.codeHacker;
+        //return this.TheCodeHacker;
 
-        //this.Magaz = React.createElement(Magaz, {className: 'magaz'});
-        //return this.Magaz;
+        this.TheSenior = React.createElement(Senior, {className: 'senior'});
+        return this.TheSenior;
     }
 }
 
