@@ -22,10 +22,10 @@ class Electra extends Component {
                     this.electraRightMenu,
                     this.electraFooter
         );
+        return this.codeHacker;
 
-        this.Magaz = React.createElement(Magaz, {className: 'magaz'});
-
-        return this.Magaz;
+        //this.Magaz = React.createElement(Magaz, {className: 'magaz'});
+        //return this.Magaz;
     }
 }
 
