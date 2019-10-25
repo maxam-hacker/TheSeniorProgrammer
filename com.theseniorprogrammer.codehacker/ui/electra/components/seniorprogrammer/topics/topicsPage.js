@@ -8,7 +8,7 @@ class SeniorTopicsPage extends Component {
 
         this.header = React.createElement(SeniorTopicsPageHeader, {});
 
-        this.springHack0 = React.createElement(TopicIcon, {}, 'Item0');
+        this.springHack0 = React.createElement(TopicIcon, {topicName: 'Spring'});
         this.springHack1 = React.createElement(TopicIcon, {}, 'Item0');
         this.springHack2 = React.createElement(TopicIcon, {}, 'Item0');
         this.springHack3 = React.createElement(TopicIcon, {}, 'Item0');
@@ -33,7 +33,7 @@ class SeniorTopicsPage extends Component {
         this.springHack22 = React.createElement(TopicIcon, {}, 'Item0');
         this.springHack23 = React.createElement(TopicIcon, {}, 'Item0');
 
-        this.iconContainer = React.createElement('div', {className: 'senior-topics-page-icon-wrapper'},
+        this.iconContainer = React.createElement('div', {className: 'senior-topics-page-icons-wrapper'},
                                 this.springHack0,
                                 this.springHack1,
                                 this.springHack2,
