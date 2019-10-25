@@ -4,7 +4,8 @@ import {ElectraLeftMenu} from './electraLeftMenu';
 import {ElectraRightMenu} from './electraRightMenu';
 import {ElectraContent} from './electraContent';
 import {ElectraFooter} from './electraFooter';
-import {Senior} from './seniorprogrammer/senior'
+import {Senior} from './seniorprogrammer/senior';
+import { BrowserRouter } from 'react-router-dom';
 
 class Electra extends Component {
 
@@ -24,7 +25,9 @@ class Electra extends Component {
         );
         //return this.TheCodeHacker;
 
-        this.TheSenior = React.createElement(Senior, {className: 'senior'});
+        this.TheSenior = React.createElement(BrowserRouter, {},
+                                                    React.createElement(Senior, {className: 'senior'})
+        );
         return this.TheSenior;
     }
 }

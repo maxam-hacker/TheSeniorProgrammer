@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 
 class SeniorLeftMenu extends Component {
@@ -6,8 +7,9 @@ class SeniorLeftMenu extends Component {
     render() {
 
         this.topicsItem = React.createElement(SeniorLeftMenuTopics, {content: 'Topics'});
+        this.topicsLink = React.createElement(Link, {to: '/topics'}, this.topicsItem);
         
-        this.theMenu = React.createElement('div', {className: 'senior-menu-left'}, this.topicsItem);
+        this.theMenu = React.createElement('div', {className: 'senior-menu-left'}, this.topicsLink);
 
         return this.theMenu;
     }
@@ -36,8 +38,8 @@ class SeniorLeftMenuTopics extends Component {
         };
       
         this.image = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-        this.contect = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, this.props.content)
-        this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, this.image, this.contect);
+        this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, this.props.content)
+        this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, this.image, this.content);
 
         return this.menuItem;
     }

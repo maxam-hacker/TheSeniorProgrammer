@@ -19,6 +19,7 @@
         "react-dom": "^16.9.0",
         "react-keyed-file-browser": "^1.5.2",
         "react-nested-file-tree": "0.0.4",
+        "react-router-dom": "^5.1.2",
         "react-splitter-layout": "^4.0.0",
         "remote": "^0.2.6",
         "request": "^2.88.0",
