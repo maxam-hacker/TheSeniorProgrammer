@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {SeniorTopicsPageHeader} from './topicsPageHeader';
-import {TopicIcon} from './topicIcon';
+import {TopicsPageHeader} from './header';
+import {TopicIcon} from './icon';
 
-class SeniorTopicsPage extends Component {
+class TopicsPage extends Component {
 
     render() {
 
-        this.header = React.createElement(SeniorTopicsPageHeader, {});
+        this.header = React.createElement(TopicsPageHeader, {});
 
         this.springHack0 = React.createElement(TopicIcon, {topicName: 'Spring'});
         this.springHack1 = React.createElement(TopicIcon, {}, 'Item0');
@@ -69,4 +69,4 @@ class SeniorTopicsPage extends Component {
     }
 }
 
-export {SeniorTopicsPage}
+export {TopicsPage}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SeniorContent} from './seniorContent';
+import {SeniorContent} from './content';
 import {SeniorLeftMenu} from './menuLeft';
 
 

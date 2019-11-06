@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class SeniorTopicsPageHeader extends Component {
+class TopicsPageHeader extends Component {
 
     render() {
 
@@ -12,4 +12,4 @@ class SeniorTopicsPageHeader extends Component {
     }
 }
 
-export {SeniorTopicsPageHeader}
+export {TopicsPageHeader}
