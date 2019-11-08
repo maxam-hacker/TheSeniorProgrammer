@@ -7,10 +7,12 @@ class SeniorLeftMenu extends Component {
     render() {
 
         this.mainItem = React.createElement(LeftMenuMain, {content: 'Main'});
-        this.mainLink = React.createElement(Link, {to: '/main'}, this.mainItem);
+        this.mainLink = React.createElement(Link, {to: '/main'}, 
+                this.mainItem);
 
         this.topicsItem = React.createElement(LeftMenuTopics, {content: 'Topics'});
-        this.topicsLink = React.createElement(Link, {to: '/topics'}, this.topicsItem);
+        this.topicsLink = React.createElement(Link, {to: '/topics'}, 
+                this.topicsItem);
         
         this.theMenu = React.createElement('div', {className: 'senior-menu-left'}, 
                 this.mainLink,
@@ -44,7 +46,9 @@ class LeftMenuTopics extends Component {
       
         this.image = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
         this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, this.props.content)
-        this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, this.image, this.content);
+        this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, 
+                this.image, 
+                this.content);
 
         return this.menuItem;
     }
@@ -74,7 +78,9 @@ class LeftMenuMain extends Component {
       
         this.image = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
         this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, this.props.content)
-        this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, this.image, this.content);
+        this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, 
+                this.image, 
+                this.content);
 
         return this.menuItem;
     }

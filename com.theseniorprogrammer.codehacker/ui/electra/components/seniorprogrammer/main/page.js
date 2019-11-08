@@ -8,7 +8,7 @@ class MainPage extends Component {
         this.header = React.createElement(TopicsPageHeader, {});
 
         this.pageWrapper = React.createElement('div', {className: 'senior-topics-page'}, 
-                                this.header,
+                this.header,
         );
 
         return this.pageWrapper;
