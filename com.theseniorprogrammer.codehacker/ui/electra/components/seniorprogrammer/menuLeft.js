@@ -13,10 +13,15 @@ class SeniorLeftMenu extends Component {
         this.topicsItem = React.createElement(LeftMenuTopics, {content: 'Topics'});
         this.topicsLink = React.createElement(Link, {to: '/topics'}, 
                 this.topicsItem);
+
+        this.pluginsItem = React.createElement(LeftMenuTopics, {content: 'Plugins'});
+        this.pluginsLink = React.createElement(Link, {to: '/plugins'}, 
+                this.pluginsItem);
         
         this.theMenu = React.createElement('div', {className: 'senior-menu-left'}, 
                 this.mainLink,
-                this.topicsLink);
+                this.topicsLink,
+                this.pluginsLink);
 
         return this.theMenu;
     }
@@ -45,7 +50,10 @@ class LeftMenuTopics extends Component {
         };
       
         this.image = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-        this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, this.props.content)
+
+        this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, 
+                this.props.content);
+
         this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, 
                 this.image, 
                 this.content);
@@ -77,7 +85,10 @@ class LeftMenuMain extends Component {
         };
       
         this.image = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-        this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, this.props.content)
+
+        this.content = React.createElement('span', {style: {paddingLeft: '10px', paddingTop: '6px'}}, 
+                this.props.content);
+
         this.menuItem = React.createElement('div', {className: 'magaz-menu-codehacks-item'}, 
                 this.image, 
                 this.content);
