@@ -9,7 +9,7 @@ class TopicsPage extends Component {
         this.header = React.createElement(TopicsPageHeader, {});
 
         this.springHack0 = React.createElement(TopicIcon, {topicName: 'Spring'});
-        this.springHack1 = React.createElement(TopicIcon, {}, 'Item0');
+        this.springHack1 = React.createElement(TopicIcon, {topicName: 'Spring'}, 'Item0');
         this.springHack2 = React.createElement(TopicIcon, {}, 'Item0');
         this.springHack3 = React.createElement(TopicIcon, {}, 'Item0');
         this.springHack4 = React.createElement(TopicIcon, {}, 'Item0');
