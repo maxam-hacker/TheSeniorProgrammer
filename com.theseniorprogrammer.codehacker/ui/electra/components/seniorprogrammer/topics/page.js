@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
 import {TopicsPageHeader} from './header';
 import {TopicIcon} from './icon';
+import {Backender} from '../backender'
 
 class TopicsPage extends Component {
+
+    constructor(props) {
+        super(props);
+        
+        Backender.getTopics(function(data) {
+
+        });
+    }
+
+    componentDidMount() {
+        // 
+    }
 
     render() {
 
