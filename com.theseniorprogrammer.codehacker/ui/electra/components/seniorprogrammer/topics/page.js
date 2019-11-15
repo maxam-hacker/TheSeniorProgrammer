@@ -46,7 +46,7 @@ class TopicsPage extends Component {
         this.springHack22 = React.createElement(TopicIcon, {}, 'Item0');
         this.springHack23 = React.createElement(TopicIcon, {}, 'Item0');
 
-        this.iconContainer = React.createElement('div', {className: 'senior-topics-page-icons-wrapper'},
+        this.iconContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
                                 this.springHack0,
                                 this.springHack1,
                                 this.springHack2,
@@ -72,9 +72,8 @@ class TopicsPage extends Component {
                                 this.springHack22,
                                 this.springHack23
         );
-
         this.pageWrapper = React.createElement('div', {className: 'senior-topics-page'}, 
-                                this.header,
+                                //this.header,
                                 this.iconContainer
         );
 
