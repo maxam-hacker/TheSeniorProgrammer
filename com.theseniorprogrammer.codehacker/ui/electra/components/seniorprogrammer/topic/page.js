@@ -8,16 +8,17 @@ class TopicContentPage extends Component {
     constructor(props) {
         super(props);
 
-        this.topicList = [
-            new TopicHandler('spring-core'),
-            new TopicHandler('spring-beans'),
-            new TopicHandler('spring-mvc')
-        ];
+        this.topicList = [];
 
         this.topicName = this.props.location.pathname.split('/')[2];
         Backender.getTopicContent(this.topicName, function(data){
 
         });
+
+        this.topicList.push(new TopicHandler('spring-core'));
+        this.topicList.push(new TopicHandler('spring-beans'));
+        this.topicList.push(new TopicHandler('spring-mvc'));
+        this.topicList.push(new TopicHandler('spring-transactions'));
     }
 
     render() {

@@ -10,6 +10,9 @@ class TopicsPage extends Component {
         super(props);
 
         this.groupList = [];
+        
+        Backender.getTopics(function(data) {
+        });
 
         // Debugging...
         this.groupList.push(new GroupHandler('Spring'));
@@ -24,9 +27,6 @@ class TopicsPage extends Component {
         this.groupList.push(new GroupHandler('Chrome V8'));
         this.groupList.push(new GroupHandler('Chakra'));
         this.groupList.push(new GroupHandler('Python VM'));
-        
-        Backender.getTopics(function(data) {
-        });
     }
 
     componentDidMount() {
