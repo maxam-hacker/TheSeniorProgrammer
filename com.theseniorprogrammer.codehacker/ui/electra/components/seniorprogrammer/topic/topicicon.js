@@ -11,18 +11,14 @@ class TopicIcon extends Component {
         this.state = {
             topicName: this.props.topicName
         };
-
-        this.extendTopic = function(e) {
-            this.setState({topicName: 'On Clicks...'});
-        };
     }
 
     render() {
 
-        this.topicIconWrapper = React.createElement('div', {className: 'senior-topic-icon', onClick: this.extendTopic.bind(this)}, 
+        this.topicIconWrapper = React.createElement('div', {className: 'senior-topic-icon'}, 
             this.state.topicName);
 
-        this.topicLinkedIconWrapper = React.createElement(Link, {to: '/topic' + '/' + String(this.state.topicName).toLowerCase(), className: 'senior-topic-link'}, 
+        this.topicLinkedIconWrapper = React.createElement(Link, {to: '/codehacker' + '/' + String(this.state.topicName).toLowerCase(), className: 'senior-topic-link'}, 
             this.topicIconWrapper);
 
         return this.topicLinkedIconWrapper;

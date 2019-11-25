@@ -1,29 +1,29 @@
 import React, {Component} from 'react';
 import {TopicsPageHeader} from './header';
-import {TopicIcon} from './icon';
+import {GroupIcon} from './groupicon';
 import {Backender} from '../backender'
-import {TopicHandler} from './model';
+import {GroupHandler} from './model';
 
 class TopicsPage extends Component {
 
     constructor(props) {
         super(props);
 
-        this.topicList = [];
+        this.groupList = [];
 
         // Debugging...
-        this.topicList.push(new TopicHandler('Spring'));
-        this.topicList.push(new TopicHandler('Spring Boot'));
-        this.topicList.push(new TopicHandler('Hazelcast'));
-        this.topicList.push(new TopicHandler('Solr'));
-        this.topicList.push(new TopicHandler('Lucine'));
-        this.topicList.push(new TopicHandler('PostgreSQL'));
-        this.topicList.push(new TopicHandler('Elasticsearch'));
-        this.topicList.push(new TopicHandler('Java VM'));
-        this.topicList.push(new TopicHandler('Chrome'));
-        this.topicList.push(new TopicHandler('Chrome V8'));
-        this.topicList.push(new TopicHandler('Chakra'));
-        this.topicList.push(new TopicHandler('Python VM'));
+        this.groupList.push(new GroupHandler('Spring'));
+        this.groupList.push(new GroupHandler('Spring Boot'));
+        this.groupList.push(new GroupHandler('Hazelcast'));
+        this.groupList.push(new GroupHandler('Solr'));
+        this.groupList.push(new GroupHandler('Lucine'));
+        this.groupList.push(new GroupHandler('PostgreSQL'));
+        this.groupList.push(new GroupHandler('Elasticsearch'));
+        this.groupList.push(new GroupHandler('Java VM'));
+        this.groupList.push(new GroupHandler('Chrome'));
+        this.groupList.push(new GroupHandler('Chrome V8'));
+        this.groupList.push(new GroupHandler('Chakra'));
+        this.groupList.push(new GroupHandler('Python VM'));
         
         Backender.getTopics(function(data) {
         });
@@ -37,14 +37,15 @@ class TopicsPage extends Component {
 
         this.header = React.createElement(TopicsPageHeader, {});
 
-        this.iconContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
-                this.topicList.map((topic) => {
-                     return React.createElement(TopicIcon, {topicName: topic.name});
-                })
+        this.groupContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
+            this.groupList.map((group) => {
+                return React.createElement(GroupIcon, {groupName: group.name});
+            })
         );
+
         this.pageWrapper = React.createElement('div', {className: 'senior-topics-page'}, 
                 this.header,
-                this.iconContainer
+                this.groupContainer
         );
 
         return this.pageWrapper;
