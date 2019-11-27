@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-class ElectraFooter extends Component {
+class CodeHackerFooter extends Component {
 
     render() {
 
@@ -11,4 +11,4 @@ class ElectraFooter extends Component {
     }
 }
 
-export {ElectraFooter}
+export {CodeHackerFooter}

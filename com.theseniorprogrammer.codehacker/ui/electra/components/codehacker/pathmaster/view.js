@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus';
-import {ingestCall, ingestMethod, ingestPath} from '../../paths';
+import {ingestCall, ingestMethod, ingestPath} from '../../../paths';
 
 
 export default function PathMasterView() {

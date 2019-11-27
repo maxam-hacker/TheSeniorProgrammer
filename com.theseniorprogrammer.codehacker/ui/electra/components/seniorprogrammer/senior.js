@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {SeniorContent} from './content';
-import {SeniorLeftMenu} from './menuLeft';
+import {SeniorLeftMenu} from './leftmenu';
 
 
 class Senior extends Component {

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Browser} from './browser/browser';
-import {Theraphosa} from './editor/theraphosa'
-import {VerticalSplitter} from './vsplitter'
-import {PhosaTabsContainer} from './tabs/container'
-import PathMasterLine from './pathmaster/line'
+import {Theraphosa} from './editor/theraphosa';
+import {VerticalSplitter} from './vsplitter';
+import {PhosaTabsContainer} from './tabs/container';
+import PathMasterLine from './pathmaster/line';
 
 
-class ElectraContent extends Component {
+class CodeHackerContent extends Component {
 
     render() {
 
@@ -20,4 +20,4 @@ class ElectraContent extends Component {
     }
 }
 
-export {ElectraContent}
+export {CodeHackerContent}

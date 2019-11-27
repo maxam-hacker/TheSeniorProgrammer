@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {ElectraHeader} from '../electraHeader';
-import {ElectraLeftMenu} from '../electraLeftMenu';
-import {ElectraRightMenu} from '../electraRightMenu';
-import {ElectraContent} from '../electraContent';
-import {ElectraFooter} from '../electraFooter';
+import {CodeHackerHeader} from './header';
+import {CodeHackerLeftMenu} from './leftmenu';
+import {CodeHackerRightMenu} from './rightmenu';
+import {CodeHackerContent} from './content';
+import {CodeHackerFooter} from './footer';
 
 class CodeHacker extends Component {
 
@@ -13,17 +13,18 @@ class CodeHacker extends Component {
 
     render() {
 
-        this.electraHeader = React.createElement(ElectraHeader, {});
-        this.electraLeftMenu = React.createElement(ElectraLeftMenu, {});
-        this.electraRightMenu = React.createElement(ElectraRightMenu, {});
-        this.electraContent = React.createElement(ElectraContent, {});
-        this.electraFooter = React.createElement(ElectraFooter, {});
+        this.header = React.createElement(CodeHackerHeader, {});
+        this.leftMenu = React.createElement(CodeHackerLeftMenu, {});
+        this.rightMenu = React.createElement(CodeHackerRightMenu, {});
+        this.content = React.createElement(CodeHackerContent, {});
+        this.footer = React.createElement(CodeHackerFooter, {});
+
         this.TheCodeHacker = React.createElement('div', { className: 'codehacker' },
-                    this.electraHeader,
-                    this.electraLeftMenu,
-                    this.electraContent,
-                    this.electraRightMenu,
-                    this.electraFooter
+            this.header,
+            this.leftMenu,
+            this.content,
+            this.rightMenu,
+            this.footer
         );
         return this.TheCodeHacker;
     }

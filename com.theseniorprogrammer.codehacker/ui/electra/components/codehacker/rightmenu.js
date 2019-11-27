@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ElectraRightMenu extends Component {
+class CodeHackerRightMenu extends Component {
 
     render() {
 
@@ -10,4 +10,4 @@ class ElectraRightMenu extends Component {
     }
 }
 
-export {ElectraRightMenu}
+export {CodeHackerRightMenu}

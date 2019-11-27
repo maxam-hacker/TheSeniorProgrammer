@@ -1,12 +1,12 @@
 import fs from 'fs';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Phosa from '../../../theraphosa/theraphosa';
-import PhosaTheme from '../../../theraphosa/theme/monokai.js';
-import {Mode} from '../../../theraphosa/mode/javascript.js';
+import Phosa from '../../../../theraphosa/theraphosa';
+import PhosaTheme from '../../../../theraphosa/theme/monokai.js';
+import {Mode} from '../../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
-import {ThePathWeb} from '../../paths'
+import {ThePathWeb} from '../../../paths'
 
 
 class Theraphosa extends Component {

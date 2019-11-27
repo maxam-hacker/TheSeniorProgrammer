@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ElectraHeader extends Component {
+class CodeHackerHeader extends Component {
 
     render() {
 
@@ -31,4 +31,4 @@ class ElectraHeader extends Component {
     }
 }
 
-export {ElectraHeader}
+export {CodeHackerHeader}
