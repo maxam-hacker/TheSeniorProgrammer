@@ -18,7 +18,7 @@ class TopicIcon extends Component {
         this.topicIconWrapper = React.createElement('div', {className: 'senior-topic-icon'}, 
             this.state.topicName);
 
-        this.topicLinkedIconWrapper = React.createElement(Link, {to: '/codehacker', className: 'senior-topic-link'}, 
+        this.topicLinkedIconWrapper = React.createElement(Link, {to: '/codehacker/' + this.props.topicName, className: 'senior-topic-link'}, 
             this.topicIconWrapper);
 
         return this.topicLinkedIconWrapper;
