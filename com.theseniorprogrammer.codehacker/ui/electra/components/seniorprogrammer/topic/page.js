@@ -8,17 +8,39 @@ class TopicContentPage extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            updateSource: 'constructor'
+        };
+
         this.topicList = [];
-
         this.topicName = this.props.location.pathname.split('/')[2];
-        Backender.getTopicContent(this.topicName, function(data){
 
-        });
+        this.onTopicContent = this.onTopicContent.bind(this);
+        this.onTopicContentError = this.onTopicContentError.bind(this);
+    }
 
+    onTopicContent(data) {
+
+    }
+
+    onTopicContentError(error) {
+        // For debugging...
         this.topicList.push(new TopicHandler('spring-core'));
         this.topicList.push(new TopicHandler('spring-beans'));
         this.topicList.push(new TopicHandler('spring-mvc'));
         this.topicList.push(new TopicHandler('spring-transactions'));
+
+        this.setState({ updateSource: 'onTopicContentError' });
+    }
+
+    componentDidMount(){
+
+        Backender.getTopicContent(
+            this.topicName, 
+            this.onTopicContent,
+            this.onTopicContentError
+        );
+
     }
 
     render() {
@@ -33,8 +55,6 @@ class TopicContentPage extends Component {
             this.topicName,
             this.topicContainer
         );
-
-        
 
         return this.pageWrapper;
     }

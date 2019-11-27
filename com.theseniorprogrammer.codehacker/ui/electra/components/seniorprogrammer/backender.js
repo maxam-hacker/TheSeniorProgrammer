@@ -27,7 +27,7 @@ class BackendHandler {
             });
     }
 
-    getTopicContent(topicName, callback) {
+    getTopicContent(topicName, callback, onerror) {
 
         axios.get(this.topic_content_path + topicName)
 
@@ -42,6 +42,8 @@ class BackendHandler {
 
             .catch(function (error) {
                 console.log('BackendHandler :: getTopics :: GET error');
+                if (onerror)
+                    onerror(error);
             });
     }
 
