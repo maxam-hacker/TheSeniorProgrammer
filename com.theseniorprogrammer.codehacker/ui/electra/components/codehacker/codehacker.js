@@ -18,7 +18,7 @@ class CodeHacker extends Component {
         this.electraRightMenu = React.createElement(ElectraRightMenu, {});
         this.electraContent = React.createElement(ElectraContent, {});
         this.electraFooter = React.createElement(ElectraFooter, {});
-        this.TheCodeHacker = React.createElement('div', { className: 'electra' },
+        this.TheCodeHacker = React.createElement('div', { className: 'codehacker' },
                     this.electraHeader,
                     this.electraLeftMenu,
                     this.electraContent,
