@@ -4,7 +4,7 @@ import {TopicsPage} from './topics/page';
 import {PluginsPage} from './plugins/page';
 import {Switch, Route} from 'react-router-dom';
 import {TopicContentPage} from './topic/page';
-
+import {CodeHacker} from '../codehacker/codehacker'
 
 class SeniorContent extends Component {
 
@@ -14,12 +14,14 @@ class SeniorContent extends Component {
         this.topicsPageRouter = React.createElement(Route, {path: '/topics', component: TopicsPage});
         this.pluginsPageRouter = React.createElement(Route, {path: '/plugins', component: PluginsPage});
         this.topicContentRouter = React.createElement(Route, {path: '/topic', component: TopicContentPage});
+        this.codeHackerRouter = React.createElement(Route, {path: '/codehacker', component: CodeHacker});
 
         this.contentSwitcher = React.createElement(Switch, {}, 
             this.mainPageRouter,
             this.topicsPageRouter,
             this.pluginsPageRouter,
-            this.topicContentRouter);
+            this.topicContentRouter,
+            this.codeHackerRouter);
 
         this.content = React.createElement('div', {className: 'senior-content'}, this.contentSwitcher);
 

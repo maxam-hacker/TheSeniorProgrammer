@@ -9,7 +9,7 @@ class BackendHandler {
         this.debug = true;
     }
 
-    getTopics(callback) {
+    getTopics(callback, onerror) {
         
         axios.get(this.topics_path)
 
@@ -24,6 +24,8 @@ class BackendHandler {
 
             .catch(function (error) {
                 console.log('BackendHandler :: getTopics :: GET error');
+                if (onerror)
+                    onerror(error);
             });
     }
 
@@ -45,6 +47,10 @@ class BackendHandler {
                 if (onerror)
                     onerror(error);
             });
+    }
+
+    openCodeHacker(topicName, callback, onerror) {
+
     }
 
 }
