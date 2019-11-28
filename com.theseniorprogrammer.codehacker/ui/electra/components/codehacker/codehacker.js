@@ -9,7 +9,8 @@ class CodeHacker extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
+        this.topic = props.match.params.topic;
+        console.log(this.topic);
     }
 
     render() {

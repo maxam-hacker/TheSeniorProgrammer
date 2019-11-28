@@ -3,27 +3,38 @@ import axios from 'axios';
 class BackendHandler {
 
     BackendHandler() {
-        this.topics_path = 'http://localhost:17070/topics';
-        this.topic_content_path = 'http://localhost:17070/topic?';
+        this.seniorBaseURL = 'http://localhost:17070/';
+        this.commandTopicGroups = '/groups';
+        this.commandTopicContent = 'http://localhost:17070/topic?';
+        this.commandOpenCodeHacker = 'http://localhost:17070/codehacker?';
 
         this.debug = true;
+
+        this.getTopicGroups = this.getTopicGroups.bind(this);
     }
 
-    getTopics(callback, onerror) {
-        
-        axios.get(this.topics_path)
+    getTopicGroups(callback, onerror) {
 
+        console.log(this.seniorBaseURL);
+        
+        axios
+            .request({
+                method: "get",
+                url: '/groups',
+                crossDomain: true,
+                baseURL: 'http://localhost:17070/',
+            })
             .then(function(response) {
 
-                if (this.debug)
-                    console.log(response.data);
+                console.log(response.data);
 
                 if (callback)
                     callback(response.data);
             })
-
             .catch(function (error) {
-                console.log('BackendHandler :: getTopics :: GET error');
+                console.log('BackendHandler :: getTopicGroups :: error');
+                console.log(error);
+
                 if (onerror)
                     onerror(error);
             });
@@ -31,7 +42,7 @@ class BackendHandler {
 
     getTopicContent(topicName, callback, onerror) {
 
-        axios.get(this.topic_content_path + topicName)
+        axios.get(this.commandTopicContent + topicName)
 
             .then(function(response) {
 
@@ -43,13 +54,15 @@ class BackendHandler {
             })
 
             .catch(function (error) {
-                console.log('BackendHandler :: getTopics :: GET error');
+                console.log('BackendHandler :: getTopicContent :: error');
+                console.log(error);
+
                 if (onerror)
                     onerror(error);
             });
     }
 
-    openCodeHacker(topicName, callback, onerror) {
+    openCodeHackerForTopic(topicName, callback, onerror) {
 
     }
 

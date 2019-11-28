@@ -9,28 +9,32 @@ class TopicsPage extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            updateSource: 'constructor'
+        };
+
         this.groupList = [];
         
-        Backender.getTopics(function(data) {
-        });
+        this.onGetTopicGroups = this.onGetTopicGroups.bind(this);
+        this.onGetTopicGroupsError = this.onGetTopicGroupsError.bind(this);
+    }
 
+    onGetTopicGroups(groupString) {
+        var groups = groupString.split(',');
+        groups.forEach(group => this.groupList.push(new GroupHandler(group)));
+
+        this.setState({ updateSource: 'onGetTopicGroups' });
+    }
+
+    onGetTopicGroupsError(error) {
         // Debugging...
-        this.groupList.push(new GroupHandler('Spring'));
-        this.groupList.push(new GroupHandler('Spring Boot'));
-        this.groupList.push(new GroupHandler('Hazelcast'));
-        this.groupList.push(new GroupHandler('Solr'));
-        this.groupList.push(new GroupHandler('Lucine'));
-        this.groupList.push(new GroupHandler('PostgreSQL'));
-        this.groupList.push(new GroupHandler('Elasticsearch'));
-        this.groupList.push(new GroupHandler('Java VM'));
-        this.groupList.push(new GroupHandler('Chrome'));
-        this.groupList.push(new GroupHandler('Chrome V8'));
-        this.groupList.push(new GroupHandler('Chakra'));
-        this.groupList.push(new GroupHandler('Python VM'));
+        this.groupList.push(new GroupHandler('Unknown'));
+
+        this.setState({ updateSource: 'onGetTopicGroupsError' });
     }
 
     componentDidMount() {
-        // 
+        Backender.getTopicGroups(this.onGetTopicGroups, this.onGetTopicGroupsError);
     }
 
     render() {

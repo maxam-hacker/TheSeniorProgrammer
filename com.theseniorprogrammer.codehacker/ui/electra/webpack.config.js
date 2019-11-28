@@ -22,7 +22,8 @@ module.exports = {
     	tls: 'empty',
 	},
 	output: {
-		filename: "theraphosa.js"
+		filename: "theraphosa.js",
+		crossOriginLoading: "anonymous"
 	},
 	target: 'electron-renderer'
 };
