@@ -4,7 +4,7 @@ import {GroupIcon} from './groupicon';
 import {Backender} from '../backender'
 import {GroupHandler} from './model';
 
-class TopicsPage extends Component {
+class GroupsPage extends Component {
 
     constructor(props) {
         super(props);
@@ -56,4 +56,4 @@ class TopicsPage extends Component {
     }
 }
 
-export {TopicsPage}
+export {GroupsPage}

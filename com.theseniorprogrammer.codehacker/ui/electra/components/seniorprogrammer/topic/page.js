@@ -15,30 +15,34 @@ class TopicContentPage extends Component {
         this.topicList = [];
         this.topicName = this.props.location.pathname.split('/')[2];
 
-        this.onTopicContent = this.onTopicContent.bind(this);
-        this.onTopicContentError = this.onTopicContentError.bind(this);
+        this.onGetTopicContent = this.onGetTopicContent.bind(this);
+        this.onGetTopicContentError = this.onGetTopicContentError.bind(this);
     }
 
-    onTopicContent(data) {
+    onGetTopicContent(topicsString) {
 
+        var topics = topicsString.split(',');
+        topics.forEach(topic => this.topicList.push(new TopicHandler(topic)));
+
+        this.setState({ updateSource: 'onGetTopicContent' });
     }
 
-    onTopicContentError(error) {
+    onGetTopicContentError(error) {
         // For debugging...
         this.topicList.push(new TopicHandler('spring-core'));
         this.topicList.push(new TopicHandler('spring-beans'));
         this.topicList.push(new TopicHandler('spring-mvc'));
         this.topicList.push(new TopicHandler('spring-transactions'));
 
-        this.setState({ updateSource: 'onTopicContentError' });
+        this.setState({ updateSource: 'onGetTopicContentError' });
     }
 
     componentDidMount(){
 
         Backender.getTopicContent(
             this.topicName, 
-            this.onTopicContent,
-            this.onTopicContentError
+            this.onGetTopicContent,
+            this.onGetTopicContentError
         );
 
     }
