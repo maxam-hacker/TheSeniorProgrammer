@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {MainPage} from './main/page';
-import {TopicsPage} from './topics/page';
+import {TopicsPage} from './groups/page';
 import {PluginsPage} from './plugins/page';
 import {Switch, Route} from 'react-router-dom';
 import {TopicContentPage} from './topic/page';

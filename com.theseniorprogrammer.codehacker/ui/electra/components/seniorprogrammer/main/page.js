@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TopicsPageHeader} from '../topics/header';
+import {TopicsPageHeader} from '../groups/header';
 
 class MainPage extends Component {
 
