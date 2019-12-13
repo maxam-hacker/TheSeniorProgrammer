@@ -10,8 +10,8 @@ class CodeHackerContent extends Component {
 
     render() {
 
-        this.browser = React.createElement(Browser, { path: './', type: 'calls' });
-        this.phosa = React.createElement(Theraphosa, { path: './', id: '_calls', type: 'calls' });
+        this.browser = React.createElement(Browser, { path: '/Users/a.kiselev/Documents/java/', type: 'calls' });
+        this.phosa = React.createElement(Theraphosa, { path: '/Users/a.kiselev/Documents/java/', id: '_calls', type: 'calls' });
         this.pathLine = React.createElement(PathMasterLine, {});
         this.editor = React.createElement('div', {}, this.pathLine, this.phosa);
         this.content = React.createElement(VerticalSplitter, {}, this.browser, this.editor);

@@ -33,6 +33,7 @@ const ingestPath = function(file, call, method) {
     path.setCall(call);
     path.setMethod(method);
     ThePathWeb.addPath(file, path);
+    //console.log(ThePathWeb.toJson());
 
     return path;
 }
