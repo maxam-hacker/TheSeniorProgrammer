@@ -7,7 +7,7 @@ class SeniorLeftMenu extends Component {
     render() {
 
         this.mainItem = React.createElement(LeftMenuLogoAndName);
-        this.mainLink= React.createElement(Link, {to: '/', style: { textDecoration: 'none' }}, 
+        this.mainLink= React.createElement(Link, {to: '/main', style: { textDecoration: 'none' }}, 
                 this.mainItem);
 
         this.splitter1 = React.createElement(LeftMenuVerticalSplitterLine);
