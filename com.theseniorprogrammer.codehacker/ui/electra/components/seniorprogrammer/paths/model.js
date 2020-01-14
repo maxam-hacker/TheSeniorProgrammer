@@ -1,8 +1,8 @@
-class TopicHandler {
+class PathHandler {
 
     constructor(name) {
         this.name = name;
     }
 }
 
-export {TopicHandler}
+export {PathHandler}

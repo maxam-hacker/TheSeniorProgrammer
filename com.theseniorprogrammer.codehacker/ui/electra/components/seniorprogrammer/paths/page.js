@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Backender} from '../backender';
-import {TopicIcon} from './topicicon';
-import {TopicHandler} from './model';
+import {PathIcon} from './pathicon';
+import {PathHandler} from './model';
 
-class TopicContentPage extends Component {
+class PathsPage extends Component {
 
     constructor(props) {
         super(props);
@@ -12,27 +12,27 @@ class TopicContentPage extends Component {
             updateSource: 'constructor'
         };
 
-        this.topicList = [];
+        this.pathList = [];
         this.topicName = this.props.location.pathname.split('/')[2];
 
         this.onGetTopicContent = this.onGetTopicContent.bind(this);
         this.onGetTopicContentError = this.onGetTopicContentError.bind(this);
     }
 
-    onGetTopicContent(topicsString) {
+    onGetTopicContent(contentString) {
 
-        var topics = topicsString.split(',');
-        topics.forEach(topic => this.topicList.push(new TopicHandler(topic)));
+        var paths = contentString.split(',');
+        paths.forEach(path => this.pathList.push(new PathHandler(path)));
 
         this.setState({ updateSource: 'onGetTopicContent' });
     }
 
     onGetTopicContentError(error) {
         // For debugging...
-        this.topicList.push(new TopicHandler('spring-core'));
-        this.topicList.push(new TopicHandler('spring-beans'));
-        this.topicList.push(new TopicHandler('spring-mvc'));
-        this.topicList.push(new TopicHandler('spring-transactions'));
+        this.pathList.push(new PathHandler('spring-core'));
+        this.pathList.push(new PathHandler('spring-beans'));
+        this.pathList.push(new PathHandler('spring-mvc'));
+        this.pathList.push(new PathHandler('spring-transactions'));
 
         this.setState({ updateSource: 'onGetTopicContentError' });
     }
@@ -49,19 +49,19 @@ class TopicContentPage extends Component {
 
     render() {
 
-        this.topicContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
-            this.topicList.map((topic) => {
-                return React.createElement(TopicIcon, {topicName: topic.name});
+        this.pathsContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
+            this.pathList.map((path) => {
+                return React.createElement(PathIcon, {pathName: path.name});
             })
         );
 
         this.pageWrapper = React.createElement('div', {}, 
             this.topicName,
-            this.topicContainer
+            this.pathsContainer
         );
 
         return this.pageWrapper;
     }
 }
 
-export {TopicContentPage}
+export {PathsPage}

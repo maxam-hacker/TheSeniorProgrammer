@@ -3,7 +3,7 @@ import {MainPage} from './main/page';
 import {TopicsPage} from './topics/page';
 import {PluginsPage} from './plugins/page';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import {TopicContentPage} from './path/page';
+import {PathsPage} from './paths/page';
 import {CodeHacker} from '../codehacker/codehacker';
 import {seniorContent} from './styles/common-styles';
 
@@ -14,7 +14,7 @@ class SeniorContent extends Component {
         this.mainPageRouter = React.createElement(Route, {path: '/main', component: MainPage});
         this.topicsPageRouter = React.createElement(Route, {path: '/topics', component: TopicsPage});
         this.pluginsPageRouter = React.createElement(Route, {path: '/plugins', component: PluginsPage});
-        this.topicContentRouter = React.createElement(Route, {path: '/topic', component: TopicContentPage});
+        this.pathsRouter = React.createElement(Route, {path: '/topic', component: PathsPage});
         this.codeHackerRouter = React.createElement(Route, {path: '/codehacker/:topic', component: CodeHacker});
 
         this.rootPageRedirect = React.createElement(Redirect, {from: '/', to: '/main'});
@@ -24,7 +24,7 @@ class SeniorContent extends Component {
                 this.mainPageRouter,
                 this.topicsPageRouter,
                 this.pluginsPageRouter,
-                this.topicContentRouter,
+                this.pathsRouter,
                 this.codeHackerRouter,
                 this.rootPageRedirect
         );
