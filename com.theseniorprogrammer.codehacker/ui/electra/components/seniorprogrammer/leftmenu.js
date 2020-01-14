@@ -29,9 +29,9 @@ class SeniorLeftMenu extends Component {
 
         this.splitter3 = React.createElement(LeftMenuVerticalSplitter3Line);
 
-        this.contactsItem = React.createElement(LeftMenuContactsItem, {content: 'CONTACT US'});
-        this.contactsLink = React.createElement(Link, {to: '/contacts', style: { textDecoration: 'none' }}, 
-                this.contactsItem);
+        this.aboutItem = React.createElement(LeftMenuAboutItem, {content: 'ABOUT US'});
+        this.aboutLink = React.createElement(Link, {to: '/about', style: { textDecoration: 'none' }}, 
+                this.aboutItem);
         
         this.theMenu = React.createElement(
             'div', {style: seniorLeftMenu}, 
@@ -42,7 +42,7 @@ class SeniorLeftMenu extends Component {
                 this.topicsLink,
                 this.pluginsLink,
                 this.splitter3,
-                this.contactsLink);
+                this.aboutLink);
 
         return this.theMenu;
     }
@@ -152,7 +152,7 @@ class LeftMenuItem extends Component {
     }
 }
 
-class LeftMenuContactsItem extends Component {
+class LeftMenuAboutItem extends Component {
 
     constructor(props) {
         super(props);
