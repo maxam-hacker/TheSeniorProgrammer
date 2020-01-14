@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
-import {TopicsPageHeader} from '../groups/header';
 
 class MainPage extends Component {
 
     render() {
 
-        this.header = React.createElement(TopicsPageHeader, {});
+        const wrapperStyle = {
+            color: "white",
+            backgroundColor: "DodgerBlue",
+            padding: "10px",
+            fontFamily: "Arial"
+        };
+
+        this.header = React.createElement('div', {className: 'senior-left-menu-topic-link'}, 'What\'s new in TheSeniorProgrammer');
 
         this.pageWrapper = React.createElement('div', {className: 'senior-topics-page'}, 
-                this.header,
+            this.header,
         );
 
         return this.pageWrapper;

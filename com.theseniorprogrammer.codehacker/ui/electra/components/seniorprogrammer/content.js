@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {MainPage} from './main/page';
-import {GroupsPage} from './groups/page';
+import {GroupsPage} from './topics/page';
 import {PluginsPage} from './plugins/page';
 import {Switch, Route} from 'react-router-dom';
-import {TopicContentPage} from './topic/page';
+import {TopicContentPage} from './path/page';
 import {CodeHacker} from '../codehacker/codehacker'
 
 class SeniorContent extends Component {

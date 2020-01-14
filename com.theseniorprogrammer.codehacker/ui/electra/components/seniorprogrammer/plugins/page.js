@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TopicsPageHeader} from '../groups/header';
+import {TopicsPageHeader} from '../topics/header';
 
 class PluginsPage extends Component {
 
