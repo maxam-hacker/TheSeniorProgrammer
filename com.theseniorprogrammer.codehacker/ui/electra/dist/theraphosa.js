@@ -1292,7 +1292,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"MainPage\", function() { return MainPage; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\n\nclass MainPage extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    this.header = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {\n      className: 'senior-left-menu-topic-link'\n    }, 'What\\'s new in TheSeniorProgrammer');\n    this.pageWrapper = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {\n      className: 'senior-topics-page'\n    }, this.header);\n    return this.pageWrapper;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./components/seniorprogrammer/main/page.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"MainPage\", function() { return MainPage; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _styles_common_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/common-styles */ \"./components/seniorprogrammer/styles/common-styles.js\");\n/* harmony import */ var _styles_main_page_style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../styles/main-page-style */ \"./components/seniorprogrammer/styles/main-page-style.js\");\n\n\n\n\nclass MainPage extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    this.header = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {\n      style: _styles_main_page_style__WEBPACK_IMPORTED_MODULE_2__[\"mainPageHeader\"]\n    }, 'What\\'s new in TheSeniorProgrammer');\n    this.pageWrapper = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {\n      style: _styles_common_styles__WEBPACK_IMPORTED_MODULE_1__[\"seniorPageWrapper\"]\n    }, this.header);\n    return this.pageWrapper;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./components/seniorprogrammer/main/page.js?");
 
 /***/ }),
 
@@ -1353,6 +1353,30 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Senior\", function() { return Senior; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ \"./components/seniorprogrammer/content.js\");\n/* harmony import */ var _leftmenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./leftmenu */ \"./components/seniorprogrammer/leftmenu.js\");\n\n\n\n\nclass Senior extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    this.pagesWrapper = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__[\"SeniorContent\"], {});\n    this.leftMenu = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_leftmenu__WEBPACK_IMPORTED_MODULE_2__[\"SeniorLeftMenu\"], {});\n    this.mainWrapper = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('div', {\n      className: 'senior'\n    }, this.leftMenu, this.pagesWrapper);\n    return this.mainWrapper;\n  }\n\n}\n\n\n\n//# sourceURL=webpack:///./components/seniorprogrammer/senior.js?");
+
+/***/ }),
+
+/***/ "./components/seniorprogrammer/styles/common-styles.js":
+/*!*************************************************************!*\
+  !*** ./components/seniorprogrammer/styles/common-styles.js ***!
+  \*************************************************************/
+/*! exports provided: seniorPageWrapper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"seniorPageWrapper\", function() { return seniorPageWrapper; });\nconst seniorPageWrapper = {\n  position: 'relative',\n  left: '10px',\n  bottom: '0px',\n  width: 'calc(100% - 40px)',\n  height: '100%',\n  overflowY: 'auto'\n};\n\n\n//# sourceURL=webpack:///./components/seniorprogrammer/styles/common-styles.js?");
+
+/***/ }),
+
+/***/ "./components/seniorprogrammer/styles/main-page-style.js":
+/*!***************************************************************!*\
+  !*** ./components/seniorprogrammer/styles/main-page-style.js ***!
+  \***************************************************************/
+/*! exports provided: mainPageHeader */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"mainPageHeader\", function() { return mainPageHeader; });\nconst mainPageHeader = {\n  color: '#0AE2FF',\n  fontSize: '21px',\n  fontFamily: 'Sinhala Sangam MN, sans-serif'\n};\n\n\n//# sourceURL=webpack:///./components/seniorprogrammer/styles/main-page-style.js?");
 
 /***/ }),
 

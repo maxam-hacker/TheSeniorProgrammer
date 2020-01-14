@@ -1,19 +1,14 @@
 import React, {Component} from 'react';
+import {seniorPageWrapper} from '../styles/common-styles';
+import {mainPageHeader} from '../styles/main-page-style';
 
 class MainPage extends Component {
 
     render() {
 
-        const wrapperStyle = {
-            color: "white",
-            backgroundColor: "DodgerBlue",
-            padding: "10px",
-            fontFamily: "Arial"
-        };
+        this.header = React.createElement('div', {style: mainPageHeader}, 'What\'s new in TheSeniorProgrammer');
 
-        this.header = React.createElement('div', {className: 'senior-left-menu-topic-link'}, 'What\'s new in TheSeniorProgrammer');
-
-        this.pageWrapper = React.createElement('div', {className: 'senior-topics-page'}, 
+        this.pageWrapper = React.createElement('div', {style: seniorPageWrapper}, 
             this.header,
         );
 
