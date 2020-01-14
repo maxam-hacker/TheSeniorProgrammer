@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {MainPage} from './main/page';
 import {GroupsPage} from './topics/page';
 import {PluginsPage} from './plugins/page';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import {TopicContentPage} from './path/page';
-import {CodeHacker} from '../codehacker/codehacker'
+import {CodeHacker} from '../codehacker/codehacker';
+import {seniorContent} from './styles/common-styles';
 
 class SeniorContent extends Component {
 
@@ -16,14 +17,19 @@ class SeniorContent extends Component {
         this.topicContentRouter = React.createElement(Route, {path: '/topic', component: TopicContentPage});
         this.codeHackerRouter = React.createElement(Route, {path: '/codehacker/:topic', component: CodeHacker});
 
-        this.contentSwitcher = React.createElement(Switch, {}, 
-            this.mainPageRouter,
-            this.groupsPageRouter,
-            this.pluginsPageRouter,
-            this.topicContentRouter,
-            this.codeHackerRouter);
+        this.rootPageRedirect = React.createElement(Redirect, {from: '/', to: '/main'});
 
-        this.content = React.createElement('div', {className: 'senior-content'}, this.contentSwitcher);
+        this.contentSwitcher = React.createElement(
+            Switch, {}, 
+                this.mainPageRouter,
+                this.groupsPageRouter,
+                this.pluginsPageRouter,
+                this.topicContentRouter,
+                this.codeHackerRouter,
+                this.rootPageRedirect
+        );
+
+        this.content = React.createElement('div', {style: seniorContent}, this.contentSwitcher);
 
         return this.content;
     }

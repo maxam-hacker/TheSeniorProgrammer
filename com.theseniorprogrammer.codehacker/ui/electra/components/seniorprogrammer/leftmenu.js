@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import {seniorLeftMenu} from './styles/common-styles';
 
 
 class SeniorLeftMenu extends Component {
@@ -32,7 +33,8 @@ class SeniorLeftMenu extends Component {
         this.contactsLink = React.createElement(Link, {to: '/contacts', style: { textDecoration: 'none' }}, 
                 this.contactsItem);
         
-        this.theMenu = React.createElement('div', {className: 'senior-menu-1-left'}, 
+        this.theMenu = React.createElement(
+            'div', {style: seniorLeftMenu}, 
                 this.mainLink,
                 this.splitter1,
                 this.loginLink,

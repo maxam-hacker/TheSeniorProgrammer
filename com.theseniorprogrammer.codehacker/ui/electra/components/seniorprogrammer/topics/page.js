@@ -3,6 +3,7 @@ import {TopicsPageHeader} from './header';
 import {GroupIcon} from './groupicon';
 import {Backender} from '../backender'
 import {GroupHandler} from './model';
+import {seniorPageWrapper} from '../styles/common-styles';
 
 class GroupsPage extends Component {
 
@@ -41,13 +42,15 @@ class GroupsPage extends Component {
 
         this.header = React.createElement(TopicsPageHeader, {});
 
-        this.groupContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
-            this.groupList.map((group) => {
-                return React.createElement(GroupIcon, {groupName: group.name});
-            })
+        this.groupContainer = React.createElement(
+            'div', {className: 'topics-page-icons-wrapper'},
+                this.groupList.map((group) => {
+                    return React.createElement(GroupIcon, {groupName: group.name});
+                })
         );
 
-        this.pageWrapper = React.createElement('div', {className: 'senior-topics-page'}, 
+        this.pageWrapper = React.createElement(
+            'div', {style: seniorPageWrapper}, 
                 this.header,
                 this.groupContainer
         );
