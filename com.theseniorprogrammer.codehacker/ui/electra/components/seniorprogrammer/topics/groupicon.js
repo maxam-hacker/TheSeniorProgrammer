@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom"; 
 import PropTypes from 'prop-types';
-
+import {pathIcon, pathLink} from '../styles/topics-page-style';
 
 class GroupIcon extends Component {
 
@@ -15,13 +15,15 @@ class GroupIcon extends Component {
 
     render() {
 
-        this.groupIconWrapper = React.createElement('div', {className: 'senior-topic-icon'}, 
-            this.state.groupName);
+        this.groupIcon = React.createElement(
+            'div', {style: pathIcon}, 
+                this.state.groupName);
 
-        this.groupIconLinkedWrapper = React.createElement(Link, {to: '/topic' + '/' + String(this.state.groupName).toLowerCase(), className: 'senior-topic-link'}, 
-            this.groupIconWrapper);
+        this.groupLinkedIcon = React.createElement(
+            Link, {to: '/topic' + '/' + String(this.state.groupName).toLowerCase(), style: pathLink}, 
+                this.groupIcon);
 
-        return this.groupIconLinkedWrapper;
+        return this.groupLinkedIcon;
     }
 }
 

@@ -4,6 +4,7 @@ import {GroupIcon} from './groupicon';
 import {Backender} from '../backender'
 import {GroupHandler} from './model';
 import {seniorPageWrapper} from '../styles/common-styles';
+import {topicsPageContent} from '../styles/topics-page-style';
 
 class GroupsPage extends Component {
 
@@ -43,7 +44,7 @@ class GroupsPage extends Component {
         this.header = React.createElement(TopicsPageHeader, {});
 
         this.groupContainer = React.createElement(
-            'div', {className: 'topics-page-icons-wrapper'},
+            'div', {style: topicsPageContent},
                 this.groupList.map((group) => {
                     return React.createElement(GroupIcon, {groupName: group.name});
                 })
