@@ -1,8 +1,8 @@
-class GroupHandler {
+class TopicHandler {
 
     constructor(name) {
         this.name = name;
     }
 }
 
-export {GroupHandler}
+export {TopicHandler}

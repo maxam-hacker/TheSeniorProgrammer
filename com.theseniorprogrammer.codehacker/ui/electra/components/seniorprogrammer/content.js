@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {MainPage} from './main/page';
-import {GroupsPage} from './topics/page';
+import {TopicsPage} from './topics/page';
 import {PluginsPage} from './plugins/page';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {TopicContentPage} from './path/page';
@@ -12,7 +12,7 @@ class SeniorContent extends Component {
     render() {
 
         this.mainPageRouter = React.createElement(Route, {path: '/main', component: MainPage});
-        this.groupsPageRouter = React.createElement(Route, {path: '/topics', component: GroupsPage});
+        this.topicsPageRouter = React.createElement(Route, {path: '/topics', component: TopicsPage});
         this.pluginsPageRouter = React.createElement(Route, {path: '/plugins', component: PluginsPage});
         this.topicContentRouter = React.createElement(Route, {path: '/topic', component: TopicContentPage});
         this.codeHackerRouter = React.createElement(Route, {path: '/codehacker/:topic', component: CodeHacker});
@@ -22,7 +22,7 @@ class SeniorContent extends Component {
         this.contentSwitcher = React.createElement(
             Switch, {}, 
                 this.mainPageRouter,
-                this.groupsPageRouter,
+                this.topicsPageRouter,
                 this.pluginsPageRouter,
                 this.topicContentRouter,
                 this.codeHackerRouter,

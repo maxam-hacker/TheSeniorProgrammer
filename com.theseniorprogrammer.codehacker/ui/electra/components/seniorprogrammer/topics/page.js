@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {TopicsPageHeader} from './header';
-import {GroupIcon} from './groupicon';
+import {TopicIcon} from './topicicon';
 import {Backender} from '../backender'
-import {GroupHandler} from './model';
+import {TopicHandler} from './model';
 import {seniorPageWrapper} from '../styles/common-styles';
 import {topicsPageContent} from '../styles/topics-page-style';
 
-class GroupsPage extends Component {
+class TopicsPage extends Component {
 
     constructor(props) {
         super(props);
@@ -15,22 +15,22 @@ class GroupsPage extends Component {
             updateSource: 'constructor'
         };
 
-        this.groupList = [];
+        this.topicList = [];
         
         this.onGetTopicGroups = this.onGetTopicGroups.bind(this);
         this.onGetTopicGroupsError = this.onGetTopicGroupsError.bind(this);
     }
 
-    onGetTopicGroups(groupString) {
-        var groups = groupString.split(',');
-        groups.forEach(group => this.groupList.push(new GroupHandler(group)));
+    onGetTopicGroups(topicString) {
+        var topics = topicString.split(',');
+        topics.forEach(topic => this.topicList.push(new TopicHandler(topic)));
 
         this.setState({ updateSource: 'onGetTopicGroups' });
     }
 
     onGetTopicGroupsError(error) {
         // Debugging...
-        this.groupList.push(new GroupHandler('Unknown'));
+        this.topicList.push(new TopicHandler('Unknown'));
 
         this.setState({ updateSource: 'onGetTopicGroupsError' });
     }
@@ -43,21 +43,21 @@ class GroupsPage extends Component {
 
         this.header = React.createElement(TopicsPageHeader, {});
 
-        this.groupContainer = React.createElement(
+        this.topicsContainer = React.createElement(
             'div', {style: topicsPageContent},
-                this.groupList.map((group) => {
-                    return React.createElement(GroupIcon, {groupName: group.name});
+                this.topicList.map((topic) => {
+                    return React.createElement(TopicIcon, {topicName: topic.name});
                 })
         );
 
         this.pageWrapper = React.createElement(
             'div', {style: seniorPageWrapper}, 
                 this.header,
-                this.groupContainer
+                this.topicsContainer
         );
 
         return this.pageWrapper;
     }
 }
 
-export {GroupsPage}
+export {TopicsPage}
