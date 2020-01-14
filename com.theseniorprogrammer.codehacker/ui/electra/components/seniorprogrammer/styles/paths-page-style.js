@@ -1,9 +1,11 @@
+import {topicsPageContent, topicIcon, topicLink} from './topics-page-style';
+
 const headerTopPadding = '40px';
 const headerLeftPadding = '20px';
 const headerRightPadding = '20px';
 const headerHeight = '170px';
 const headerRadius = '7px';
-const topicsPageHeader = {
+const pathsPageHeader = {
     position: 'relative',
     width: `calc(100% - ${headerLeftPadding} - ${headerRightPadding})`,
     height: headerHeight,
@@ -13,17 +15,21 @@ const topicsPageHeader = {
     background: '#282831',
     borderRadius: headerRadius
 };
-export {topicsPageHeader}
+export {pathsPageHeader}
 
-const topicsPageContent = {
+/*
+const pathsPageContent = {
     position: 'relative',
     top: headerTopPadding,
     left: headerLeftPadding,
     width: `calc(100% - ${headerLeftPadding} - ${headerRightPadding})`
 };
-export {topicsPageContent}
+*/
+const pathsPageContent = topicsPageContent;
+export {pathsPageContent}
 
-const topicIcon = {
+/*
+const pathsIcon = {
     position: 'relative',
     width: '100%',
     height: '120px',
@@ -35,12 +41,17 @@ const topicIcon = {
     borderStyle: 'solid',
     borderColor: '#FF00A6'
 };
-export {topicIcon}
+*/
+const pathsIcon = topicIcon;
+export {pathsIcon}
 
-const topicLink = {
+/*
+const pathsLink = {
     fontSize: '24px',
     fontStyle: 'normal',
     color: 'aliceblue',
     textDecoration: 'none'
 };
-export {topicLink}
+*/
+const pathsLink = topicLink;
+export {pathsLink}

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Backender} from '../backender';
 import {PathIcon} from './pathicon';
 import {PathHandler} from './model';
+import {seniorPageWrapper} from '../styles/common-styles';
+import {pathsPageContent} from '../styles/paths-page-style';
 
 class PathsPage extends Component {
 
@@ -49,15 +51,17 @@ class PathsPage extends Component {
 
     render() {
 
-        this.pathsContainer = React.createElement('div', {className: 'topics-page-icons-wrapper'},
-            this.pathList.map((path) => {
-                return React.createElement(PathIcon, {pathName: path.name});
-            })
+        this.pathsContainer = React.createElement(
+            'div', {style: pathsPageContent},
+                this.pathList.map((path) => {
+                    return React.createElement(PathIcon, {pathName: path.name});
+                })
         );
 
-        this.pageWrapper = React.createElement('div', {}, 
-            this.topicName,
-            this.pathsContainer
+        this.pageWrapper = React.createElement(
+            'div', {style: seniorPageWrapper}, 
+                //this.topicName,
+                this.pathsContainer
         );
 
         return this.pageWrapper;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'; 
 import PropTypes from 'prop-types';
-
+import {pathsIcon, pathsLink} from '../styles/paths-page-style';
 
 class PathIcon extends Component {
 
@@ -16,12 +16,12 @@ class PathIcon extends Component {
     render() {
 
         this.pathIcon = React.createElement(
-            'div', {className: 'senior-topic-icon'}, 
+            'div', {style: pathsIcon}, 
                 this.state.pathName
         );
 
         this.pathLinkedIcon = React.createElement(
-            Link, {to: '/codehacker/' + this.props.pathName, className: 'senior-topic-link'}, 
+            Link, {to: '/codehacker/' + this.props.pathName, style: pathsLink}, 
                 this.pathIcon
         );
 
