@@ -42,8 +42,7 @@ class GoogleDriver {
         {
             auth: this.client,
             pageSize: 100,
-            fields: 'nextPageToken, files(name)',
-            spaces: 'drive'
+            fields: 'files(name)'
         }, 
         
         (err, res) => {
