@@ -15,13 +15,7 @@ class GoogleDriver {
             redirect_uris                 : ["urn:ietf:wg:oauth:2.0:oob","http://localhost"]
         };
 
-        this.tokens = {
-            "access_token":"ya29.Il-6B2nfE_sASb_OQexv_t0AxzTsTo-WqgyPHQB7KrXPWOJxkHWtNc6s-KZmtJlnhnv_SyxlnbqAHuU-coL-1E5SUl6g2nvDMLKYW0Stnen94RO3mWZVxjCXpC3A1dpnFg",
-            "refresh_token":"1//0c3_fYeYhgqGRCgYIARAAGAwSNwF-L9IriXHA0x31SoxakNjQnkoMFBoCOvO8af_0dsfIr_DIr8pj9BYFw_gd0p8Hhai-GYWud_A",
-            "scope":"https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.file",
-            "token_type":"Bearer",
-            "expiry_date":1579200734358
-        };
+        this.tokens = {"access_token":"ya29.Il-6B6N4CQAovtLHRlYrnFvGKlHb5qony_X-Q3_RStExfaWqfPrYT5MpGKpqxmXTA5xUqC_HL4vu2zvrVlHhjuQYEaCS3lHhgP5b6z0QcGKYBPTDK537xlw7-mvyhvJNbg","refresh_token":"1//0ce3-B2PtUfPWCgYIARAAGAwSNwF-L9IrIhmgA4nk2cVp9jXhxVFPo_oZD-xw3D_1IksduJozAsblo_LVU74DFCeOEy63cgsyxDQ","scope":"https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata.readonly","token_type":"Bearer","expiry_date":1579209726381};
 
         this.authorize();
     }
@@ -45,8 +39,13 @@ class GoogleDriver {
         {
             auth: this.client,
             pageSize: 100,
-            q: "mimeType = 'application/vnd.google-apps.folder'"
-            //fields: 'files(name, originalFilename, description, iconLink, webViewLink, properties)'
+            //q: "('root' in parents)",
+            //q: "parents in '116ayPbVCrjGo8SLQ1EzPqxsb2FdRrpTZ'",
+            //q: "parents in '1qt46NBhtmm8FmklwzXYhlRvV4GZR_dCD'",
+            q: "('1qt46NBhtmm8FmklwzXYhlRvV4GZR_dCD' in parents)",
+            //q: "('1eKQikx1bRoQDUC3YmrK_NQo53WExzAxR' in parents)",
+            fields: 'files(name, id)',
+            orderBy: 'folder, name'
         }, 
         
         (err, res) => {
@@ -55,7 +54,7 @@ class GoogleDriver {
             if (files.length) {
                 console.log('Files:');
                 files.map((file) => {
-                    console.log(file);
+                    console.log(file.name);
                 });
             } else {
                 console.log('No files found.');
