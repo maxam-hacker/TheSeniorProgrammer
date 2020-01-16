@@ -16,11 +16,12 @@ class GoogleDriver {
         };
 
         this.tokens = {
-            "access_token":"ya29.Il-6By1MRfn3EbByHOebO-BJVRNhFOOUynxaVI94dV89Oa8xM3BIcJvDjdF9z-xC8ygEfH4K4me6-jhzCueCEtscOTyRR1R2z6Y6XgMZ5VD9N7QCYJmHVohXa8Zn3iMGBg",
-            "refresh_token":"1//0cpyai5ZgLQs7CgYIARAAGAwSNwF-L9IrACBOKafHxqfD_1gG6mHjud9TZIdAs3zTDOA0o-VHer3lA4C3-Vg6jJ7sxeSDe_DmrFY",
-            "scope":"https://www.googleapis.com/auth/drive.metadata.readonly",
+            "access_token":"ya29.Il-6B2nfE_sASb_OQexv_t0AxzTsTo-WqgyPHQB7KrXPWOJxkHWtNc6s-KZmtJlnhnv_SyxlnbqAHuU-coL-1E5SUl6g2nvDMLKYW0Stnen94RO3mWZVxjCXpC3A1dpnFg",
+            "refresh_token":"1//0c3_fYeYhgqGRCgYIARAAGAwSNwF-L9IriXHA0x31SoxakNjQnkoMFBoCOvO8af_0dsfIr_DIr8pj9BYFw_gd0p8Hhai-GYWud_A",
+            "scope":"https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.file",
             "token_type":"Bearer",
-            "expiry_date":1579197722094};
+            "expiry_date":1579200734358
+        };
 
         this.authorize();
     }
@@ -38,11 +39,14 @@ class GoogleDriver {
 
         const drive = google.drive({version: 'v3'});
 
+        console.log(drive);
+
         drive.files.list(
         {
             auth: this.client,
             pageSize: 100,
-            fields: 'files(name)'
+            q: "mimeType = 'application/vnd.google-apps.folder'"
+            //fields: 'files(name, originalFilename, description, iconLink, webViewLink, properties)'
         }, 
         
         (err, res) => {
@@ -51,7 +55,7 @@ class GoogleDriver {
             if (files.length) {
                 console.log('Files:');
                 files.map((file) => {
-                    console.log(`${file.name} (${file.id})`);
+                    console.log(file);
                 });
             } else {
                 console.log('No files found.');
