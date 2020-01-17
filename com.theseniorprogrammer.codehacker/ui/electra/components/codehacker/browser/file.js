@@ -11,7 +11,7 @@ class FileView extends Component {
 
   onFileClick(event) {
     event.stopPropagation();
-    BrowserToTheraphosaCallsEventBus.publish(this.props.file);
+    BrowserToTheraphosaCallsEventBus.publish({file: this.props.file, path: this.props.path});
   }
 
   render() {

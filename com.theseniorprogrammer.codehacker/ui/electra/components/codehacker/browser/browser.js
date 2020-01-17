@@ -36,9 +36,9 @@ class Browser extends Component {
               React.createElement('div', { className: 'split-pane browser-files'  },
                 this.dir.map(file => {
                   if (Googler.isFolder(file))
-                    return React.createElement(FolderView, { file: file, level: 0 });
+                    return React.createElement(FolderView, { file: file, path: file.name, level: 0 });
                   else
-                    return React.createElement(FileView, { file: file, level: 0 });
+                    return React.createElement(FileView, { file: file, path: file.name, level: 0 });
                   
                 })
               ));

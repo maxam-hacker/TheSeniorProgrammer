@@ -53,9 +53,9 @@ class FolderView extends Component {
       var contentWrapper = React.createElement('div', {},
         this.dir.map(file => {
           if (Googler.isFolder(file))
-            return React.createElement(FolderView, { file: file, type: this.props.type, level: this.props.level + 1});
+            return React.createElement(FolderView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1});
           else
-            return React.createElement(FileView, { file: file, type: this.props.type, level: this.props.level + 1 });
+            return React.createElement(FileView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1 });
 
             
         })
