@@ -2,6 +2,7 @@ import fs from 'fs';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {FileView} from './file';
+import {Googler} from '../../seniorprogrammer/gdriver';
 
 
 class FolderView extends Component {
@@ -9,17 +10,27 @@ class FolderView extends Component {
   constructor(props) {
     super(props);
 
+    this.file = this.props.file;
+    this.dir = [];
+
     this.state = {
       folderOpen: false,
-      dir: fs.readdirSync(props.path)
     };
 
     this.onFolderClick = function(event) {
       event.stopPropagation();
-      var content = this.state.dir;
-      this.setState({folderOpen: !this.state.folderOpen, dir: content});
+      this.setState({folderOpen: !this.state.folderOpen});
       this.forceUpdate();
     }
+  }
+
+  componentDidMount(){
+    Googler.listFiles(this.file.id, files => {
+      files.forEach(file => {
+        this.dir.push(file);
+      });
+      this.setState({ updateSource: 'componentDidMount' });
+    })
   }
 
   render() {
@@ -40,17 +51,18 @@ class FolderView extends Component {
     if (this.state.folderOpen) {
 
       var contentWrapper = React.createElement('div', {},
-        this.state.dir.map(file => {
-          var stat = fs.statSync(this.props.path + '/' + file);
-          if (stat.isFile())
-            return React.createElement(FileView, { name: file, path: this.props.path + '/' + file, type: this.props.type, level: this.props.level + 1 });
-          if (stat.isDirectory())
-            return React.createElement(FolderView, { name: file, path: this.props.path + '/' + file, type: this.props.type, level: this.props.level + 1});
+        this.dir.map(file => {
+          if (Googler.isFolder(file))
+            return React.createElement(FolderView, { file: file, type: this.props.type, level: this.props.level + 1});
+          else
+            return React.createElement(FileView, { file: file, type: this.props.type, level: this.props.level + 1 });
+
+            
         })
       );
       
       var folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-      var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.name);
+      var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.file.name);
       var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, folderImage, folderName);
       var folderWrapper = React.createElement('div', {}, folderNamedImage, contentWrapper);
 
@@ -59,7 +71,7 @@ class FolderView extends Component {
     } else {
 
       var folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-      var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.name);
+      var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.file.name);
       var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, folderImage, folderName);
       var folderWrapper = React.createElement('div', {}, folderNamedImage);
 
@@ -71,9 +83,7 @@ class FolderView extends Component {
 
 
 FolderView.propTypes = {
-  name: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  file: PropTypes.object.isRequired
 };
 
 export {FolderView}

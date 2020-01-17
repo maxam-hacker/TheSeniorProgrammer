@@ -34,7 +34,7 @@ class GoogleDriver {
             {
                 auth: this.client,
                 q: `('${fileId}' in parents)`,
-                fields: 'files(name, id)',
+                fields: 'files(name, id, mimeType)',
                 orderBy: 'folder, name'
             }, 
             (error, response) => {
@@ -112,6 +112,10 @@ class GoogleDriver {
 
     getPathContent(pathId) {
 
+    }
+
+    isFolder(file) {
+        return file.mimeType === 'application/vnd.google-apps.folder';
     }
 }
 

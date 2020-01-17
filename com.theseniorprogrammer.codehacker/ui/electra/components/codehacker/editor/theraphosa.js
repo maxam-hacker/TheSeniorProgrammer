@@ -6,7 +6,7 @@ import PhosaTheme from '../../../../theraphosa/theme/monokai.js';
 import {Mode} from '../../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
-import {ThePathWeb} from '../../../paths'
+import {Googler} from '../../seniorprogrammer/gdriver';
 
 
 class Theraphosa extends Component {
@@ -26,11 +26,12 @@ class Theraphosa extends Component {
     this.phosaEditor.getSession().setMode(new Mode());
     this.pathToFile = '';
 
-    this.FileAndFolderClick = function(pathToFile) {
-        this.pathToFile = pathToFile;
-        var text = fs.readFileSync(pathToFile);
-        this.phosaEditor.setCurrentFile(pathToFile);
-        this.phosaEditor.setValueWithTag(text.toString(), { path: pathToFile, deltaX: 0, deltaY: 0 });
+    this.FileAndFolderClick = function(file) {
+        this.pathToFile = file.name;
+        Googler.downloadFile(file.id, text => {
+          this.phosaEditor.setCurrentFile(file.name);
+          this.phosaEditor.setValueWithTag(text.toString(), { path: file.name, deltaX: 0, deltaY: 0 });
+        });
     };
 
     this.MethodCreator = function(callback) {
@@ -52,9 +53,7 @@ class Theraphosa extends Component {
 }
 
 Theraphosa.propTypes = {
-  id: PropTypes.string,
-  path: PropTypes.string,
-  type: PropTypes.string
+  rootFolderDescriptor: PropTypes.string
 };
 
 export {Theraphosa}

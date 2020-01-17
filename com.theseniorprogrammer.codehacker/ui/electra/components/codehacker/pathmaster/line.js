@@ -6,8 +6,8 @@ export default function  PathMasterLine() {
 
     const [pathToFile, setPathToFile] = React.useState('');
 
-    const FileAndFolderClick = function(pathToFile) {
-        setPathToFile(pathToFile);
+    const FileAndFolderClick = function(file) {
+        setPathToFile(file.name);
     };
     BrowserToTheraphosaCallsEventBus.subscribe(FileAndFolderClick.bind(this));
 

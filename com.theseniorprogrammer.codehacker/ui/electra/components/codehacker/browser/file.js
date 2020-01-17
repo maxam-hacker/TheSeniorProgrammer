@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js'
+import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
+
 
 class FileView extends Component {
 
@@ -10,10 +11,7 @@ class FileView extends Component {
 
   onFileClick(event) {
     event.stopPropagation();
-    if (this.props.type === 'calls')
-      BrowserToTheraphosaCallsEventBus.publish(this.props.path);
-    else if (this.props.type === 'methods')
-      BrowserToTheraphosaMethodsEventBus.publish(this.props.path);
+    BrowserToTheraphosaCallsEventBus.publish(this.props.file);
   }
 
   render() {
@@ -30,7 +28,7 @@ class FileView extends Component {
       '</svg>'};
 
     var fileImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-    var fileName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.name);
+    var fileName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.file.name);
     var fileNamedImage = React.createElement('div', { style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, fileImage, fileName);
     var fileWrapper = React.createElement('div', { onClick: this.onFileClick.bind(this) }, fileNamedImage);
 
@@ -40,9 +38,7 @@ class FileView extends Component {
 }
 
 FileView.propTypes = {
-  name: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  file: PropTypes.object.isRequired
 };
 
 export {FileView}
