@@ -9,7 +9,7 @@ class PathIcon extends Component {
         super(props);
 
         this.state = {
-            pathName: this.props.pathName
+            pathObject: this.props.path
         };
     }
 
@@ -17,11 +17,11 @@ class PathIcon extends Component {
 
         this.pathIcon = React.createElement(
             'div', {style: pathsIcon}, 
-                this.state.pathName
+                this.props.pathObject.pathName
         );
 
         this.pathLinkedIcon = React.createElement(
-            Link, {to: '/codehacker/' + this.props.pathName, style: pathsLink}, 
+            Link, {to: '/codehacker/' + this.props.pathObject.pathName + '/' + this.props.pathObject.pathDescriptor + '/' + this.props.pathObject.pathSrcFolderDescriptor, style: pathsLink}, 
                 this.pathIcon
         );
 
@@ -30,7 +30,7 @@ class PathIcon extends Component {
 }
 
 PathIcon.propTypes = {
-    pathName: PropTypes.string.isRequired,
+    pathObject: PropTypes.object.isRequired
 };
 
 export {PathIcon}

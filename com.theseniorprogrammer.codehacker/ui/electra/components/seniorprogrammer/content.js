@@ -19,7 +19,7 @@ class SeniorContent extends Component {
         this.loginPageRouter = React.createElement(Route, {path: '/login', component: LoginPage});
         this.aboutPageRouter = React.createElement(Route, {path: '/about', component: AboutPage});
         this.pathsRouter = React.createElement(Route, {path: '/topic', component: PathsPage});
-        this.codeHackerRouter = React.createElement(Route, {path: '/codehacker/:topic', component: CodeHacker});
+        this.codeHackerRouter = React.createElement(Route, {path: '/codehacker/:topic/:content/:src', component: CodeHacker});
 
         this.rootPageRedirect = React.createElement(Redirect, {from: '/', to: '/main'});
 

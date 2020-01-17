@@ -9,7 +9,8 @@ class TopicIcon extends Component {
         super(props);
 
         this.state = {
-            topicName: this.props.topicName
+            topicName: this.props.topicName,
+            topicDescriptor: this.props.topicDescriptor
         };
     }
 
@@ -20,7 +21,7 @@ class TopicIcon extends Component {
                 this.state.topicName);
 
         this.topicLinkedIcon = React.createElement(
-            Link, {to: '/topic' + '/' + String(this.state.topicName).toLowerCase(), style: topicLink}, 
+            Link, {to: '/topic' + '/' + String(this.state.topicName) + '?' + String(this.state.topicDescriptor), style: topicLink}, 
                 this.topicIcon);
 
         return this.topicLinkedIcon;
@@ -29,6 +30,7 @@ class TopicIcon extends Component {
 
 TopicIcon.propTypes = {
     topicName: PropTypes.string.isRequired,
+    topicDescriptor: PropTypes.string.isRequired
 };
 
 export {TopicIcon}

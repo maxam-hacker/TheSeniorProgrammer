@@ -8,6 +8,10 @@ import PathMasterLine from './pathmaster/line';
 
 class CodeHackerContent extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
 
         this.browser = React.createElement(Browser, { path: '/Users/a.kiselev/Documents/java/', type: 'calls' });

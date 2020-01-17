@@ -1,7 +1,9 @@
 class TopicHandler {
 
-    constructor(name) {
-        this.name = name;
+    constructor(topicId, topicName, topicDescriptor) {
+        this.topicId = topicId;
+        this.topicName = topicName;
+        this.topicDescriptor = topicDescriptor;
     }
 }
 

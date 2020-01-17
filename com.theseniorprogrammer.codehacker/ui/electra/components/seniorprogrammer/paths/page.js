@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Backender} from '../backender';
+import {Googler} from '../gdriver';
 import {PathIcon} from './pathicon';
 import {PathHandler} from './model';
 import {seniorPageWrapper} from '../styles/common-styles';
@@ -15,36 +16,44 @@ class PathsPage extends Component {
         };
 
         this.pathList = [];
+        console.log(this.props.location);
         this.topicName = this.props.location.pathname.split('/')[2];
+        this.topicDescriptor = this.props.location.search.replace('?', '');
 
         this.onGetTopicContent = this.onGetTopicContent.bind(this);
         this.onGetTopicContentError = this.onGetTopicContentError.bind(this);
     }
 
     onGetTopicContent(contentString) {
-
         var paths = contentString.split(',');
         paths.forEach(path => this.pathList.push(new PathHandler(path)));
-
         this.setState({ updateSource: 'onGetTopicContent' });
     }
 
     onGetTopicContentError(error) {
         // For debugging...
-        this.pathList.push(new PathHandler('spring-core'));
-        this.pathList.push(new PathHandler('spring-beans'));
-        this.pathList.push(new PathHandler('spring-mvc'));
-        this.pathList.push(new PathHandler('spring-transactions'));
-
+        this.pathList.push(new PathHandler('Error :: onGetTopicContentError'));
         this.setState({ updateSource: 'onGetTopicContentError' });
     }
 
     componentDidMount(){
 
+        /*
         Backender.getTopicContent(
             this.topicName, 
             this.onGetTopicContent,
             this.onGetTopicContentError
+        );
+        */
+
+        Googler.getPathsForTopic(
+
+            this.topicDescriptor, 
+
+            (data, fileId) => {
+                this.pathList.push(new PathHandler(fileId, data));
+                this.setState({ updateSource: 'getPathsForTopic' });
+            }
         );
 
     }
@@ -54,13 +63,13 @@ class PathsPage extends Component {
         this.pathsContainer = React.createElement(
             'div', {style: pathsPageContent},
                 this.pathList.map((path) => {
-                    return React.createElement(PathIcon, {pathName: path.name});
+                    return React.createElement(PathIcon, {pathObject: path});
                 })
         );
 
         this.pageWrapper = React.createElement(
             'div', {style: seniorPageWrapper}, 
-                //this.topicName,
+                this.topicName,
                 this.pathsContainer
         );
 
