@@ -18,6 +18,8 @@ class GoogleDriver {
 
         this.topicsFolderId = "1h2Wd36x-0Hn1v5s0EKLTSS2ni9-gjZNx";
 
+        this.result = [];
+
         this.authorize();
     }
 
@@ -28,31 +30,46 @@ class GoogleDriver {
         this.drive = google.drive({version: 'v3'});
     }
 
-    listFiles(fileId, callback, onerror) {
+    listFiles(fileId, callback, onerror, nextPageToken, result) {
 
         this.drive.files.list(
             {
                 auth: this.client,
                 q: `('${fileId}' in parents)`,
-                fields: 'files(name, id, mimeType)',
-                orderBy: 'folder, name'
+                fields: 'nextPageToken, files(name, id, mimeType)',
+                orderBy: 'folder, name',
+                pageSize: 1000,
+                pageToken: nextPageToken != null ? nextPageToken : ''
             }, 
             (error, response) => {
 
-                if (error && onerror) 
+                if (error && onerror) {
                     onerror(error);
-
-                var files = response.data.files;
-                var result = [];
-
-                if (files.length) {
-                    files.map((file) => {
-                        result.push(file);
-                    });
                 }
 
-                if (callback) 
-                    callback(result);
+                if (response && response.data) {
+
+                    var files = response.data.files;
+                    var token = response.data.nextPageToken;
+
+                    if (result == null)
+                        result = [];
+
+                    if (files.length) {
+                        files.map((file) => {
+                            result.push(file);
+                        });
+                    }
+
+                    if (token) {
+                        this.listFiles(fileId, callback, onerror, token, result);
+                        return;
+                    }
+
+                    if (callback) {
+                        callback(result);
+                    }
+                }
             }
         );
     }
