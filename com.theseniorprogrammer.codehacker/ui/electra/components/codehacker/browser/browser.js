@@ -12,7 +12,7 @@ class Browser extends Component {
     super(props);
 
     this.rootFolderDescriptor = props.rootFolderDescriptor;
-    this.pathFileDescriptor = props.pathFileDescriptor;
+    this.pathFolderDescriptor = props.pathFolderDescriptor;
 
     this.dir = [];
 
@@ -33,7 +33,7 @@ class Browser extends Component {
 
   render() {
     return React.createElement('div', {className: 'browser-container'},
-              React.createElement(PathMasterView, {pathFileDescriptor: this.pathFileDescriptor}),
+              React.createElement(PathMasterView, {pathFolderDescriptor: this.pathFolderDescriptor}),
               React.createElement('div', { className: 'split-pane browser-files'  },
                 this.dir.map(file => {
                   if (Googler.isFolder(file))

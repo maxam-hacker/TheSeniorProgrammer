@@ -1,3 +1,4 @@
+
 class CallMethodPath {
 
     constructor() {
@@ -16,6 +17,16 @@ class CallMethodPath {
 
     setMethod(method) {
         this.method = method;
+    }
+
+    toString() {
+        var stringified = '';
+        stringified += `${this.file}` + '_';
+        stringified += `${this.call.file}` + '-';
+        stringified += `${this.call.start.line}` + '-' + `${this.call.end.line}` + '_';
+        stringified += `${this.method.file}` + '-';
+        stringified += `${this.method.start.line}` + '-' + `${this.method.end.line}`;
+        return stringified;
     }
 
     toJson() {

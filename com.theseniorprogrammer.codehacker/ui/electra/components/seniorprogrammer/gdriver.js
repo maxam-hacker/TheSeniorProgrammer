@@ -27,7 +27,7 @@ class GoogleDriver {
         const {client_secret, client_id, redirect_uris} = this.credentials;
         this.client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
         this.client.setCredentials(this.tokens);
-        this.drive = google.drive({version: 'v3'});
+        this.drive = google.drive({version: 'v3', auth: this.client});
     }
 
     listFiles(fileId, callback, onerror, nextPageToken, result) {
@@ -123,6 +123,31 @@ class GoogleDriver {
         );   
     }
 
+    createFile(fileName, content, parent, callback, onerror) {
+
+        this.drive.files.create(
+            {
+                requestBody: {
+                    name: `${fileName}`,
+                    parents: [`${parent}`],
+                    mimeType: 'text/plain'
+                },
+                media: {
+                    body: `${content}`,
+                    mimeType: 'text/plain'
+                },
+            },
+            (error, file) => {
+
+                if (onerror)
+                    onerror(error);
+
+                if (callback)
+                    callback(file);
+            }
+        );  
+    }
+
     getTopics(callback, onerror) {
 
         this.listFiles(
@@ -167,3 +192,38 @@ class GoogleDriver {
 const Googler = new GoogleDriver();
 
 export {Googler}
+
+/*
+
+    googleapis-commons/build/src/apirequest.js
+
+        - create
+
+            ...
+            if (resource) {
+                // gaxios doesn't support multipart/related uploads, so it has to
+                // be implemented here.
+                params.uploadType = 'multipart';
+                const multipart = [
+                    { 'Content-Type': 'application/json; charset=UTF-8', body: JSON.stringify(resource) }, {
+                        'Content-Type': media.mimeType || (resource && resource.mimeType) || defaultMime,
+                        body: media.body // can be a readable stream or raw string!
+                    }
+                ];
+                const boundary = uuid.v4();
+                const finale = `--${boundary}--`;
+                headers['Content-Type'] = `multipart/related; boundary=${boundary}`;
+
+                let data = '';
+                for (const part of multipart) {
+                    const preamble = `--${boundary}\r\nContent-Type: ${part['Content-Type']}\r\n\r\n`;
+                    data += preamble;
+                    data += part.body;
+                    data += '\r\n';
+                }
+                data += finale;
+
+                options.data = data;
+            }
+            ...
+*/

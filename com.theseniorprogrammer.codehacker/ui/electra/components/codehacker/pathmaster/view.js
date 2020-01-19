@@ -22,10 +22,10 @@ export default function PathMasterView(props) {
   const [methodEndColumn, setMethodEndColumn] = useState(0);
   const [methodText, setMethodText] = useState('');
 
-  var isReady = false;
+  const [isReady, setIsReady] = React.useState(false);
 
   if (!isReady) {
-    isReady = true;
+    setIsReady(true);
     initPaths(props);
   }
 

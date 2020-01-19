@@ -3,7 +3,7 @@ class PathHandler {
     constructor(fileId, data) {
         this.pathId = fileId;
         this.pathName = data.name;
-        this.pathDescriptor = data.pathDescriptor;
+        this.pathFolderDescriptor = data.pathFolderDescriptor;
         this.pathSrcFolderDescriptor = data.srcFolderDescriptor;
     }
 }

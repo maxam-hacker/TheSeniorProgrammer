@@ -9,21 +9,41 @@ var TheCalls = [];
 var EditorCallRegistry = null;
 
 const initPaths = function(props) {
+
+    props.pathFolderDescriptor
+
+    Googler.listFiles(
+        props.pathFolderDescriptor,
+        files => {
+            files.forEach(file => {
+                Googler.downloadFile(
+                    file.id, 
+                    savedPath => {
+                        var mirrorCall= ingestCall(savedPath.file, savedPath.call.text, savedPath.call.start, savedPath.call.end);
+                        var mirrorMethod = ingestMethod(savedPath.file, savedPath.method.text, savedPath.method.start, savedPath.method.end);
+                        mirrorCall.setMethod(mirrorMethod);
+                        ingestPath(savedPath.file, mirrorCall, mirrorMethod);
+                        if (EditorCallRegistry)
+                            EditorCallRegistry.add(savedPath.file, mirrorCall);
+                    }
+                );
+            });
+        }
+    );
+
+    /*
     Googler.downloadFile(
         props.pathFileDescriptor, 
         savedPath => {
-
             var mirrorCall= ingestCall(savedPath.file, savedPath.call.text, savedPath.call.start, savedPath.call.end);
             var mirrorMethod = ingestMethod(savedPath.file, savedPath.method.text, savedPath.method.start, savedPath.method.end);
             mirrorCall.setMethod(mirrorMethod);
             ingestPath(savedPath.file, mirrorCall, mirrorMethod);
-            
-            TheCalls.push({file: savedPath.file, call: mirrorCall});
-
             if (EditorCallRegistry)
                 EditorCallRegistry.add(savedPath.file, mirrorCall);
         }
     );
+    */
 }
 
 const ingestCall = function(file, text, start, end) {
@@ -55,8 +75,10 @@ const ingestPath = function(file, call, method, props) {
     path.setMethod(method);
     ThePathWeb.addPath(file, path);
 
-    if (props)
-        Googler.updateFile(props.pathFileDescriptor, JSON.stringify(path));
+    if (props) {
+        Googler.createFile(path.toString(), JSON.stringify(path), props.pathFolderDescriptor);
+        //Googler.updateFile(props.pathFileDescriptor, JSON.stringify(path));
+    }
 
     return path;
 }
@@ -68,7 +90,6 @@ const getCallsForFile = function(file) {
 const setCallRegistry = function(callRegistry) {
     if (EditorCallRegistry == null) {
         EditorCallRegistry = callRegistry;
-        //TheCalls.forEach(call => EditorCallRegistry.add(call.file, call.call));
     }
 }
 
