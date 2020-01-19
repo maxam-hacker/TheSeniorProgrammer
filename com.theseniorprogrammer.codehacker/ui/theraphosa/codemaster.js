@@ -89,7 +89,7 @@ oop.inherits(CodeMaster, Editor);
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
-        var method = call.path.method;
+        var method = call.method;
         var text = method.text;
         var file = method.file;
         var session = this.session;

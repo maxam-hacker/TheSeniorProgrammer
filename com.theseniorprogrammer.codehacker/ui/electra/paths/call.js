@@ -14,24 +14,24 @@ class PathCall extends PathPoint {
     constructor() {
         super();
         this.text = null;
-        this.path = null;
         this.file = null;
+        this.method = null;
     }
 
     setText(text) {
         this.text = text;
     }
 
-    setPath(path) {
-        this.path = path;
-    }
-
     setFile(file) {
         this.file = file;
     }
 
+    setMethod(method) {
+        this.method = method;
+    }
+
     toJson() {
-        return `{ file: ${this.file}, text: "${this.text}", start: ${this.startToJson()}, end: ${this.endToJson()}, path: ${this.path.toJson()} }`;
+        return `{ file: ${this.file}, text: "${this.text}", start: ${this.startToJson()}, end: ${this.endToJson()} }`;
     }
 
     equals(call) {

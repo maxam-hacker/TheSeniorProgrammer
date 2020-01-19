@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus';
-import {ingestCall, ingestMethod, ingestPath} from '../../../paths';
+import {ingestCall, ingestMethod, ingestPath, initPaths} from '../../../paths';
 
 
-export default function PathMasterView() {
+export default function PathMasterView(props) {
 
   const [callInvisible, setCallInvisible] = React.useState(true);
   const [methodInvisible, setMethodInvisible] = React.useState(true);
@@ -21,6 +21,13 @@ export default function PathMasterView() {
   const [methodStartColumn, setMethodStartColumn] = useState(0);
   const [methodEndColumn, setMethodEndColumn] = useState(0);
   const [methodText, setMethodText] = useState('');
+
+  var isReady = false;
+
+  if (!isReady) {
+    isReady = true;
+    initPaths(props);
+  }
 
   const onCallClick = function(event) {
       const selectedHandler = function(pathToFile, selectedText, selectedRange) {
@@ -98,9 +105,9 @@ export default function PathMasterView() {
         {line: methodStartRow, column: methodEndColumn}, 
         {line: methodEndRow, column: methodEndColumn});
 
-    var path = ingestPath(callFile, call, method);
+    call.setMethod(method);
 
-    call.setPath(path);
+    ingestPath(callFile, call, method, props);
 
     setCallInvisible(true);
     setMethodInvisible(true);

@@ -95,6 +95,34 @@ class GoogleDriver {
         );    
     }
 
+    updateFile(fileId, content, callback, onerror) {
+
+        this.drive.files.update(
+            {
+                "auth": this.client,
+                "fileId": fileId,
+                "media": {
+                    "body": `${content}`
+                }
+            },
+            {
+                mimeType: 'application/vnd.google-apps.file',
+                uploadType: 'media',
+                fields: 'id'
+            },
+            (error, file) => {
+
+                console.log(error, file);
+
+                if (onerror)
+                    onerror(error);
+
+                if (callback)
+                    callback(file);
+            }
+        );   
+    }
+
     getTopics(callback, onerror) {
 
         this.listFiles(

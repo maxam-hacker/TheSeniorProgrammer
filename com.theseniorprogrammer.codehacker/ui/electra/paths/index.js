@@ -2,8 +2,29 @@ import {PathWeb} from './web'
 import {PathCall} from './call'
 import {PathMethod} from './method'
 import {CallMethodPath} from './path'
+import {Googler} from '../components/seniorprogrammer/gdriver'
 
 var ThePathWeb = new PathWeb();
+var TheCalls = [];
+var EditorCallRegistry = null;
+
+const initPaths = function(props) {
+    Googler.downloadFile(
+        props.pathFileDescriptor, 
+        savedPath => {
+
+            var mirrorCall= ingestCall(savedPath.file, savedPath.call.text, savedPath.call.start, savedPath.call.end);
+            var mirrorMethod = ingestMethod(savedPath.file, savedPath.method.text, savedPath.method.start, savedPath.method.end);
+            mirrorCall.setMethod(mirrorMethod);
+            ingestPath(savedPath.file, mirrorCall, mirrorMethod);
+            
+            TheCalls.push({file: savedPath.file, call: mirrorCall});
+
+            if (EditorCallRegistry)
+                EditorCallRegistry.add(savedPath.file, mirrorCall);
+        }
+    );
+}
 
 const ingestCall = function(file, text, start, end) {
     var call = new PathCall();
@@ -27,13 +48,15 @@ const ingestMethod = function(file, text, start, end) {
     return method;
 }
 
-const ingestPath = function(file, call, method) {
+const ingestPath = function(file, call, method, props) {
     var path = new CallMethodPath();
     path.setFile(file);
     path.setCall(call);
     path.setMethod(method);
     ThePathWeb.addPath(file, path);
-    //console.log(ThePathWeb.toJson());
+
+    if (props)
+        Googler.updateFile(props.pathFileDescriptor, JSON.stringify(path));
 
     return path;
 }
@@ -42,4 +65,11 @@ const getCallsForFile = function(file) {
     return ThePathWeb.getCalls(file);
 }
 
-export { ingestCall, ingestMethod, ingestPath, getCallsForFile }
+const setCallRegistry = function(callRegistry) {
+    if (EditorCallRegistry == null) {
+        EditorCallRegistry = callRegistry;
+        //TheCalls.forEach(call => EditorCallRegistry.add(call.file, call.call));
+    }
+}
+
+export { ingestCall, ingestMethod, ingestPath, initPaths, getCallsForFile, setCallRegistry }

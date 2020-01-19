@@ -22,7 +22,7 @@ class CallMethodPath {
 
         var jsonified = '{\n';
         jsonified += `file: ${this.file}\n`;
-        //jsonified += `call: ${this.call.toJson()}\n`;
+        jsonified += `call: ${this.call.toJson()}\n`;
         jsonified += `method: ${this.method.toJson()}\n`;
         jsonified += '}';
 

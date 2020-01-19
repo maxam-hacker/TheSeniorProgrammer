@@ -7,6 +7,7 @@ import {Mode} from '../../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
 import {Googler} from '../../seniorprogrammer/gdriver';
+import {setCallRegistry} from '../../../paths'
 
 
 class Theraphosa extends Component {
@@ -24,6 +25,7 @@ class Theraphosa extends Component {
     this.phosaEditor = Phosa.edit(element);
     this.phosaEditor.setTheme(PhosaTheme);
     this.phosaEditor.getSession().setMode(new Mode());
+    setCallRegistry(this.phosaEditor.callsRegistry);
     this.pathToFile = '';
 
     this.FileAndFolderClick = function(event) {
