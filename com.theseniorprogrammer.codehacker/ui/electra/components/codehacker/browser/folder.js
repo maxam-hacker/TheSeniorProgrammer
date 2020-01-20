@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserFileView} from './file';
 import {Googler} from '../../../connectors/googledriver';
+import { BrowserFile } from './model';
 
 
 class BrowserFolderView extends Component {
@@ -10,8 +11,8 @@ class BrowserFolderView extends Component {
   constructor(props) {
     super(props);
 
-    this.file = this.props.file;
-    this.dir = [];
+    this.folder = this.props.folder;
+    this.folderContent = [];
 
     this.state = {
       folderOpen: false,
@@ -20,14 +21,20 @@ class BrowserFolderView extends Component {
     this.onFolderClick = function(event) {
       event.stopPropagation();
       this.setState({folderOpen: !this.state.folderOpen});
-      this.forceUpdate();
     }
   }
 
   componentDidMount(){
-    Googler.listFiles(this.file.id, files => {
-      files.forEach(file => {
-        this.dir.push(file);
+    Googler.listFiles(this.folder.originalObject.id, driveFiles => {
+      driveFiles.forEach(driveFile => {
+        var browserFile = new BrowserFile();
+        browserFile
+          .setId(driveFile.id)
+          .setName(driveFile.name)
+          .setType(driveFile.mimeType)
+          .setFullName(this.folder.name + '/' + driveFile.name)
+          .setOriginalObject(driveFile)
+        this.folderContent.push(browserFile);
       });
       this.setState({ updateSource: 'componentDidMount' });
     })
@@ -48,42 +55,54 @@ class BrowserFolderView extends Component {
       '</svg>'
     };
 
+    this.folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
+      
+    this.folderName = React.createElement(
+      'span', { style: {color: '#d4d4d4'} }, 
+        this.folder.name
+    );
+      
+    this.folderNamedImage = React.createElement(
+      'div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, 
+        this.folderImage, 
+        this.folderName
+    );
+
     if (this.state.folderOpen) {
 
-      var contentWrapper = React.createElement('div', {},
-        this.dir.map(file => {
-          if (Googler.isFolder(file))
-            return React.createElement(BrowserFolderView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1});
-          else
-            return React.createElement(BrowserFileView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1 });
-
-            
-        })
+      this.contentWrapper = React.createElement(
+        'div', {},
+          this.folderContent.map(browserFile => {
+            if (Googler.isFolder(browserFile.originalObject))
+              return React.createElement(BrowserFolderView, { folder: browserFile, level: this.props.level + 1});
+            else
+              return React.createElement(BrowserFileView, { file: browserFile, level: this.props.level + 1 });
+          }
+        )
       );
       
-      var folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-      var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.file.name);
-      var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, folderImage, folderName);
-      var folderWrapper = React.createElement('div', {}, folderNamedImage, contentWrapper);
-
-      return folderWrapper;
+      this.folderWrapper = React.createElement(
+        'div', {}, 
+          this.folderNamedImage, 
+          this.contentWrapper
+      );
 
     } else {
-
-      var folderImage = React.createElement('svg', { width: '24px', height: '24px', dangerouslySetInnerHTML: htmlObj });
-      var folderName = React.createElement('span', { style: {color: '#d4d4d4'} }, this.props.file.name);
-      var folderNamedImage = React.createElement('div', { onClick: this.onFolderClick.bind(this), style: { display: 'flex', position: 'relative', left: this.props.level * 20 + 'px', marginTop: '3px' } }, folderImage, folderName);
-      var folderWrapper = React.createElement('div', {}, folderNamedImage);
-
-      return folderWrapper;
+      
+      this.folderWrapper = React.createElement(
+        'div', {}, 
+          this.folderNamedImage
+      );
     }
+
+    return this.folderWrapper;
   }
 
 }
 
 
 BrowserFolderView.propTypes = {
-  file: PropTypes.object.isRequired
+  folder: PropTypes.object.isRequired
 };
 
 export {BrowserFolderView}

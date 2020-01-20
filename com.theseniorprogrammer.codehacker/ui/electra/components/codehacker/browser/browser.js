@@ -41,14 +41,14 @@ class Browser extends Component {
   render() {
 
     this.pathMasterView = React.createElement(PathMasterView, {pathFolderDescriptor: this.pathFolderDescriptor});
-    
+
     this.browserContent = React.createElement(
       'div', { className: 'split-pane browser-files'  },
         this.rootFolderContent.map(browserFile => {
           if (Googler.isFolder(browserFile.originalObject))
-            return React.createElement(BrowserFolderView, { file: browserFile, path: browserFile.name, level: 0 });
+            return React.createElement(BrowserFolderView, { folder: browserFile, level: 0 });
           else
-            return React.createElement(BrowserFileView, { file: browserFile, path: browserFile.name, level: 0 });
+            return React.createElement(BrowserFileView, { file: browserFile, level: 0 });
         })
     );
 

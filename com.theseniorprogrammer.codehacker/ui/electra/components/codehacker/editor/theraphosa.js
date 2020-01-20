@@ -28,11 +28,11 @@ class Theraphosa extends Component {
     setCallRegistry(this.phosaEditor.callsRegistry);
     this.pathToFile = '';
 
-    this.FileAndFolderClick = function(event) {
-        this.pathToFile = event.file.name;
-        Googler.downloadFile(event.file.id, text => {
-          this.phosaEditor.setCurrentFile(event.file.name);
-          this.phosaEditor.setValueWithTag(text.toString(), { path: event.file.name, deltaX: 0, deltaY: 0 });
+    this.FileAndFolderClick = function(browserFile) {
+        this.pathToFile = browserFile.name;
+        Googler.downloadFile(browserFile.originalObject.id, text => {
+          this.phosaEditor.setCurrentFile(browserFile.name);
+          this.phosaEditor.setValueWithTag(text.toString(), { path: browserFile.name, deltaX: 0, deltaY: 0 });
         });
     };
 
