@@ -8,14 +8,14 @@ export default function PathMasterView(props) {
   const [callInvisible, setCallInvisible] = React.useState(true);
   const [methodInvisible, setMethodInvisible] = React.useState(true);
 
-  const [callFile, setCallFile] = useState('');
+  const [callBrowserFile, setCallBrowserFile] = useState(null);
   const [callStartRow, setCallStartRow] = useState(0);
   const [callEndRow, setCallEndRow] = useState(0);
   const [callStartColumn, setCallStartColumn] = useState(0);
   const [callEndColumn, setCallEndColumn] = useState(0);
   const [callText, setCallText] = useState('');
 
-  const [methodFile, setMethodFile] = useState('');
+  const [methodBrowserFile, setMethodBrowserFile] = useState(null);
   const [methodStartRow, setMethodStartRow] = useState(0);
   const [methodEndRow, setMethodEndRow] = useState(0);
   const [methodStartColumn, setMethodStartColumn] = useState(0);
@@ -30,8 +30,8 @@ export default function PathMasterView(props) {
   }
 
   const onCallClick = function(event) {
-      const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-        setCallFile(pathToFile);
+      const selectedHandler = function(browserFile, selectedText, selectedRange) {
+        setCallBrowserFile(browserFile);
         setCallStartRow(selectedRange.start.row);
         setCallEndRow(selectedRange.end.row);
         setCallStartColumn(selectedRange.start.column);
@@ -79,8 +79,8 @@ export default function PathMasterView(props) {
   };
 
   const onMethodClick = function(event) {
-      const selectedHandler = function(pathToFile, selectedText, selectedRange) {
-        setMethodFile(pathToFile);
+      const selectedHandler = function(browserFile, selectedText, selectedRange) {
+        setMethodBrowserFile(browserFile);
         setMethodStartRow(selectedRange.start.row);
         setMethodEndRow(selectedRange.end.row);
         setMethodStartColumn(selectedRange.start.column);
@@ -94,20 +94,20 @@ export default function PathMasterView(props) {
   const onBindClick = function(event) {
 
     var call = ingestCall(
-        callFile, 
+        callBrowserFile.name, 
         callText, 
         {line: callStartRow, column: callStartColumn}, 
         {line: callEndRow, column: callEndColumn});
 
     var method = ingestMethod(
-        methodFile, 
+        methodBrowserFile.name, 
         methodText, 
         {line: methodStartRow, column: methodEndColumn}, 
         {line: methodEndRow, column: methodEndColumn});
 
     call.setMethod(method);
 
-    ingestPath(callFile, call, method, props);
+    ingestPath(callBrowserFile.name, call, method, props);
 
     setCallInvisible(true);
     setMethodInvisible(true);

@@ -29,7 +29,7 @@ class Theraphosa extends Component {
     this.pathToFile = '';
 
     this.FileAndFolderClick = function(browserFile) {
-        this.pathToFile = browserFile.name;
+        this.browserFile = browserFile;
         Googler.downloadFile(browserFile.originalObject.id, text => {
           this.phosaEditor.setCurrentFile(browserFile.name);
           this.phosaEditor.setValueWithTag(text.toString(), { path: browserFile.name, deltaX: 0, deltaY: 0 });
@@ -39,13 +39,13 @@ class Theraphosa extends Component {
     this.MethodCreator = function(callback) {
       var selectedText = this.phosaEditor.getSelectedText();
       var selectedRange = this.phosaEditor.getSelectionRange();
-      callback(this.pathToFile, selectedText, selectedRange);
+      callback(this.browserFile, selectedText, selectedRange);
     };
 
     this.CallCreator = function(callback) {
       var selectedText = this.phosaEditor.getSelectedText();
       var selectedRange = this.phosaEditor.getSelectionRange();
-      callback(this.pathToFile, selectedText, selectedRange);
+      callback(this.browserFile, selectedText, selectedRange);
     };
 
     BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
