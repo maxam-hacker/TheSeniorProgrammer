@@ -5,29 +5,32 @@ class BrowserFile {
         this.name = '';
         this.type = '';
         this.fullName = '';
-    }
-
-    constructor(id, name, type, fullName) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.fullName = fullName;
+        this.originalObject = null;
     }
 
     setId(id) {
         this.id = id;
+        return this;
     }
 
     setName(name) {
         this.name = name;
+        return this;
     }
 
-    setName(type) {
+    setType(type) {
         this.type = type;
+        return this;
     }
 
-    setName(fullName) {
+    setFullName(fullName) {
         this.fullName = fullName;
+        return this;
+    }
+
+    setOriginalObject(originalObject) {
+        this.originalObject = originalObject;
+        return this;
     }
 }
 

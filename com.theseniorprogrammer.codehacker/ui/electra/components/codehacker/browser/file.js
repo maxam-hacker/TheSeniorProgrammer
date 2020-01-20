@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
 
 
-class FileView extends Component {
+class BrowserFileView extends Component {
 
   constructor(props) {
     super(props);
@@ -37,8 +37,8 @@ class FileView extends Component {
 
 }
 
-FileView.propTypes = {
+BrowserFileView.propTypes = {
   file: PropTypes.object.isRequired
 };
 
-export {FileView}
+export {BrowserFileView}

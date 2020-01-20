@@ -1,11 +1,11 @@
 import fs from 'fs';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FileView} from './file';
+import {BrowserFileView} from './file';
 import {Googler} from '../../../connectors/googledriver';
 
 
-class FolderView extends Component {
+class BrowserFolderView extends Component {
 
   constructor(props) {
     super(props);
@@ -53,9 +53,9 @@ class FolderView extends Component {
       var contentWrapper = React.createElement('div', {},
         this.dir.map(file => {
           if (Googler.isFolder(file))
-            return React.createElement(FolderView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1});
+            return React.createElement(BrowserFolderView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1});
           else
-            return React.createElement(FileView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1 });
+            return React.createElement(BrowserFileView, { file: file, path: this.props.path + '/' + file.name, level: this.props.level + 1 });
 
             
         })
@@ -82,8 +82,8 @@ class FolderView extends Component {
 }
 
 
-FolderView.propTypes = {
+BrowserFolderView.propTypes = {
   file: PropTypes.object.isRequired
 };
 
-export {FolderView}
+export {BrowserFolderView}
