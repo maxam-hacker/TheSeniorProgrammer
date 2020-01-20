@@ -17,8 +17,8 @@ class CodeHackerContent extends Component {
 
     render() {
 
-        this.browser = React.createElement(Browser, { rootFolderDescriptor: this.src, pathFolderDescriptor: this.content, type: 'calls' });
-        this.phosa = React.createElement(Theraphosa, { rootFolderDescriptor: this.src, id: '_calls', type: 'calls' });
+        this.browser = React.createElement(Browser, { srcFolderDescriptor: this.src, pathFolderDescriptor: this.content });
+        this.phosa = React.createElement(Theraphosa, { id: '_calls'  });
         this.pathLine = React.createElement(PathMasterLine, {});
         this.editor = React.createElement('div', {}, this.pathLine, this.phosa);
         this.content = React.createElement(VerticalSplitter, {}, this.browser, this.editor);

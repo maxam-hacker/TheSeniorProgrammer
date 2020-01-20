@@ -55,7 +55,7 @@ class Theraphosa extends Component {
 }
 
 Theraphosa.propTypes = {
-  rootFolderDescriptor: PropTypes.string
+  id: PropTypes.string
 };
 
 export {Theraphosa}

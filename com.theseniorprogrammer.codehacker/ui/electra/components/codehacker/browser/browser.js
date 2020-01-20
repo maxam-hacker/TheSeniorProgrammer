@@ -11,7 +11,7 @@ class Browser extends Component {
   constructor(props) {
     super(props);
 
-    this.rootFolderDescriptor = props.rootFolderDescriptor;
+    this.srcFolderDescriptor = props.srcFolderDescriptor;
     this.pathFolderDescriptor = props.pathFolderDescriptor;
 
     this.dir = [];
@@ -23,7 +23,7 @@ class Browser extends Component {
   }
 
   componentDidMount(){
-    Googler.listFiles(this.rootFolderDescriptor, files => {
+    Googler.listFiles(this.srcFolderDescriptor, files => {
       files.forEach(file => {
         this.dir.push(file);
       });
@@ -48,7 +48,8 @@ class Browser extends Component {
 }
 
 Browser.propTypes = {
-  rootFolderDescriptor: PropTypes.string.isRequired
+  srcFolderDescriptor: PropTypes.string.isRequired,
+  pathFolderDescriptor: PropTypes.string.isRequired
 };
 
 export {Browser}
