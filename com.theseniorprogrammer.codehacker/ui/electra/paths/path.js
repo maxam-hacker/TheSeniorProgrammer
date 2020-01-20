@@ -21,11 +21,17 @@ class CallMethodPath {
 
     toString() {
         var stringified = '';
+        
         stringified += `${this.file}` + '_';
+
         stringified += `${this.call.file}` + '-';
-        stringified += `${this.call.start.line}` + '-' + `${this.call.end.line}` + '_';
+        stringified += `${this.call.start.line}` + '-' + `${this.call.start.column}` + '-'
+        stringified += `${this.call.end.line}` + '-' + `${this.call.end.column}` + '_';
+
         stringified += `${this.method.file}` + '-';
-        stringified += `${this.method.start.line}` + '-' + `${this.method.end.line}`;
+        stringified += `${this.method.start.line}` + '-' + `${this.method.start.column}` + '-'
+        stringified += `${this.method.end.line}` + '-' + `${this.method.end.column}` + '_';
+
         return stringified;
     }
 
