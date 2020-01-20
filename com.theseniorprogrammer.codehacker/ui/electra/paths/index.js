@@ -2,7 +2,7 @@ import {PathWeb} from './web'
 import {PathCall} from './call'
 import {PathMethod} from './method'
 import {CallMethodPath} from './path'
-import {Googler} from '../components/seniorprogrammer/gdriver'
+import {Googler} from '../connectors/googledriver'
 
 var ThePathWeb = new PathWeb();
 var TheCalls = [];

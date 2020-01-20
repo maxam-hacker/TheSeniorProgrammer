@@ -2,7 +2,7 @@ import fs from 'fs';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {FileView} from './file';
-import {Googler} from '../../seniorprogrammer/gdriver';
+import {Googler} from '../../../connectors/googledriver';
 
 
 class FolderView extends Component {

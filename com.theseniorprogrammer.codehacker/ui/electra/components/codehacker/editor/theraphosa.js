@@ -6,7 +6,7 @@ import PhosaTheme from '../../../../theraphosa/theme/monokai.js';
 import {Mode} from '../../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
-import {Googler} from '../../seniorprogrammer/gdriver';
+import {Googler} from '../../../connectors/googledriver';
 import {setCallRegistry} from '../../../paths'
 
 

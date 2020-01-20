@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {TopicsPageHeader} from './header';
 import {TopicIcon} from './topicicon';
-import {Backender} from '../backender';
-import {Googler} from '../gdriver';
+import {Backender} from '../../../connectors/backender';
+import {Googler} from '../../../connectors/googledriver';
 import {TopicHandler} from './model';
 import {seniorPageWrapper} from '../styles/common-styles';
 import {topicsPageContent} from '../styles/topics-page-style';

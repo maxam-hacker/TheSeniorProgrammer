@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Backender} from '../backender';
-import {Googler} from '../gdriver';
+import {Backender} from '../../../connectors/backender';
+import {Googler} from '../../../connectors/googledriver';
 import {PathIcon} from './pathicon';
 import {PathHandler} from './model';
 import {seniorPageWrapper} from '../styles/common-styles';

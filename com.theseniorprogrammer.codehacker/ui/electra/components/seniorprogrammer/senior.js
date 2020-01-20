@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {SeniorContent} from './content';
 import {SeniorLeftMenu} from './leftmenu';
 import {senior} from './styles/common-styles';
-import {Googler} from './gdriver';
+import {Googler} from '../../connectors/googledriver';
 
 
 class Senior extends Component {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {FileView} from './file';
 import {FolderView} from './folder';
 import PathMasterView from '../pathmaster/view';
-import {Googler} from '../../seniorprogrammer/gdriver';
+import {Googler} from '../../../connectors/googledriver';
 
 class Browser extends Component {
 
