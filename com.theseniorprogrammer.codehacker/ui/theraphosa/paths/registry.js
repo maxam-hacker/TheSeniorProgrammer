@@ -69,7 +69,7 @@ define(function(require, exports, module) {
         this.getPathByCall = function(tgtCall) {
             var tgtPath = undefined;
             this.$paths.forEach(path => {
-                if (path.call.equals(tgtCall))
+                if (path.call == tgtCall)
                     tgtPath = path;
             });
             return tgtPath;
@@ -82,6 +82,15 @@ define(function(require, exports, module) {
                     pathList.push(path);
             });
             return pathList;
+        }
+
+        this.getCallsByFile = function(file) {
+            var callsList = []
+            this.$paths.forEach(path => {
+                if (path.call.file === file)
+                    callsList.push(path.call);
+            });
+            return callsList;
         }
 
         this.getAllMarkers = function() {

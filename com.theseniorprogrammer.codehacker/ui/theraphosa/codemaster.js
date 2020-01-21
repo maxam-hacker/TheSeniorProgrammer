@@ -37,22 +37,22 @@ oop.inherits(CodeMaster, Editor);
 
         if (file === undefined || file === "")
             file = this.currentFile;
-        var calls = callsExtractor(file);
+        var paths = this.pathsRegistry.getPathsByFile(file);
 
-        if (calls !== undefined) {
-            calls.forEach(call => {
-                if (row >= call.start.line + deltaY && row <= call.end.line + deltaY &&
-                    column >= call.start.column + deltaX && column <= call.end.column + deltaX)
-                    tgtCall = call;
+        if (paths !== undefined) {
+            paths.forEach(path => {
+                if (row >= path.call.start.line + deltaY && row <= path.call.end.line + deltaY &&
+                    column >= path.call.start.column + deltaX && column <= path.call.end.column + deltaX)
+                    tgtCall = path.call;
             });
         }
 
         if (tgtCall !== undefined) {
-            var callHandler = this.callsRegistry.getHandlerByCall(tgtCall);
-            if (callHandler !== undefined) {
-                if (callHandler.isOpen === true)
+            var path = this.pathsRegistry.getPathByCall(tgtCall);
+            if (path !== undefined) {
+                if (path.isOpen === true)
                     return;
-                callHandler.isOpen = true;
+                    path.isOpen = true;
             }
             this.expandCall(tgtCall, deltaX, deltaY);
         }
@@ -68,7 +68,7 @@ oop.inherits(CodeMaster, Editor);
         var paths = this.pathsRegistry.getPathsByFile(this.currentFile);
         if (paths !== undefined) {
             paths.forEach(path => {
-                var marker = this.session.addMarker(
+                this.session.addMarker(
                     new Range(
                         path.call.start.line, 
                         path.call.start.column, 
@@ -129,7 +129,7 @@ oop.inherits(CodeMaster, Editor);
 
         session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
 
-        var inMethodCalls = callsExtractor(file);
+        var inMethodCalls = this.pathsRegistry.getCallsByFile(path);
         if (inMethodCalls !== undefined) {
             inMethodCalls.forEach(inCall => {
                 if (inCall.start.line >= method.start.line && inCall.end.line <= method.end.line) {
@@ -148,9 +148,9 @@ oop.inherits(CodeMaster, Editor);
             });
         }
 
-        var callHandler = this.callsRegistry.getHandlerByCall(call);
-        if (callHandler !== undefined) {
-            this.session.toggleMarker(callHandler.marker);
+        var path = this.pathsRegistry.getPathByCall(call);
+        if (path !== undefined) {
+            this.session.toggleMarker(path.marker);
         }
     }
         
