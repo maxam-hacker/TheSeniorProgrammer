@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus, BindToTheraphosaEventBus} from '../eventbus';
-import {ingestCall, ingestMethod, ingestPath, initPaths} from '../../../paths';
 import {PathMasterCall} from './callmodel';
 import {PathMasterMethod} from './methodmodel';
 import {Googler} from '../../../connectors/googledriver';

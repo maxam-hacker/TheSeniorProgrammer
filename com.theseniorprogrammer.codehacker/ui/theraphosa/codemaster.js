@@ -2,11 +2,9 @@ define(function(require, exports, module) {
 "use strict";
 
 var Editor = require("./editor").Editor;
-var callsExtractor = require("../electra/paths").getCallsForFile;
 var oop = require("./lib/oop");
 var Expanders = require("./expanders").Expanders;
 var Range = require("./range").Range;
-var CallsRegistry = require("./callsregistry").CallsRegistry;
 var PathsRegistry = require("./paths/registry").PathsRegistry;
 
 
@@ -14,7 +12,6 @@ var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
     this.expanders = new Expanders();
-    this.callsRegistry = new CallsRegistry();
     this.pathsRegistry = new PathsRegistry();
     this.addEventListener('click', this.onMouseClick.bind(this));
 };
