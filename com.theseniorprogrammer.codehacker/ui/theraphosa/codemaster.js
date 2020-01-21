@@ -125,7 +125,7 @@ oop.inherits(CodeMaster, Editor);
 
         text = shiftedLines.join("\n"); 
 
-        session.insert(cursor, text, { call: call, method : method, text: text, path: method.file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursor.row - method.start.line });
+        session.insert(cursor, text, { path: file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursor.row - method.start.line, expansion: true });
 
         var inMethodCalls = this.pathsRegistry.getCallsByFile(path);
         if (inMethodCalls !== undefined) {
@@ -141,7 +141,6 @@ oop.inherits(CodeMaster, Editor);
                         "text",
                         false,
                         "phosa_call-word-enabled", "phosa_call-word-disabled");
-                    this.callsRegistry.add(file, inCall, marker);
                 }
             });
         }
