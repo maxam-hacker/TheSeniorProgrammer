@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 
 class CodeHackerHeader extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.topic = props.topic;
+        this.path = props.path;
+    }
+
     render() {
 
         this.logoPath = React.createElement('path', { className: 'logo-lines', 
@@ -21,7 +28,7 @@ class CodeHackerHeader extends Component {
 
         this.titleSp = React.createElement('span', {className: 'title-senior-programmer'}, 'TheSeniorProgrammer');
         this.titleCh = React.createElement('span', {className: 'title-code-hacker'}, 'CodeHacker :');
-        this.titlePr = React.createElement('span', {className: 'title-project-name'}, 'project-name');
+        this.titlePr = React.createElement('span', {className: 'title-project-name'}, this.topic + ' :: ' + this.path);
         this.titleChWrapper = React.createElement('div', {className: 'title-project-wrapper'}, this.titleCh, this.titlePr);
         this.titleWrapper = React.createElement('div', {className: 'title-wrapper'}, this.titleSp, this.titleChWrapper);
 

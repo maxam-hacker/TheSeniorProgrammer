@@ -21,7 +21,7 @@ class PathIcon extends Component {
         );
 
         this.pathLinkedIcon = React.createElement(
-            Link, {to: '/codehacker/' + this.props.pathObject.pathName + '/' + this.props.pathObject.pathFolderDescriptor + '/' + this.props.pathObject.pathSrcFolderDescriptor, style: pathsLink}, 
+            Link, {to: '/codehacker/' + this.props.topicName + '/' + this.props.pathObject.pathName + '/' + this.props.pathObject.pathFolderDescriptor + '/' + this.props.pathObject.pathSrcFolderDescriptor, style: pathsLink}, 
                 this.pathIcon
         );
 

@@ -62,7 +62,7 @@ class PathsPage extends Component {
         this.pathsContainer = React.createElement(
             'div', {style: pathsPageContent},
                 this.pathList.map((path) => {
-                    return React.createElement(PathIcon, {pathObject: path});
+                    return React.createElement(PathIcon, {pathObject: path, topicName: this.topicName});
                 })
         );
 

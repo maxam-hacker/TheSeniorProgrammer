@@ -11,6 +11,7 @@ class CodeHackerContent extends Component {
     constructor(props) {
         super(props);
         this.topic = props.topic;
+        this.path = props.path;
         this.content = props.content;
         this.src = props.src;
     }
