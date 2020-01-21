@@ -16,7 +16,6 @@ class PathsPage extends Component {
         };
 
         this.pathList = [];
-        console.log(this.props.location);
         this.topicName = this.props.location.pathname.split('/')[2];
         this.topicDescriptor = this.props.location.search.replace('?', '');
 

@@ -7,6 +7,7 @@ var oop = require("./lib/oop");
 var Expanders = require("./expanders").Expanders;
 var Range = require("./range").Range;
 var CallsRegistry = require("./callsregistry").CallsRegistry;
+var PathsRegistry = require("./paths/registry").PathsRegistry;
 
 
 var CodeMaster = function(renderer, session, options) {
@@ -14,6 +15,7 @@ var CodeMaster = function(renderer, session, options) {
     this.currentFile = undefined;
     this.expanders = new Expanders();
     this.callsRegistry = new CallsRegistry();
+    this.pathsRegistry = new PathsRegistry();
     this.addEventListener('click', this.onMouseClick.bind(this));
 };
 oop.inherits(CodeMaster, Editor);
@@ -63,28 +65,27 @@ oop.inherits(CodeMaster, Editor);
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
         this.clearAllMarkers();
-        var calls = callsExtractor(this.currentFile);
-        if (calls !== undefined) {
-            calls.forEach(call => {
+        var paths = this.pathsRegistry.getPathsByFile(this.currentFile);
+        if (paths !== undefined) {
+            paths.forEach(path => {
                 var marker = this.session.addMarker(
                     new Range(
-                        call.start.line, 
-                        call.start.column, 
-                        call.end.line, 
-                        call.end.column), 
+                        path.call.start.line, 
+                        path.call.start.column, 
+                        path.call.end.line, 
+                        path.call.end.column), 
                     "phosa_call-word", 
                     "text",
                     false,
                     "phosa_call-word-enabled", "phosa_call-word-disabled");
-                this.callsRegistry.add(this.currentFile, call, marker);
             });
         }
     };
 
     this.clearAllMarkers = function() {
-        if (this.callsRegistry === undefined)
+        if (this.pathsRegistry === undefined)
             return;
-        var markers = this.callsRegistry.getAllMarkers();
+        var markers = this.pathsRegistry.getAllMarkers();
         markers.forEach(marker => this.session.removeMarker(marker));
     };
 

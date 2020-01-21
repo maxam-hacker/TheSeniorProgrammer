@@ -32,6 +32,7 @@ class BrowserFile {
         this.originalObject = originalObject;
         return this;
     }
+
 }
 
 export {BrowserFile}
