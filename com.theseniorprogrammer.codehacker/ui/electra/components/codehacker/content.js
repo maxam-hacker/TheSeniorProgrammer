@@ -16,14 +16,30 @@ class CodeHackerContent extends Component {
     }
 
     render() {
-
-        this.browser = React.createElement(Browser, { srcFolderDescriptor: this.src, pathFolderDescriptor: this.content });
+        // The editor is in the first place (it's important)
         this.phosa = React.createElement(Theraphosa, { id: '_calls'  });
         this.pathLine = React.createElement(PathMasterLine, {});
-        this.editor = React.createElement('div', {}, this.pathLine, this.phosa);
-        this.content = React.createElement(VerticalSplitter, {}, this.browser, this.editor);
 
-        return React.createElement('div', {className: 'electra-content'}, this.content);
+        this.editorContainer = React.createElement(
+            'div', {}, 
+                this.pathLine, 
+                this.phosa
+        );
+
+        this.browser = React.createElement(Browser, { srcFolderDescriptor: this.src, pathFolderDescriptor: this.content });
+
+        this.codeHacker = React.createElement(
+            VerticalSplitter, {}, 
+                this.browser, 
+                this.editorContainer
+        );
+
+        this.codeHackerWrapper = React.createElement(
+            'div', {className: 'electra-content'}, 
+                this.codeHacker
+        );
+
+        return this.codeHackerWrapper;
     }
 }
 

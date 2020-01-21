@@ -15,7 +15,16 @@ class EventBus {
 
 const BrowserToTheraphosaCallsEventBus = new EventBus();
 const BrowserToTheraphosaMethodsEventBus = new EventBus();
+
+// pathmaster view buttons ---> theraphosa editor
 const CallToTheraphosaEventBus = new EventBus();
 const MethodToTheraphosaEventBus = new EventBus();
+const BindToTheraphosaEventBus = new EventBus();
 
-export {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus, CallToTheraphosaEventBus, MethodToTheraphosaEventBus}
+export {
+    BrowserToTheraphosaCallsEventBus, 
+    BrowserToTheraphosaMethodsEventBus, 
+    CallToTheraphosaEventBus, 
+    MethodToTheraphosaEventBus,
+    BindToTheraphosaEventBus
+}

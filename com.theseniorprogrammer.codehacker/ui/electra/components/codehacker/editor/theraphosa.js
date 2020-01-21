@@ -5,7 +5,7 @@ import Phosa from '../../../../theraphosa/theraphosa';
 import PhosaTheme from '../../../../theraphosa/theme/monokai.js';
 import {Mode} from '../../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus, BrowserToTheraphosaMethodsEventBus} from '../eventbus.js';
-import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus'
+import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus, BindToTheraphosaEventBus} from '../eventbus'
 import {Googler} from '../../../connectors/googledriver';
 import {setCallRegistry} from '../../../paths'
 
@@ -48,9 +48,19 @@ class Theraphosa extends Component {
       callback(this.browserFile, selectedText, selectedRange);
     };
 
+    this.CallAndMethodBinder = function(callback) {
+      var selectedText = this.phosaEditor.getSelectedText();
+      var selectedRange = this.phosaEditor.getSelectionRange();
+      callback(this.browserFile, selectedText, selectedRange);
+    };
+
+    // Event, when a user clicks on a browser file
     BrowserToTheraphosaCallsEventBus.subscribe(this.FileAndFolderClick.bind(this));
+
+    // Events, when a user clicks on call, method, bind buttons of path maser panel.
     CallToTheraphosaEventBus.subscribe(this.CallCreator.bind(this));
     MethodToTheraphosaEventBus.subscribe(this.MethodCreator.bind(this));
+    BindToTheraphosaEventBus.subscribe(this.CallAndMethodBinder.bind(this));
   }
 }
 

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus} from '../eventbus';
+import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus, BindToTheraphosaEventBus} from '../eventbus';
 import {ingestCall, ingestMethod, ingestPath, initPaths} from '../../../paths';
 
 
@@ -42,56 +42,22 @@ export default function PathMasterView(props) {
       CallToTheraphosaEventBus.publish(selectedHandler);
   };
 
-  var callRef = React.createRef();
-
-  const onCallEnter = function(event) {
-    callRef.current.style.stroke = '#2b3ff7de';
-    callRef.current.style.fill = '#2b3ff7de';
-  };
-
-  const onCallLeave = function(event) {
-    callRef.current.style.stroke = '#2b40f7';
-    callRef.current.style.fill = '#2b40f7';
-  };
-
-  var methodRef = React.createRef();
-
-  const onMethodEnter = function(event) {
-    methodRef.current.style.stroke = '#2b3ff7de';
-    methodRef.current.style.fill = '#2b3ff7de';
-  };
-
-  const onMethodLeave = function(event) {
-    methodRef.current.style.stroke = '#2b40f7';
-    methodRef.current.style.fill = '#2b40f7';
-  };
-
-  var bindRef = React.createRef();
-
-  const onBindEnter = function(event) {
-    bindRef.current.style.stroke = '#2b3ff7de';
-    bindRef.current.style.fill = '#2b3ff7de';
-  };
-
-  const onBindLeave = function(event) {
-    bindRef.current.style.stroke = '#2b40f7';
-    bindRef.current.style.fill = '#2b40f7';
-  };
-
   const onMethodClick = function(event) {
-      const selectedHandler = function(browserFile, selectedText, selectedRange) {
-        setMethodBrowserFile(browserFile);
-        setMethodStartRow(selectedRange.start.row);
-        setMethodEndRow(selectedRange.end.row);
-        setMethodStartColumn(selectedRange.start.column);
-        setMethodEndColumn(selectedRange.end.column);
-        setMethodText(selectedText);
-        setMethodInvisible(false);
-      };
-      MethodToTheraphosaEventBus.publish(selectedHandler);
+    const selectedHandler = function(browserFile, selectedText, selectedRange) {
+      setMethodBrowserFile(browserFile);
+      setMethodStartRow(selectedRange.start.row);
+      setMethodEndRow(selectedRange.end.row);
+      setMethodStartColumn(selectedRange.start.column);
+      setMethodEndColumn(selectedRange.end.column);
+      setMethodText(selectedText);
+      setMethodInvisible(false);
+    };
+    MethodToTheraphosaEventBus.publish(selectedHandler);
   };
 
   const onBindClick = function(event) {
+
+    BindToTheraphosaEventBus.publish();
 
     var call = ingestCall(
         callBrowserFile.name, 
@@ -111,6 +77,40 @@ export default function PathMasterView(props) {
 
     setCallInvisible(true);
     setMethodInvisible(true);
+  };
+
+  var callRef = React.createRef();
+  var methodRef = React.createRef();
+  var bindRef = React.createRef();
+
+  const onCallEnter = function(event) {
+    callRef.current.style.stroke = '#2b3ff7de';
+    callRef.current.style.fill = '#2b3ff7de';
+  };
+
+  const onCallLeave = function(event) {
+    callRef.current.style.stroke = '#2b40f7';
+    callRef.current.style.fill = '#2b40f7';
+  };
+
+  const onMethodEnter = function(event) {
+    methodRef.current.style.stroke = '#2b3ff7de';
+    methodRef.current.style.fill = '#2b3ff7de';
+  };
+
+  const onMethodLeave = function(event) {
+    methodRef.current.style.stroke = '#2b40f7';
+    methodRef.current.style.fill = '#2b40f7';
+  };
+
+  const onBindEnter = function(event) {
+    bindRef.current.style.stroke = '#2b3ff7de';
+    bindRef.current.style.fill = '#2b3ff7de';
+  };
+
+  const onBindLeave = function(event) {
+    bindRef.current.style.stroke = '#2b40f7';
+    bindRef.current.style.fill = '#2b40f7';
   };
 
   var callBorderPath = React.createElement('path', { className: 'button-border-line', ref: callRef,
