@@ -12,7 +12,6 @@ class CodeHacker extends Component {
         this.topic = props.match.params.topic;
         this.content = props.match.params.content;
         this.src = props.match.params.src;
-        console.log(this.topic, this.content, this.src);
     }
 
     render() {
