@@ -61,11 +61,11 @@ oop.inherits(CodeMaster, Editor);
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
-        this.clearAllMarkers();
+        this.clearAndCloseExistingPaths();
         var paths = this.pathsRegistry.getPathsByFile(this.currentFile);
         if (paths !== undefined) {
             paths.forEach(path => {
-                this.session.addMarker(
+                path.marker = this.session.addMarker(
                     new Range(
                         path.call.start.line, 
                         path.call.start.column, 
@@ -79,11 +79,12 @@ oop.inherits(CodeMaster, Editor);
         }
     };
 
-    this.clearAllMarkers = function() {
-        if (this.pathsRegistry === undefined)
-            return;
-        var markers = this.pathsRegistry.getAllMarkers();
-        markers.forEach(marker => this.session.removeMarker(marker));
+    this.clearAndCloseExistingPaths = function() {
+        this.pathsRegistry.$paths.forEach(path => {
+            this.session.removeMarker(path.marker)
+            path.marker = 0;
+            path.isOpen = false;
+        });
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
@@ -147,7 +148,7 @@ oop.inherits(CodeMaster, Editor);
 
         var path = this.pathsRegistry.getPathByCall(call);
         if (path !== undefined) {
-            this.session.toggleMarker(path.marker);
+            this.session.removeMarker(path.marker);
         }
     }
         
