@@ -26,34 +26,10 @@ oop.inherits(CodeMaster, Editor);
         var row = cursor.row;
         var column = cursor.column;
 
-        var target = undefined;
-
-        var lineTag = this.session.doc.getTag(row);
-        var file   = lineTag.file;
-        var deltaX = lineTag.deltaX;
-        var deltaY = lineTag.deltaY;
-
-        if (file === undefined || file === "")
-            file = this.currentFile;
-            
-        var paths = this.pathsRegistry.getPathsByFile(file);
-        if (paths !== undefined) {
-            paths.forEach(path => {
-                if (row >= path.call.start.line + deltaY && row <= path.call.end.line + deltaY &&
-                    column >= path.call.start.column + deltaX && column <= path.call.end.column + deltaX)
-                    target = path.call;
-            });
-        }
-
-        if (target !== undefined) {
-            this.callMarkers.forEach(callMarker => {
-                if (callMarker.originalCall == target) {
-                    if (callMarker.isOpen === false) {
-                        callMarker.isOpen = true;
-                        this.expandCall(target, deltaX, deltaY);
-                    }
-                }
-            });
+        var callMarker = CallMarker.checkHit(this.callMarkers, row, column);
+        if (callMarker) {
+            callMarker.hide();
+            this.expandCall(callMarker.originalCall, callMarker.deltaX, callMarker.deltaY);
         }
     };
 
@@ -120,7 +96,7 @@ oop.inherits(CodeMaster, Editor);
         CallMarker.shiftUnderOffsetY(
             this.callMarkers, 
             shiftDownValueForText, 
-            cursorForText.row + shiftDownValueForText
+            cursorForText.row
         );
         
         // Method text was inserted. The text may contain its own calls.

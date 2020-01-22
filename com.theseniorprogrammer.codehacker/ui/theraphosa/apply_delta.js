@@ -95,7 +95,7 @@ exports.applyDelta = function(docLines, delta, doNotValidate, docTags) {
                     for (var idx = 0; idx < lines.length; idx ++)
                         docTags.splice(row, 0, Object.assign({}, delta.tag));
                 }
-                for (var idx = row + lines.length; idx < docLines.length; idx ++) {
+                for (var idx = row + lines.length - 1; idx < docLines.length; idx ++) {
                     if (docTags[idx] != null && docTags[idx].deltaY != null && row > 0)
                         docTags[idx].deltaY += lines.length - 1;
                 }

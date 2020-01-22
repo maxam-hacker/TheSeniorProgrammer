@@ -43,7 +43,7 @@ define(function(require, exports, module) {
         this.endColumn   = -1;
         this.isOpen = false;
         this.deltaX = 0;
-        this.delatY = 0;
+        this.deltaY = 0;
     };
     
     (function() {
@@ -135,17 +135,18 @@ define(function(require, exports, module) {
     };
 
     CallMarker.checkHit = function(callMarkers, row, column) {
+        var result = undefined;
         callMarkers.forEach(callMarker => {
             var rowHit = 
-                row >= callMarker.startLine + callMarker.deltaY && 
-                row <= callMarker.endLine + callMarker.deltaY;
+                row >= callMarker.startLine/* + callMarker.deltaY*/ && 
+                row <= callMarker.endLine/* + callMarker.deltaY*/;
             var columnHit = 
-                column >= callMarker.startColumn + callMarker.deltaX && 
-                column <= callMarker.endColumn + callMarker.deltaX;
-            if (rowHit && columnHit)
-                return true;
+                column >= callMarker.startColumn/* + callMarker.deltaX*/ && 
+                column <= callMarker.endColumn/* + callMarker.deltaX*/;
+            if (rowHit === true && columnHit === true)
+                result = callMarker;
         });
-        return false;
+        return result;
     }
     
     exports.CallMarker = CallMarker;
