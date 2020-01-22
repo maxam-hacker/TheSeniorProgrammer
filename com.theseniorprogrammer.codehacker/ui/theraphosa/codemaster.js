@@ -26,10 +26,10 @@ oop.inherits(CodeMaster, Editor);
         var row = cursor.row;
         var column = cursor.column;
 
-        var callMarker = CallMarker.checkHit(this.callMarkers, row, column);
-        if (callMarker) {
-            callMarker.hide();
-            this.expandCall(callMarker.originalCall, callMarker.deltaX, callMarker.deltaY);
+        var target = CallMarker.checkHit(this.callMarkers, row, column);
+        if (target) {
+            target.hide();
+            this.expandCall(target.originalCall, target.deltaX, target.deltaY);
         }
     };
 
@@ -147,27 +147,6 @@ oop.inherits(CodeMaster, Editor);
             shiftedLines.push(linePrefix + textLines[idx]);
 
         text = shiftedLines.join("\n"); 
-        */
-        //session.insert(cursorForText, text, { file: file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursorForText.row - method.start.line });
-
-        /*
-        var inMethodCalls = this.pathsRegistry.getCallsByFile(path);
-        if (inMethodCalls !== undefined) {
-            inMethodCalls.forEach(inCall => {
-                if (inCall.start.line >= method.start.line && inCall.end.line <= method.end.line) {
-                    var marker = this.session.addMarker(
-                        new Range(
-                            inCall.start.line + cursor.row - method.start.line, 
-                            inCall.start.column + startPoint + deltaPoints, 
-                            inCall.end.line + cursor.row - method.start.line, 
-                            inCall.end.column + startPoint + deltaPoints), 
-                        "phosa_call-word", 
-                        "text",
-                        false,
-                        "phosa_call-word-enabled", "phosa_call-word-disabled");
-                }
-            });
-        }
         */
     }
         
