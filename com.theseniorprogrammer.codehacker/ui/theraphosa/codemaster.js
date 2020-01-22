@@ -4,8 +4,8 @@ define(function(require, exports, module) {
 var Editor = require("./editor").Editor;
 var oop = require("./lib/oop");
 var Expanders = require("./expanders").Expanders;
-var Range = require("./range").Range;
 var PathsRegistry = require("./paths/registry").PathsRegistry;
+var CallMarker = require("./paths/marker").CallMarker;
 
 
 var CodeMaster = function(renderer, session, options) {
@@ -13,6 +13,7 @@ var CodeMaster = function(renderer, session, options) {
     this.currentFile = undefined;
     this.expanders = new Expanders();
     this.pathsRegistry = new PathsRegistry();
+    this.callMarkers = [];
     this.addEventListener('click', this.onMouseClick.bind(this));
 };
 oop.inherits(CodeMaster, Editor);
@@ -34,8 +35,8 @@ oop.inherits(CodeMaster, Editor);
 
         if (file === undefined || file === "")
             file = this.currentFile;
+            
         var paths = this.pathsRegistry.getPathsByFile(file);
-
         if (paths !== undefined) {
             paths.forEach(path => {
                 if (row >= path.call.start.line + deltaY && row <= path.call.end.line + deltaY &&
@@ -45,15 +46,14 @@ oop.inherits(CodeMaster, Editor);
         }
 
         if (target !== undefined) {
-            var path = this.pathsRegistry.getPathByCall(target);
-            if (path !== undefined) {
-                /// The question... how to avoid loop back in the same file
-                /// when a call was alredy open in that file and there is a need to open it again in another place?
-                //if (path.isOpen === true)
-                //    return;
-                path.isOpen = true;
-            }
-            this.expandCall(target, deltaX, deltaY);
+            this.callMarkers.forEach(callMarker => {
+                if (callMarker.originalCall == target) {
+                    if (callMarker.isOpen === false) {
+                        callMarker.isOpen = true;
+                        this.expandCall(target, deltaX, deltaY);
+                    }
+                }
+            });
         }
     };
 
@@ -63,30 +63,20 @@ oop.inherits(CodeMaster, Editor);
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
-        this.clearAndCloseExistingPaths();
+        this.callMarkers.forEach(callMarker => callMarker.hide());
+        this.callMarkers = [];
         var paths = this.pathsRegistry.getPathsByFile(this.currentFile);
         if (paths !== undefined) {
             paths.forEach(path => {
-                path.marker = this.session.addMarker(
-                    new Range(
-                        path.call.start.line, 
-                        path.call.start.column, 
-                        path.call.end.line, 
-                        path.call.end.column), 
-                    "phosa_call-word", 
-                    "text",
-                    false,
-                    "phosa_call-word-enabled", "phosa_call-word-disabled");
+                var callMarker = new CallMarker(this.session);
+                callMarker
+                    .setOriginalCall(path.call)
+                    .setLineParams(path.call.start.line, path.call.end.line)
+                    .setColumnParams(path.call.start.column, path.call.end.column)
+                    .build();
+                this.callMarkers.push(callMarker);
             });
         }
-    };
-
-    this.clearAndCloseExistingPaths = function() {
-        this.pathsRegistry.$paths.forEach(path => {
-            this.session.removeMarker(path.marker)
-            path.marker = 0;
-            path.isOpen = false;
-        });
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
@@ -108,7 +98,8 @@ oop.inherits(CodeMaster, Editor);
         var lastCallDocLine = session.getLine(call.end.line + deltaY);
         var lastCallLine = call.end.line + deltaY;
         var lastCallColumn = call.end.column + deltaX;
-        var shiftValueForText = lastCallColumn + 1;
+        var shiftRightValueForText = lastCallColumn + 1;
+        var shiftDownValueForText = text.split("\n").length;
 
         // We need to insert new string character at the end of last call string, 
         // even if last call column ends not at the end of that string.
@@ -120,10 +111,17 @@ oop.inherits(CodeMaster, Editor);
         /// Setting up column value doesn't work.
         /// So we need to process the text and remember additional shift value.
         var cursorForText = { row: lastCallLine + 1, column: 0};
-        var shifted = shiftText(text, shiftValueForText);
-        var newDeltaX = shiftValueForText;
+        var shifted = shiftText(text, shiftRightValueForText);
+        var newDeltaX = shiftRightValueForText;
         var newDeltaY = cursorForText.row - method.start.line;
         session.insert(cursorForText, shifted, { file: file, deltaX: newDeltaX, deltaY: newDeltaY });
+
+        // Method text was inserted. So we need to shift existing markers. 
+        CallMarker.shiftUnderOffsetY(
+            this.callMarkers, 
+            shiftDownValueForText, 
+            cursorForText.row + shiftDownValueForText
+        );
         
         // Method text was inserted. The text may contain its own calls.
         // So we got additional calls on the page.
@@ -132,24 +130,17 @@ oop.inherits(CodeMaster, Editor);
         if (textCalls !== undefined) {
             textCalls.forEach(textCall => {
                 if (textCall.start.line >= method.start.line && textCall.end.line <= method.end.line) {
-                    var marker = this.session.addMarker(
-                        new Range(
-                            textCall.start.line + newDeltaY, 
-                            textCall.start.column + newDeltaX, 
-                            textCall.end.line + newDeltaY, 
-                            textCall.end.column + newDeltaX), 
-                        "phosa_call-word", 
-                        "text",
-                        false,
-                        "phosa_call-word-enabled", "phosa_call-word-disabled");
+                    var callMarker = new CallMarker(this.session);
+                    callMarker
+                        .setOriginalCall(textCall)
+                        .setLineParams(textCall.start.line + newDeltaY, textCall.end.line + newDeltaY)
+                        .setColumnParams(textCall.start.column + newDeltaX, textCall.end.column + newDeltaX)
+                        .setDeltaX(newDeltaX)
+                        .setDeltaY(newDeltaY)
+                        .build();
+                    this.callMarkers.push(callMarker);
                 }
             });
-        }
-
-        // Remove opened call marker
-        var path = this.pathsRegistry.getPathByCall(call);
-        if (path !== undefined) {
-            //this.session.removeMarker(path.marker);
         }
 
         /*

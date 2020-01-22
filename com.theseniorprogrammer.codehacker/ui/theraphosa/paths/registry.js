@@ -59,9 +59,7 @@ define(function(require, exports, module) {
 
             var path = {
                 file: origCall.browserFile.fullName, 
-                call: call, 
-                marker: marker, 
-                isOpen: false
+                call: call
             };
             this.$paths.push(path);
         }
@@ -92,12 +90,6 @@ define(function(require, exports, module) {
             });
             return callsList;
         }
-
-        this.getAllMarkers = function() {
-            var markers = [];
-            this.$paths.forEach(path => markers.push(path.marker));
-            return markers;
-        };
       
     }).call(PathsRegistry.prototype);
     
