@@ -85,7 +85,7 @@ exports.applyDelta = function(docLines, delta, doNotValidate, docTags) {
             if (lines.length === 1) {
                 docLines[row] = line.substring(0, startColumn) + delta.lines[0] + line.substring(startColumn);
                 if (docTags && delta.tag !== undefined)
-                    docTags[row] = delta.tag;
+                    docTags[row] = Object.assign({}, delta.tag);
             } else {
                 var args = [row, 1].concat(delta.lines);
                 docLines.splice.apply(docLines, args);
@@ -93,11 +93,11 @@ exports.applyDelta = function(docLines, delta, doNotValidate, docTags) {
                 docLines[row + delta.lines.length - 1] += line.substring(startColumn);
                 if (docTags && delta.tag !== undefined) {
                     for (var idx = 0; idx < lines.length; idx ++)
-                        docTags.splice(row, 0, delta.tag);
+                        docTags.splice(row, 0, Object.assign({}, delta.tag));
                 }
-                for (var idx = row + lines.length + 1; idx < docLines.length; idx ++) {
-                    if (docTags[idx] != null && docTags[idx].deltaY != null && lines.length > 2)
-                        docTags[idx].deltaY = lines.length;
+                for (var idx = row + lines.length; idx < docLines.length; idx ++) {
+                    if (docTags[idx] != null && docTags[idx].deltaY != null && row > 0)
+                        docTags[idx].deltaY += lines.length - 1;
                 }
             }
             break;

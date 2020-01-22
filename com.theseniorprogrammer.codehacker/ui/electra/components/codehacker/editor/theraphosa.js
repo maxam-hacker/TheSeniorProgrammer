@@ -28,7 +28,7 @@ class Theraphosa extends Component {
         this.browserFile = browserFile;
         Googler.downloadFile(browserFile.originalObject.id, text => {
           this.phosaEditor.setCurrentFile(browserFile.fullName);
-          this.phosaEditor.setValueWithTag(text.toString(), { path: browserFile.fullName, deltaX: 0, deltaY: 0 });
+          this.phosaEditor.setValueWithTag(text.toString(), { file: browserFile.fullName, deltaX: 0, deltaY: 0 });
         });
     };
 

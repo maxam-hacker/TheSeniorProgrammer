@@ -25,12 +25,12 @@ oop.inherits(CodeMaster, Editor);
         var row = cursor.row;
         var column = cursor.column;
 
-        var tgtCall = undefined;
+        var target = undefined;
 
-        var tag = this.session.doc.getTag(row);
-        var file = tag.path;
-        var deltaX = tag.deltaX;
-        var deltaY = tag.deltaY;
+        var lineTag = this.session.doc.getTag(row);
+        var file   = lineTag.file;
+        var deltaX = lineTag.deltaX;
+        var deltaY = lineTag.deltaY;
 
         if (file === undefined || file === "")
             file = this.currentFile;
@@ -40,18 +40,20 @@ oop.inherits(CodeMaster, Editor);
             paths.forEach(path => {
                 if (row >= path.call.start.line + deltaY && row <= path.call.end.line + deltaY &&
                     column >= path.call.start.column + deltaX && column <= path.call.end.column + deltaX)
-                    tgtCall = path.call;
+                    target = path.call;
             });
         }
 
-        if (tgtCall !== undefined) {
-            var path = this.pathsRegistry.getPathByCall(tgtCall);
+        if (target !== undefined) {
+            var path = this.pathsRegistry.getPathByCall(target);
             if (path !== undefined) {
-                if (path.isOpen === true)
-                    return;
-                    path.isOpen = true;
+                /// The question... how to avoid loop back in the same file
+                /// when a call was alredy open in that file and there is a need to open it again in another place?
+                //if (path.isOpen === true)
+                //    return;
+                path.isOpen = true;
             }
-            this.expandCall(tgtCall, deltaX, deltaY);
+            this.expandCall(target, deltaX, deltaY);
         }
     };
 
@@ -88,16 +90,70 @@ oop.inherits(CodeMaster, Editor);
     };
 
     this.expandCall = function(call, deltaX, deltaY) {
+
+        var shiftText = function(text, shift) {
+            var prefix = ' '.repeat(shift);
+            var lines = text.split("\n");
+            var shifted = [];
+            for (var idx = 0; idx < lines.length; idx ++)
+                shifted.push(prefix + lines[idx]);
+            return shifted.join("\n");
+        }
+
         var method = call.method;
-        var text = method.text;
-        var file = method.file;
+        var text   = method.text;
+        var file   = method.file;
         var session = this.session;
-        var cursor = { row: call.end.line + 1 + deltaY, column: call.end.column + 1};
 
-        var line = session.getLine(call.end.line + deltaY);
-        session.insert({ row: call.end.line + deltaY, column: line.length + 1 }, "\n");
+        var lastCallDocLine = session.getLine(call.end.line + deltaY);
+        var lastCallLine = call.end.line + deltaY;
+        var lastCallColumn = call.end.column + deltaX;
+        var shiftValueForText = lastCallColumn + 1;
 
-        var startPoint = call.start.column + deltaX;
+        // We need to insert new string character at the end of last call string, 
+        // even if last call column ends not at the end of that string.
+        var cursorForEmptyLine = { row: lastCallLine, column: lastCallDocLine.length + 1 };
+        session.insert(cursorForEmptyLine, "\n");
+
+        // Now we are inserting the text in the emty line.
+        /// But before it we need to shift text to rhe right.
+        /// Setting up column value doesn't work.
+        /// So we need to process the text and remember additional shift value.
+        var cursorForText = { row: lastCallLine + 1, column: 0};
+        var shifted = shiftText(text, shiftValueForText);
+        var newDeltaX = shiftValueForText;
+        var newDeltaY = cursorForText.row - method.start.line;
+        session.insert(cursorForText, shifted, { file: file, deltaX: newDeltaX, deltaY: newDeltaY });
+        
+        // Method text was inserted. The text may contain its own calls.
+        // So we got additional calls on the page.
+        // Show them.
+        var textCalls = this.pathsRegistry.getCallsByFile(file);
+        if (textCalls !== undefined) {
+            textCalls.forEach(textCall => {
+                if (textCall.start.line >= method.start.line && textCall.end.line <= method.end.line) {
+                    var marker = this.session.addMarker(
+                        new Range(
+                            textCall.start.line + newDeltaY, 
+                            textCall.start.column + newDeltaX, 
+                            textCall.end.line + newDeltaY, 
+                            textCall.end.column + newDeltaX), 
+                        "phosa_call-word", 
+                        "text",
+                        false,
+                        "phosa_call-word-enabled", "phosa_call-word-disabled");
+                }
+            });
+        }
+
+        // Remove opened call marker
+        var path = this.pathsRegistry.getPathByCall(call);
+        if (path !== undefined) {
+            //this.session.removeMarker(path.marker);
+        }
+
+        /*
+        var startPoint = lastCallColumn;
         var deltaPoints = 4;
 
         var firstLinePrefix = "";
@@ -124,9 +180,10 @@ oop.inherits(CodeMaster, Editor);
             shiftedLines.push(linePrefix + textLines[idx]);
 
         text = shiftedLines.join("\n"); 
+        */
+        //session.insert(cursorForText, text, { file: file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursorForText.row - method.start.line });
 
-        session.insert(cursor, text, { path: file, deltaX: /*deltaX +*/ startPoint + deltaPoints, deltaY: cursor.row - method.start.line, expansion: true });
-
+        /*
         var inMethodCalls = this.pathsRegistry.getCallsByFile(path);
         if (inMethodCalls !== undefined) {
             inMethodCalls.forEach(inCall => {
@@ -144,11 +201,7 @@ oop.inherits(CodeMaster, Editor);
                 }
             });
         }
-
-        var path = this.pathsRegistry.getPathByCall(call);
-        if (path !== undefined) {
-            this.session.removeMarker(path.marker);
-        }
+        */
     }
         
 }).call(CodeMaster.prototype);
