@@ -53,7 +53,7 @@ define(function(require, exports, module) {
         };
     
         this.scrollExpanders = function(config) {
-            dom.translate(this.element, 0, -((config.firstRowScreen * config.lineHeight) % this.canvasHeight) - config.offset * this.$offsetCoefficient);
+            dom.translate(this.element, 0, -((config.firstRowScreen * config.lineHeight)));
         };
 
         this.update = function(config) {
@@ -64,12 +64,12 @@ define(function(require, exports, module) {
             var wrapper = this.dom.createElement("div");
             wrapper.setAttribute('class', 'logo-wrapper');
 
+            var svg = this.dom.createElement("svg", "http://www.w3.org/2000/svg");
+            svg.setAttribute('class', 'logo-svg');
+
             var path = this.dom.createElement("path", "http://www.w3.org/2000/svg");
             path.setAttribute("d", "M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z");
             path.setAttribute('class', 'logo-lines');
-
-            var svg = this.dom.createElement("svg", "http://www.w3.org/2000/svg");
-            svg.setAttribute('class', 'logo-svg');
 
             svg.appendChild(path);
             wrapper.appendChild(svg);
