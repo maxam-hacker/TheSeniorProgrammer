@@ -34,6 +34,7 @@ define(function(require, exports, module) {
     var oop = require("../lib/oop");
     var dom = require("../lib/dom");
     var EventEmitter = require("../lib/event_emitter").EventEmitter;
+    var d3 = require("../../electra/node_modules/d3");
     
     var Expander = function(parentEl) {
         this.dom = dom; 
@@ -60,24 +61,21 @@ define(function(require, exports, module) {
         };
     
         this.$createExpanderElement = function(expander) {
-            var expanderEl = this.dom.createElement("div");
-            expanderEl.className = "ace_expander";
-            this.element.appendChild(expanderEl);
+            var wrapper = this.dom.createElement("div");
+            wrapper.setAttribute('class', 'logo-wrapper');
 
-            
-            var linkPoint1 = React.createElement('path', { className: 'button-image-filled',
-            d: '\
-            M18, 30 \
-            A3, 3, 0 0,1 12 27 \
-            A3, 3, 0 0,1 18 30 \
-            '
-            });
+            var path = this.dom.createElement("path", "http://www.w3.org/2000/svg");
+            path.setAttribute("d", "M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z");
+            path.setAttribute('class', 'logo-lines');
 
-            var svgEl = this.dom.createElement("svg");
-            svgEl.appendChild(linkPoint1);
-            expanderEl.appendChild(svgEl);
+            var svg = this.dom.createElement("svg", "http://www.w3.org/2000/svg");
+            svg.setAttribute('class', 'logo-svg');
+
+            svg.appendChild(path);
+            wrapper.appendChild(svg);
+            this.element.appendChild(wrapper);
             
-            return expanderEl;
+            return wrapper;
         };
 
     }).call(Expander.prototype);
