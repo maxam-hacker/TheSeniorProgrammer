@@ -57,10 +57,10 @@ define(function(require, exports, module) {
         };
 
         this.update = function(config) {
-            this.scrollExpanders(config);
+        
         };
     
-        this.$createExpanderElement = function(expander) {
+        this.$createExpanderElement = function(expander, config, fontMetrics) {
             var wrapper = this.dom.createElement("div");
             wrapper.setAttribute('class', 'logo-wrapper');
 
@@ -68,7 +68,11 @@ define(function(require, exports, module) {
             svg.setAttribute('class', 'logo-svg');
 
             var path = this.dom.createElement("path", "http://www.w3.org/2000/svg");
-            path.setAttribute("d", "M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z");
+            var y0 = expander.start.line * config.lineHeight;
+            var x0 = expander.start.column * 10;
+            var y2 = (expander.start.line + 1) * config.lineHeight;
+            var x2 = expander.start.column * 10;
+            path.setAttribute("d", `M${x0},${y0} L${x2},${y2}`);
             path.setAttribute('class', 'logo-lines');
 
             svg.appendChild(path);

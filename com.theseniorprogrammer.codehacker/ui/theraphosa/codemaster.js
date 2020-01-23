@@ -30,6 +30,7 @@ oop.inherits(CodeMaster, Editor);
         if (target) {
             target.hide();
             this.expandCall(target.originalCall, target.deltaX, target.deltaY);
+            this.session.addCExpanderForCallMarker(target);
         }
     };
 
@@ -118,9 +119,6 @@ oop.inherits(CodeMaster, Editor);
                 }
             });
         }
-
-        // Draw expander
-        this.session.addCallExpander();
     }
         
 }).call(CodeMaster.prototype);

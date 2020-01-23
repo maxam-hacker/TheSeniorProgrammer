@@ -1191,7 +1191,8 @@ var VirtualRenderer = function(container, theme) {
     };
 
     this.updateCallExpanders = function(expander) {
-        expander.element = this.$expanderLayer.$createExpanderElement(expander);
+        if (expander.element === undefined)
+            expander.element = this.$expanderLayer.$createExpanderElement(expander, this.layerConfig, this.$fontMetrics);
         this.$loop.schedule(this.CHANGE_FULL);
     }
 
