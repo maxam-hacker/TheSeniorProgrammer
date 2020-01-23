@@ -919,10 +919,8 @@ var VirtualRenderer = function(container, theme) {
             if (this.$showGutter) {
                 if (changes & this.CHANGE_GUTTER || changes & this.CHANGE_LINES)
                     this.$gutterLayer.update(config);
-                else {
+                else 
                     this.$gutterLayer.scrollLines(config);
-                    this.$expanderLayer.scrollExpanders(config);
-                }
             }
             this.$markerBack.update(config);
             this.$markerFront.update(config);
