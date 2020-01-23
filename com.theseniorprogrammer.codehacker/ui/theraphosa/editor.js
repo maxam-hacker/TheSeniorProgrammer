@@ -313,6 +313,7 @@ Editor.$uid = 0;
             this.session.off("changeBackMarker", this.$onChangeBackMarker);
             this.session.off("changeBreakpoint", this.$onChangeBreakpoint);
             this.session.off("changeAnnotation", this.$onChangeAnnotation);
+            this.session.off("changeCallExpander", this.$onChangeCallExpander);
             this.session.off("changeOverwrite", this.$onCursorChange);
             this.session.off("changeScrollTop", this.$onScrollTopChange);
             this.session.off("changeScrollLeft", this.$onScrollLeftChange);
@@ -357,6 +358,9 @@ Editor.$uid = 0;
     
             this.$onChangeAnnotation = this.onChangeAnnotation.bind(this);
             this.session.on("changeAnnotation", this.$onChangeAnnotation);
+
+            this.$onChangeCallExpander = this.onChangeCallExpander.bind(this);
+            this.session.on("changeCallExpander", this.$onChangeCallExpander);
     
             this.$onCursorChange = this.onCursorChange.bind(this);
             this.session.on("changeOverwrite", this.$onCursorChange);
@@ -841,13 +845,16 @@ Editor.$uid = 0;
         this.renderer.updateBackMarkers();
     };
 
-
     this.onChangeBreakpoint = function() {
         this.renderer.updateBreakpoints();
     };
 
     this.onChangeAnnotation = function() {
         this.renderer.setAnnotations(this.session.getAnnotations());
+    };
+
+    this.onChangeCallExpander = function(expander) {
+        this.renderer.updateCallExpanders(expander);
     };
 
 

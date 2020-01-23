@@ -37,6 +37,7 @@ var config = require("./config");
 var GutterLayer = require("./layer/gutter").Gutter;
 var MarkerLayer = require("./layer/marker").Marker;
 var TextLayer = require("./layer/text").Text;
+var ExpanderLayer = require("./paths/expander").Expander;
 var CursorLayer = require("./layer/cursor").Cursor;
 var HScrollBar = require("./scrollbar").HScrollBar;
 var VScrollBar = require("./scrollbar").VScrollBar;
@@ -95,6 +96,8 @@ var VirtualRenderer = function(container, theme) {
 
     var textLayer = this.$textLayer = new TextLayer(this.content);
     this.canvas = textLayer.element;
+
+    this.$expanderLayer = new ExpanderLayer(this.content);
 
     this.$markerFront = new MarkerLayer(this.content);
 
@@ -251,6 +254,7 @@ var VirtualRenderer = function(container, theme) {
         this.$markerFront.setSession(session);
         this.$gutterLayer.setSession(session);
         this.$textLayer.setSession(session);
+        this.$expanderLayer.setSession(session);
         if (!session)
             return;
         
@@ -1183,6 +1187,11 @@ var VirtualRenderer = function(container, theme) {
         this.$gutterLayer.setAnnotations(annotations);
         this.$loop.schedule(this.CHANGE_GUTTER);
     };
+
+    this.updateCallExpanders = function(expander) {
+        this.$expanderLayer.$createExpanderElement(expander);
+        expander.element = element;
+    }
 
     /**
      *

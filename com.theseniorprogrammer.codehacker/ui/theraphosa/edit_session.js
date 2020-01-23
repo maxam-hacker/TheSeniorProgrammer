@@ -145,6 +145,7 @@ var EditSession = function(text, mode) {
     this.$decorations = [];
     this.$frontMarkers = {};
     this.$backMarkers = {};
+    this.$callExpanders = [];
     this.$markerId = 1;
     this.$undoSelect = true;
 
@@ -748,6 +749,19 @@ EditSession.$uid = 0;
     this.clearAnnotations = function() {
         this.setAnnotations([]);
     };
+
+    this.addCallExpander = function(start, end) {
+        var expander = {
+            start: start,
+            end: end
+        };
+        this.$callExpanders.push(expander);
+        this._signal("changeCallExpander", expander);
+    }
+
+    this.getCallExpanders = function() {
+        return this.$callExpanders;
+    }
 
     /**
      * If `text` contains either the newline (`\n`) or carriage-return ('\r') characters, `$autoNewLine` stores that value.

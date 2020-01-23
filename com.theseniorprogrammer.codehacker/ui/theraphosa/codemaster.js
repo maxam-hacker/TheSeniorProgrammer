@@ -119,35 +119,8 @@ oop.inherits(CodeMaster, Editor);
             });
         }
 
-        /*
-        var startPoint = lastCallColumn;
-        var deltaPoints = 4;
-
-        var firstLinePrefix = "";
-        var linePrefix = "";
-        for (var idx = 0; idx < startPoint; idx ++)
-            firstLinePrefix += " ";
-        for (var idx = 0; idx < startPoint + deltaPoints; idx ++)
-            linePrefix += " ";
-        firstLinePrefix += "<e_corner/>";
-        firstLinePrefix += "<e_menu/>";
-        firstLinePrefix += "<e_line/>";
-        firstLinePrefix += "<e_line/>";
-        firstLinePrefix += "<e_line/>";
-
-        var start = { row: call.end.line + deltaY + 1, column: startPoint };
-        var end = { row: call.end.line + deltaY + 1, column: startPoint + deltaPoints };
-        this.expanders.add(start, end);
-        
-        var textLines = text.split("\n");
-
-        var shiftedLines = [];
-        shiftedLines.push(firstLinePrefix + textLines[0]);
-        for (var idx = 1; idx < textLines.length; idx ++)
-            shiftedLines.push(linePrefix + textLines[idx]);
-
-        text = shiftedLines.join("\n"); 
-        */
+        // Draw expander
+        this.session.addCallExpander();
     }
         
 }).call(CodeMaster.prototype);
