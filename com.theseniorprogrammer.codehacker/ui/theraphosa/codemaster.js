@@ -30,7 +30,7 @@ oop.inherits(CodeMaster, Editor);
         if (target) {
             target.hide();
             this.expandCall(target.originalCall, target.deltaX, target.deltaY);
-            this.session.addCExpanderForCallMarker(target);
+            this.session.addExpanderForCallMarker(target);
         }
     };
 
@@ -40,7 +40,10 @@ oop.inherits(CodeMaster, Editor);
 
     this.setCurrentFile = function(filename) {
         this.currentFile = filename;
-        this.callMarkers.forEach(callMarker => callMarker.hide());
+        this.callMarkers.forEach(callMarker => {
+            callMarker.hide()
+            this.session.deleteExpanderForCallMarker(callMarker);
+        });
         this.callMarkers = [];
         var paths = this.pathsRegistry.getPathsByFile(this.currentFile);
         if (paths !== undefined) {
@@ -94,11 +97,18 @@ oop.inherits(CodeMaster, Editor);
         session.insert(cursorForText, shifted, { file: file, deltaX: newDeltaX, deltaY: newDeltaY });
 
         // Method text was inserted. So we need to shift existing markers. 
+        this.callMarkers.forEach(callMarker => {
+            if (callMarker.shiftUnderOffsetY(shiftDownValueForText, cursorForText.row)) {
+                this.session.shiftExpanderForCallMarker(callMarker);
+            }
+        });
+        /*
         CallMarker.shiftUnderOffsetY(
             this.callMarkers, 
             shiftDownValueForText, 
-            cursorForText.row
-        );
+            cursorForText.row,
+            this.session.shiftExpanderForCallMarker
+        );*/
         
         // Method text was inserted. The text may contain its own calls.
         // So we got additional calls on the page.

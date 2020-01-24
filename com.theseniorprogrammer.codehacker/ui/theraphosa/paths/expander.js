@@ -60,9 +60,7 @@ define(function(require, exports, module) {
         
         };
     
-        this.$createExpanderElement = function(expander, config, fontMetrics) {
-
-            console.log(fontMetrics)
+        this.$createExpanderElement = function(expander, fontMetrics) {
 
             var charWidth = fontMetrics.$characterSize.width;
             var charHeight = fontMetrics.$characterSize.height;
@@ -92,9 +90,19 @@ define(function(require, exports, module) {
             svg.appendChild(path);
             wrapper.appendChild(svg);
             this.element.appendChild(wrapper);
+            expander.domElement = wrapper;
             
             return wrapper;
         };
+
+        this.$shiftExpanderElement = function(expander) {
+
+        }
+
+        this.$removeExpanderElement = function(expander) {
+            this.element.removeChild(expander.domElement);
+            expander.domElement = undefined;
+        }
 
     }).call(Expander.prototype);
     

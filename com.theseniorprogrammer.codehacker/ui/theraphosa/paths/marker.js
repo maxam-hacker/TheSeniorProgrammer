@@ -90,16 +90,22 @@ define(function(require, exports, module) {
         }
 
         this.shiftUnderOffsetY = function(shift, offset) {
-            if (this.marker === undefined)
-                return;
+            var needShow = false;
+            if (this.marker)
+                needShow = true;
 
             if (this.startLine >= offset) {
-                this.hide();
+                if (needShow)
+                    this.hide();
                 this.startLine += shift;
                 this.endLine   += shift;
                 this.incDeltaY(shift);
-                this.show();
+                if (needShow)
+                    this.show();
+                return true;
             }
+
+            return false;
         }
 
         this.setDeltaX = function(delta) {
@@ -119,9 +125,12 @@ define(function(require, exports, module) {
       
     }).call(CallMarker.prototype);
 
-    CallMarker.shiftUnderOffsetY = function(callMarkers, shift, offset) {
+    CallMarker.shiftUnderOffsetY = function(callMarkers, shift, offset, onShift) {
         callMarkers.forEach(callMarker => {
-            callMarker.shiftUnderOffsetY(shift, offset);
+            if (callMarker.shiftUnderOffsetY(shift, offset)) {
+                if (onShift)
+                    onShift(callMarker);
+            }
         });
     }
 

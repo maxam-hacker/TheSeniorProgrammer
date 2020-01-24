@@ -145,7 +145,6 @@ var EditSession = function(text, mode) {
     this.$decorations = [];
     this.$frontMarkers = {};
     this.$backMarkers = {};
-    this.$callExpanders = [];
     this.$markerId = 1;
     this.$undoSelect = true;
 
@@ -750,7 +749,7 @@ EditSession.$uid = 0;
         this.setAnnotations([]);
     };
 
-    this.addCExpanderForCallMarker = function(callMarker) {
+    this.addExpanderForCallMarker = function(callMarker) {
         var expander = {
             start: {
                 line: callMarker.startLine/* + callMarker.deltaY*/, 
@@ -759,14 +758,28 @@ EditSession.$uid = 0;
             end: {
                 line: callMarker.endLine/* + callMarker.deltaY*/, 
                 column: callMarker.endColumn/* + callMarker.deltaX*/
-            }
+            },
+            action: "create"
         };
-        this.$callExpanders.push(expander);
+        callMarker.expander = expander;
         this._signal("changeCallExpander", expander);
     }
 
-    this.getCallExpanders = function() {
-        return this.$callExpanders;
+    this.deleteExpanderForCallMarker = function(callMarker) {
+        var expander = callMarker.expander;
+
+        if (!expander) 
+            return;
+
+        expander.action = "delete";
+        this._signal("changeCallExpander", expander);
+    }
+
+    this.shiftExpanderForCallMarker = function(shiftedCallMarker) {
+        if (!shiftedCallMarker.expander)
+            return;
+        this.deleteExpanderForCallMarker(shiftedCallMarker);
+        this.addExpanderForCallMarker(shiftedCallMarker);
     }
 
     /**
