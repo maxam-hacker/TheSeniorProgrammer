@@ -61,19 +61,33 @@ define(function(require, exports, module) {
         };
     
         this.$createExpanderElement = function(expander, config, fontMetrics) {
+
+            console.log(fontMetrics)
+
+            var charWidth = fontMetrics.$characterSize.width;
+            var charHeight = fontMetrics.$characterSize.height;
+            
+            var y0 = expander.start.line * charHeight;
+            var x0 = expander.start.column * charWidth;
+            var y2 = (expander.start.line + 1) * charHeight;
+            var x2 = expander.end.column * charWidth;
+            var height = y2 - y0;
+            var length = x2 - x0;
+            
             var wrapper = this.dom.createElement("div");
-            wrapper.setAttribute('class', 'logo-wrapper');
+            wrapper.setAttribute('class', 'expander-wrapper');
+            wrapper.style.top = y0 + charHeight;
+            wrapper.style.left = x0 + charWidth;
+            wrapper.style.width = 2 * length;
+            wrapper.style.height = 2 * charHeight;
 
             var svg = this.dom.createElement("svg", "http://www.w3.org/2000/svg");
-            svg.setAttribute('class', 'logo-svg');
+            svg.setAttribute('class', 'expander-svg');
 
             var path = this.dom.createElement("path", "http://www.w3.org/2000/svg");
-            var y0 = expander.start.line * config.lineHeight;
-            var x0 = expander.start.column * 10;
-            var y2 = (expander.start.line + 1) * config.lineHeight;
-            var x2 = expander.start.column * 10;
-            path.setAttribute("d", `M${x0},${y0} L${x2},${y2}`);
-            path.setAttribute('class', 'logo-lines');
+            
+            path.setAttribute("d", `M0,0 L0,${height} L${length},${height}`);
+            path.setAttribute('class', 'expander-lines');
 
             svg.appendChild(path);
             wrapper.appendChild(svg);

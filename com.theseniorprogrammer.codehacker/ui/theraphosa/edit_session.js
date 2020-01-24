@@ -752,8 +752,14 @@ EditSession.$uid = 0;
 
     this.addCExpanderForCallMarker = function(callMarker) {
         var expander = {
-            start: {line: callMarker.startLine, column: callMarker.startColumn},
-            end: {line: callMarker.endLine, column: callMarker.endColumn}
+            start: {
+                line: callMarker.startLine/* + callMarker.deltaY*/, 
+                column: callMarker.startColumn/* + callMarker.deltaX*/
+            },
+            end: {
+                line: callMarker.endLine/* + callMarker.deltaY*/, 
+                column: callMarker.endColumn/* + callMarker.deltaX*/
+            }
         };
         this.$callExpanders.push(expander);
         this._signal("changeCallExpander", expander);
