@@ -40,6 +40,7 @@ define(function(require, exports, module) {
         this.dom = dom; 
         this.element = this.dom.createElement("div");
         this.element.className = "ace_layer ace_expanders-layer";
+        this.element.style.height = '10000000px';
         parentEl.appendChild(this.element);
     };
     
