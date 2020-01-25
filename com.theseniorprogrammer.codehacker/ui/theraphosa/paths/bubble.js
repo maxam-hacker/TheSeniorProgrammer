@@ -54,11 +54,13 @@ define(function(require, exports, module) {
     };
     
     var Bubble = function(container, editor) {
-        this.container = container;
+        //this.container = container;
         this.editor = editor;
+        this.container = this.editor.renderer.$expanderLayer.element;
 
         var el = dom.createElement("div");
-        var bubleEditor = new $singleLineEditor(el);
+        var bubbleEditor = new $singleLineEditor(el);
+        bubbleEditor.setValue("var bubleEditor = new $singleLineEditor(el);\nvar bubleEditor = new $singleLineEditor(el);");
 
         if (this.container)
             this.container.appendChild(el);
