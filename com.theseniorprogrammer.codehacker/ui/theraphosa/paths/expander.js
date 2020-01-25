@@ -35,6 +35,8 @@ define(function(require, exports, module) {
     var dom = require("../lib/dom");
     var EventEmitter = require("../lib/event_emitter").EventEmitter;
     var d3 = require("../../electra/node_modules/d3");
+    var openBubbleCommander = require("./eventbus").OpenBubbleCommander;
+
     
     var Expander = function(parentEl) {
         this.dom = dom; 
@@ -62,6 +64,8 @@ define(function(require, exports, module) {
         };
     
         this.$createExpanderElement = function(expander, fontMetrics) {
+
+            openBubbleCommander.publish(expander);
 
             var charWidth = fontMetrics.$characterSize.width;
             var charHeight = fontMetrics.$characterSize.height;

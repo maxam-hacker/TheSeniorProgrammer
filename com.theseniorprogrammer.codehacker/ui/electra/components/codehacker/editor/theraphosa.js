@@ -6,6 +6,9 @@ import {Mode} from '../../../../theraphosa/mode/javascript.js';
 import {BrowserToTheraphosaCallsEventBus} from '../eventbus.js';
 import {CallToTheraphosaEventBus, MethodToTheraphosaEventBus, BindToTheraphosaEventBus} from '../eventbus'
 import {Googler} from '../../../connectors/googledriver';
+import {VirtualRenderer} from '../../../../theraphosa/virtual_renderer';
+import {OpenBubbleCommander} from '../../../../theraphosa/paths/eventbus';
+import {Bubbler} from '../../../../theraphosa/paths/bubbler';
 
 
 class Theraphosa extends Component {
@@ -23,6 +26,12 @@ class Theraphosa extends Component {
     this.phosaEditor = Phosa.edit(element);
     this.phosaEditor.setTheme(PhosaTheme);
     this.phosaEditor.getSession().setMode(new Mode());
+    
+    Bubbler.setEditor(this.phosaEditor).setContainer(document.body);
+
+    OpenBubbleCommander.subscribe(args => {
+      Bubbler.openFor(args);
+    });
 
     this.FileAndFolderClick = function(browserFile) {
         this.browserFile = browserFile;

@@ -3,7 +3,6 @@ define(function(require, exports, module) {
 
 var Editor = require("./editor").Editor;
 var oop = require("./lib/oop");
-var Expanders = require("./expanders").Expanders;
 var PathsRegistry = require("./paths/registry").PathsRegistry;
 var CallMarker = require("./paths/marker").CallMarker;
 
@@ -11,7 +10,6 @@ var CallMarker = require("./paths/marker").CallMarker;
 var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
-    this.expanders = new Expanders();
     this.pathsRegistry = new PathsRegistry();
     this.callMarkers = [];
     this.addEventListener('click', this.onMouseClick.bind(this));

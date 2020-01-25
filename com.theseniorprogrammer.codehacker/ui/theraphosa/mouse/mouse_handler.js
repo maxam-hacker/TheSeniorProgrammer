@@ -35,7 +35,6 @@ var event = require("../lib/event");
 var useragent = require("../lib/useragent");
 var DefaultHandlers = require("./default_handlers").DefaultHandlers;
 var DefaultGutterHandler = require("./default_gutter_handler").GutterHandler;
-var ExpanderHandler = require("./expander_handler").ExpanderHandler;
 var MouseEvent = require("./mouse_event").MouseEvent;
 var DragdropHandler = require("./dragdrop_handler").DragdropHandler;
 var addTouchListeners = require("./touch_handler").addTouchListeners;
@@ -45,7 +44,6 @@ var MouseHandler = function(editor) {
     var _self = this;
     this.editor = editor;
 
-    new ExpanderHandler(this);
     new DefaultHandlers(this);
     new DefaultGutterHandler(this);
     new DragdropHandler(this);
