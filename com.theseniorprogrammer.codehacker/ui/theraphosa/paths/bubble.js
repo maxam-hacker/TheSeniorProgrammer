@@ -34,29 +34,28 @@ define(function(require, exports, module) {
     var Editor = require("../codemaster").CodeMaster;
     var Renderer = require("../virtual_renderer").VirtualRenderer;
     var dom = require("../lib/dom");
+    var EditSession = require("../edit_session").EditSession;
+    var UndoManager = require("../undomanager").UndoManager;
+    var Mode =require("../mode/javascript").Mode;
 
     var $singleLineEditor = function(el) {
         var renderer = new Renderer(el);
     
         renderer.$maxLines = 4;
+        renderer.$keepTextAreaAtCursor = true;
+
+        var doc = new EditSession("", new Mode());
+        doc.setUndoManager(new UndoManager());
     
-        var editor = new Editor(renderer);
-    
-        editor.setHighlightActiveLine(false);
-        editor.setShowPrintMargin(false);
-        editor.renderer.setShowGutter(false);
-        editor.renderer.setHighlightGutterLine(false);
-    
-        editor.$mouseHandler.$focusTimeout = 0;
-        editor.$highlightTagPending = true;
+        var editor = new Editor(renderer, doc);
     
         return editor;
     };
     
     var Bubble = function(container, editor) {
-        //this.container = container;
+        this.container = container;
         this.editor = editor;
-        this.container = this.editor.renderer.$expanderLayer.element;
+        //this.container = this.editor.renderer.$expanderLayer.element;
 
         var el = dom.createElement("div");
         var bubbleEditor = new $singleLineEditor(el);

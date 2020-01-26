@@ -18,7 +18,15 @@ class Theraphosa extends Component {
   }
 
   render() {
-    return React.createElement('div', { id: 'editor' + this.props.id });
+    this.bubbles = React.createElement('div', { id: 'bubbles' + this.props.id });
+    this.editor = React.createElement('div', { id: 'editor' + this.props.id });
+    this.container = React.createElement(
+      'div', {},
+        this.bubbles,
+        this.editor 
+    );
+
+    return this.container;
   }
 
   componentDidMount() {
@@ -27,7 +35,7 @@ class Theraphosa extends Component {
     this.phosaEditor.setTheme(PhosaTheme);
     this.phosaEditor.getSession().setMode(new Mode());
     
-    Bubbler.setEditor(this.phosaEditor).setContainer(document.body);
+    Bubbler.setEditor(this.phosaEditor).setContainer(document.getElementById('bubbles' + this.props.id));
 
     OpenBubbleCommander.subscribe(args => {
       Bubbler.openFor(args);
