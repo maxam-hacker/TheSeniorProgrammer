@@ -52,18 +52,31 @@ define(function(require, exports, module) {
         return editor;
     };
     
-    var Bubble = function(container, editor) {
+    var Bubble = function(container, editor, expander) {
         this.container = container;
         this.editor = editor;
-        //this.container = this.editor.renderer.$expanderLayer.element;
 
         var el = dom.createElement("div");
-        var bubbleEditor = new $singleLineEditor(el);
-        bubbleEditor.renderer.setStyle("ace_autocomplete");
-        bubbleEditor.setValue("var bubleEditor = new $singleLineEditor(el);\nvar bubleEditor = new $singleLineEditor(el);");
-
         if (this.container)
             this.container.appendChild(el);
+
+        var bubbleEditor = new $singleLineEditor(el);
+        
+        bubbleEditor.renderer.setStyle("ace_autocomplete");
+
+        console.log(expander.event);
+
+        //var x = expander.event.x;
+        //var y = expander.event.y;
+        //el.style.top = `${y}px`;
+        //el.style.left = `${x}px`;
+
+        var x = expander.x2 + expander.event.domEvent.pageX;
+        var y = expander.y2 + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY);
+        dom.setStyle(el.style, "left", `${x}px`);
+        dom.setStyle(el.style, "top", `${y}px`);
+
+        bubbleEditor.setValue("var bubleEditor = new $singleLineEditor(el);\nvar bubleEditor = new $singleLineEditor(el);");
     };
     
     (function() {

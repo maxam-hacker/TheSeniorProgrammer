@@ -30,7 +30,9 @@ class Theraphosa extends Component {
   }
 
   componentDidMount() {
+    
     var element = document.getElementById('editor' + this.props.id);
+
     this.phosaEditor = Phosa.edit(element);
     this.phosaEditor.setTheme(PhosaTheme);
     this.phosaEditor.getSession().setMode(new Mode());

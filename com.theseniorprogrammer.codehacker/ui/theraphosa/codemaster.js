@@ -28,7 +28,7 @@ oop.inherits(CodeMaster, Editor);
         if (target) {
             target.hide();
             this.expandCall(target.originalCall, target.deltaX, target.deltaY);
-            this.session.addExpanderForCallMarker(target);
+            this.session.addExpanderForCallMarker(target, event);
         }
     };
 

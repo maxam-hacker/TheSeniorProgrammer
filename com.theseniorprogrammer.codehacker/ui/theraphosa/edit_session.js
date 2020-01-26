@@ -749,17 +749,18 @@ EditSession.$uid = 0;
         this.setAnnotations([]);
     };
 
-    this.addExpanderForCallMarker = function(callMarker) {
+    this.addExpanderForCallMarker = function(callMarker, event) {
         var expander = {
             start: {
-                line: callMarker.startLine/* + callMarker.deltaY*/, 
-                column: callMarker.startColumn/* + callMarker.deltaX*/
+                line: callMarker.startLine, 
+                column: callMarker.startColumn
             },
             end: {
-                line: callMarker.endLine/* + callMarker.deltaY*/, 
-                column: callMarker.endColumn/* + callMarker.deltaX*/
+                line: callMarker.endLine, 
+                column: callMarker.endColumn
             },
-            action: "create"
+            action: "create",
+            event: event
         };
         callMarker.expander = expander;
         this._signal("changeCallExpander", expander);

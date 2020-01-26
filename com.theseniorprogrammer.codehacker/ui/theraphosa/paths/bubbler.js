@@ -51,8 +51,8 @@ define(function(require, exports, module) {
             return this;
         }
 
-        this.openFor = function(args) {
-            var bubble = new Bubble(this.container, this.editor);
+        this.openFor = function(expander) {
+            var bubble = new Bubble(this.container, this.editor, expander);
             this.bubbles.push(bubble);
             return this;
         }
