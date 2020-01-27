@@ -39,7 +39,7 @@ define(function(require, exports, module) {
     var Mode =require("../mode/javascript").Mode;
     var event = require("../lib/event");
 
-    var $singleLineEditor = function(el) {
+    var BubbleEditor = function(el) {
         var renderer = new Renderer(el);
     
         renderer.$maxLines = 16;
@@ -75,19 +75,43 @@ define(function(require, exports, module) {
         this.container = container;
         this.editor = editor;
 
-        var el = dom.createElement("div");
+        var bubbleElem = dom.createElement("div");
         if (this.container)
-            this.container.appendChild(el);
+            this.container.appendChild(bubbleElem);
 
-        var bubbleEditor = new $singleLineEditor(el);
+        /*
+        #container-border {
+            border-width: 2px;
+            border-color: red;
+            border-style: dashed;
+        }
+        */
+
+        var headerElem = dom.createElement("div");
+        bubbleElem.appendChild(headerElem);
+        dom.setStyle(headerElem.style, "height", "30px");
+        dom.setStyle(headerElem.style, "width", "300px");
+
+        headerElem.appendChild(dom.createTextNode("Path Master Line", headerElem));
+
+        var editorElem = dom.createElement("div");
+        //bubbleElem.appendChild(editorElem);
+
+        var bubbleEditor = new BubbleEditor(editorElem);
         bubbleEditor.renderer.setStyle("ace_autocomplete");
 
-        var x = expander.x2 + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX);
-        var y = expander.y2 + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY);
-        dom.setStyle(el.style, "left", `${x}px`);
-        dom.setStyle(el.style, "top", `${y}px`);
+        var x = expander.x2/* + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX)*/;
+        var y = expander.y2/* + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY)*/;
 
-        bubbleEditor.setValue("var bubleEditor = new $singleLineEditor(el);\nvar bubleEditor = new $singleLineEditor(el);");
+        dom.setStyle(bubbleElem.style, "position", "absolute");
+        dom.setStyle(bubbleElem.style, "left", `${x}px`);
+        dom.setStyle(bubbleElem.style, "top", `${y}px`);
+
+        bubbleEditor.setValue(
+            `var bubleEditor = new $singleLineEditor(el);\n
+            var bubleEditor = new $singleLineEditor(el);\n
+            var bubleEditor = new $singleLineEditor(el);\n
+            var bubleEditor = new $singleLineEditor(el);`);
     };
     
     (function() {

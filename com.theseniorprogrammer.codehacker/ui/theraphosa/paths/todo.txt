@@ -1,0 +1,13 @@
+Expanders:
+
+    1. To show method in a separate bubble window;
+
+    2. Header for bubble windows;
+        - cross field;
+        - path master line;
+
+    3. Can mov bubble windows;
+
+    4. Can resize bubble windows;
+
+    5. Can scroll bubble windows;
