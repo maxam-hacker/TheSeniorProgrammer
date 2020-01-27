@@ -41,7 +41,7 @@ define(function(require, exports, module) {
     var $singleLineEditor = function(el) {
         var renderer = new Renderer(el);
     
-        renderer.$maxLines = 4;
+        renderer.$maxLines = 21;
         renderer.$keepTextAreaAtCursor = true;
 
         var doc = new EditSession("", new Mode());
@@ -61,17 +61,7 @@ define(function(require, exports, module) {
             this.container.appendChild(el);
 
         var bubbleEditor = new $singleLineEditor(el);
-        
         bubbleEditor.renderer.setStyle("ace_autocomplete");
-
-        console.log(expander.event);
-        console.log(this.container);
-        console.log(el);
-
-        //var x = expander.event.x;
-        //var y = expander.event.y;
-        //el.style.top = `${y}px`;
-        //el.style.left = `${x}px`;
 
         var x = expander.x2 + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX);
         var y = expander.y2 + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY);
