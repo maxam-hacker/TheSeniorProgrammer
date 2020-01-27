@@ -37,17 +37,36 @@ define(function(require, exports, module) {
     var EditSession = require("../edit_session").EditSession;
     var UndoManager = require("../undomanager").UndoManager;
     var Mode =require("../mode/javascript").Mode;
+    var event = require("../lib/event");
 
     var $singleLineEditor = function(el) {
         var renderer = new Renderer(el);
     
-        renderer.$maxLines = 21;
+        renderer.$maxLines = 16;
         renderer.$keepTextAreaAtCursor = true;
 
         var doc = new EditSession("", new Mode());
         doc.setUndoManager(new UndoManager());
     
         var editor = new Editor(renderer, doc);
+
+        var env = {
+            document: doc,
+            editor: editor,
+            onResize: editor.resize.bind(editor, null)
+        };
+        window.addEventListener("resize", env.onResize);
+        editor.container.env = editor.env = env;
+
+        const resizeObserver = new ResizeObserver(entries => {
+            for (var entry of entries) {
+                renderer.$maxLines = undefined;
+                env.onResize();
+            }
+        });
+
+        resizeObserver.observe(el);
+        
     
         return editor;
     };
