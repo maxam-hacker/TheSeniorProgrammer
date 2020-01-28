@@ -67,48 +67,86 @@ define(function(require, exports, module) {
         this.container = container;
         this.editor = editor;
 
-        var bubbleElem = dom.createElement("div");
-        var headerElem = dom.createElement("div");
-        var editorElem = dom.createElement("div");
-        var footerElem = dom.createElement("div");
+        this.bubbleElem = dom.createElement("div");
+        this.headerElem = dom.createElement("div");
+        this.editorElem = dom.createElement("div");
+        this.footerElem = dom.createElement("div");
 
-        bubbleElem.appendChild(headerElem);
-        bubbleElem.appendChild(editorElem);
-        bubbleElem.appendChild(footerElem);
-        this.container.appendChild(bubbleElem);
+        this.bubbleElem.appendChild(this.headerElem);
+        this.bubbleElem.appendChild(this.editorElem);
+        this.bubbleElem.appendChild(this.footerElem);
+        this.container.appendChild(this.bubbleElem);
 
-        dom.addCssClass(bubbleElem, "bubble-wrapper");
-        dom.addCssClass(headerElem, "bubble-header");
-        dom.addCssClass(footerElem, "bubble-footer");
-        dom.setStyle(editorElem.style, "position", "relative");
+        dom.addCssClass(this.bubbleElem, "bubble-wrapper");
+        dom.addCssClass(this.headerElem, "bubble-header");
+        dom.addCssClass(this.footerElem, "bubble-footer");
+        dom.setStyle(this.editorElem.style, "position", "relative");
 
-        var bubbleEditor = new BubbleEditor(editorElem);
-        bubbleEditor.renderer.setStyle("ace_autocomplete");
-        bubbleEditor.renderer.setMargin(0, 15, 0, 15);
-        dom.setStyle(bubbleEditor.renderer.container.style, "resize", "both");
-        dom.setStyle(bubbleEditor.renderer.$gutter.style, "margin-bottom", "15px");
-        dom.setStyle(bubbleEditor.renderer.scroller.style, "margin-bottom", "15px");
-        dom.setStyle(bubbleEditor.renderer.scrollBarV.element.style, "margin-bottom", "15px");
-        dom.setStyle(bubbleEditor.renderer.scrollBarH.element.style, "margin-right",  "15px");
+        this.bubbleEditor = new BubbleEditor(this.editorElem);
+        this.bubbleEditor.renderer.setStyle("ace_autocomplete");
+        this.bubbleEditor.renderer.setMargin(0, 15, 0, 15);
+        dom.setStyle(this.bubbleEditor.renderer.container.style, "resize", "both");
+        dom.setStyle(this.bubbleEditor.renderer.$gutter.style, "margin-bottom", "15px");
+        dom.setStyle(this.bubbleEditor.renderer.scroller.style, "margin-bottom", "15px");
+        dom.setStyle(this.bubbleEditor.renderer.scrollBarV.element.style, "margin-bottom", "15px");
+        dom.setStyle(this.bubbleEditor.renderer.scrollBarH.element.style, "margin-right",  "15px");
 
-        headerElem.appendChild(dom.createTextNode("Path Master Line", headerElem));
+        this.headerElem.appendChild(dom.createTextNode("Path Master Line", this.headerElem));
 
         //var x = expander.x2 + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX);
         //var y = expander.y2 + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY);
         var x = expander.x2;
         var y = expander.y2;
-        dom.setStyle(bubbleElem.style, "position", "absolute");
-        dom.setStyle(bubbleElem.style, "left", `${x}px`);
-        dom.setStyle(bubbleElem.style, "top", `${y}px`);
+        dom.setStyle(this.bubbleElem.style, "position", "absolute");
+        dom.setStyle(this.bubbleElem.style, "left", `${x}px`);
+        dom.setStyle(this.bubbleElem.style, "top", `${y}px`);
 
-        bubbleEditor.setValue(
+        this.bubbleEditor.setValue(
             `var bubleEditor = new $singleLineEditor(el);\n
             var bubleEditor = new $singleLineEditor(el);\n
             var bubleEditor = new $singleLineEditor(el);\n
             var bubleEditor = new $singleLineEditor(el);`);
+
+        event.addListener(this.headerElem, "mousedown", this.onHeaderMouseDown.bind(this));
+        event.addListener(this.headerElem, "mouseup", this.onHeaderMouseUpOrLeave.bind(this));
+        event.addListener(this.headerElem, "mouseleave", this.onHeaderMouseUpOrLeave.bind(this));
+        event.addListener(this.headerElem, "mousemove", this.onHeaderMouseMove.bind(this));
+        
+        this.mouseCaptured = false;
+        this.currentX = 0;
+        this.currentY = 0;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.oldTranslateX = 0;
+        this.oldTranslateY = 0;
     };
     
     (function() {
+
+        this.onHeaderMouseDown = function(e) {
+            this.mouseCaptured = true;
+            this.currentX = e.clientX;
+            this.currentY = e.clientY;
+            this.oldTranslateX = this.translateX;
+            this.oldTranslateY = this.translateY;
+            event.stopEvent(e);
+        }
+
+        this.onHeaderMouseUpOrLeave = function(e) {
+            this.mouseCaptured = false;
+            event.stopEvent(e);
+        }
+
+        this.onHeaderMouseMove = function(e) {
+            if (this.mouseCaptured) {
+                var deltaX = this.oldTranslateX - this.currentX + e.clientX;
+                var deltaY = this.oldTranslateY - this.currentY + e.clientY;
+                dom.translate(this.bubbleElem, deltaX, deltaY);
+                this.translateX = deltaX;
+                this.translateY = deltaY;
+            }
+            event.stopEvent(e);
+        }
 
         this.show = function() {
 
