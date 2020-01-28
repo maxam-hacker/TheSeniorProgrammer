@@ -39,6 +39,7 @@ define(function(require, exports, module) {
     var Mode =require("../mode/javascript").Mode;
     var event = require("../lib/event");
 
+
     var BubbleEditor = function(el) {
         var renderer = new Renderer(el);
     
@@ -47,27 +48,18 @@ define(function(require, exports, module) {
 
         var doc = new EditSession("", new Mode());
         doc.setUndoManager(new UndoManager());
-    
         var editor = new Editor(renderer, doc);
 
-        var env = {
-            document: doc,
-            editor: editor,
-            onResize: editor.resize.bind(editor, null)
-        };
-        window.addEventListener("resize", env.onResize);
-        editor.container.env = editor.env = env;
+        this.onResize = editor.resize.bind(editor, null)
 
-        const resizeObserver = new ResizeObserver(entries => {
-            for (var entry of entries) {
+        this.resizeObserver = new ResizeObserver(entries => {
+            entries.forEach(entry => {
                 renderer.$maxLines = undefined;
-                env.onResize();
-            }
+                this.onResize();
+            })
         });
-
-        resizeObserver.observe(el);
+        this.resizeObserver.observe(el);
         
-    
         return editor;
     };
     
@@ -76,33 +68,35 @@ define(function(require, exports, module) {
         this.editor = editor;
 
         var bubbleElem = dom.createElement("div");
-        if (this.container)
-            this.container.appendChild(bubbleElem);
-
-        /*
-        #container-border {
-            border-width: 2px;
-            border-color: red;
-            border-style: dashed;
-        }
-        */
-
         var headerElem = dom.createElement("div");
-        bubbleElem.appendChild(headerElem);
-        dom.setStyle(headerElem.style, "height", "30px");
-        dom.setStyle(headerElem.style, "width", "300px");
-
-        headerElem.appendChild(dom.createTextNode("Path Master Line", headerElem));
-
         var editorElem = dom.createElement("div");
-        //bubbleElem.appendChild(editorElem);
+        var footerElem = dom.createElement("div");
+
+        bubbleElem.appendChild(headerElem);
+        bubbleElem.appendChild(editorElem);
+        bubbleElem.appendChild(footerElem);
+        this.container.appendChild(bubbleElem);
+
+        dom.addCssClass(bubbleElem, "bubble-wrapper");
+        dom.addCssClass(headerElem, "bubble-header");
+        dom.addCssClass(footerElem, "bubble-footer");
+        dom.setStyle(editorElem.style, "position", "relative");
 
         var bubbleEditor = new BubbleEditor(editorElem);
         bubbleEditor.renderer.setStyle("ace_autocomplete");
+        bubbleEditor.renderer.setMargin(0, 15, 0, 15);
+        dom.setStyle(bubbleEditor.renderer.container.style, "resize", "both");
+        dom.setStyle(bubbleEditor.renderer.$gutter.style, "margin-bottom", "15px");
+        dom.setStyle(bubbleEditor.renderer.scroller.style, "margin-bottom", "15px");
+        dom.setStyle(bubbleEditor.renderer.scrollBarV.element.style, "margin-bottom", "15px");
+        dom.setStyle(bubbleEditor.renderer.scrollBarH.element.style, "margin-right",  "15px");
 
-        var x = expander.x2/* + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX)*/;
-        var y = expander.y2/* + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY)*/;
+        headerElem.appendChild(dom.createTextNode("Path Master Line", headerElem));
 
+        //var x = expander.x2 + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX);
+        //var y = expander.y2 + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY);
+        var x = expander.x2;
+        var y = expander.y2;
         dom.setStyle(bubbleElem.style, "position", "absolute");
         dom.setStyle(bubbleElem.style, "left", `${x}px`);
         dom.setStyle(bubbleElem.style, "top", `${y}px`);
