@@ -32,6 +32,7 @@ define(function(require, exports, module) {
     "use strict";
 
     var Bubble = require("./bubble").Bubble;
+    var dom = require("../lib/dom");
     
     var Bubbler = function() {
         this.bubbles = [];
@@ -48,6 +49,7 @@ define(function(require, exports, module) {
 
         this.setContainer = function(element) {
             this.container = element;
+            dom.addCssClass(this.container, "bubbles-container");
             return this;
         }
 

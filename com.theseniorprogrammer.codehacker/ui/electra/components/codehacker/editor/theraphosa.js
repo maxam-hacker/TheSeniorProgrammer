@@ -38,6 +38,7 @@ class Theraphosa extends Component {
     this.phosaEditor.getSession().setMode(new Mode());
     
     Bubbler.setEditor(this.phosaEditor).setContainer(document.getElementById('bubbles' + this.props.id));
+    this.phosaEditor.renderer.bubbler = Bubbler;
 
     OpenBubbleCommander.subscribe(args => {
       Bubbler.openFor(args);

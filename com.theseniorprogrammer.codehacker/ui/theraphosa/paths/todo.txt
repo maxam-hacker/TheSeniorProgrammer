@@ -6,8 +6,8 @@ Expanders:
         - cross field;
         - path master line;
 
-    3. Can mov bubble windows;
+    3. Can mov bubble windows; +
 
-    4. Can resize bubble windows;
+    4. Can resize bubble windows; +
 
-    5. Can scroll bubble windows;
+    5. Can scroll bubble windows; +

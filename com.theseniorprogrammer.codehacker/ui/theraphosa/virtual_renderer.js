@@ -878,6 +878,8 @@ var VirtualRenderer = function(container, theme) {
                 this.$updateScrollBarH();
             
             dom.translate(this.content, -this.scrollLeft, -config.offset);
+            if (this.bubbler)
+                dom.translate(this.bubbler.container, -this.scrollLeft, -this.scrollTop); // like this.content
             
             var width = config.width + 2 * this.$padding + "px";
             var height = config.minHeight + "px";
@@ -889,6 +891,8 @@ var VirtualRenderer = function(container, theme) {
         // horizontal scrolling
         if (changes & this.CHANGE_H_SCROLL) {
             dom.translate(this.content, -this.scrollLeft, -config.offset);
+            if (this.bubbler)
+                dom.translate(this.bubbler.container, -this.scrollLeft, -this.scrollTop); // like this.content
             this.scroller.className = this.scrollLeft <= 0 ? "ace_scroller" : "ace_scroller ace_scroll-left";
         }
 

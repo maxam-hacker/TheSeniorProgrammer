@@ -58,10 +58,6 @@ define(function(require, exports, module) {
         this.scrollExpanders = function(config) {
             dom.translate(this.element, 0, -((config.firstRowScreen * config.lineHeight)));
         };
-
-        this.update = function(config) {
-        
-        };
     
         this.$createExpanderElement = function(expander, fontMetrics) {
 
