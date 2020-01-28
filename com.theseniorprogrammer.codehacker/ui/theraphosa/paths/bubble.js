@@ -107,10 +107,10 @@ define(function(require, exports, module) {
             var bubleEditor = new $singleLineEditor(el);\n
             var bubleEditor = new $singleLineEditor(el);`);
 
+        this.theMainElem = document.getElementById("mainContainer");
         event.addListener(this.headerElem, "mousedown", this.onHeaderMouseDown.bind(this));
-        event.addListener(this.headerElem, "mouseup", this.onHeaderMouseUpOrLeave.bind(this));
-        event.addListener(this.headerElem, "mouseleave", this.onHeaderMouseUpOrLeave.bind(this));
-        event.addListener(this.headerElem, "mousemove", this.onHeaderMouseMove.bind(this));
+        event.addListener(this.theMainElem, "mouseup", this.onHeaderMouseUp.bind(this));
+        event.addListener(this.theMainElem, "mousemove", this.onHeaderMouseMove.bind(this));
         
         this.mouseCaptured = false;
         this.currentX = 0;
@@ -132,7 +132,7 @@ define(function(require, exports, module) {
             event.stopEvent(e);
         }
 
-        this.onHeaderMouseUpOrLeave = function(e) {
+        this.onHeaderMouseUp = function(e) {
             this.mouseCaptured = false;
             event.stopEvent(e);
         }
