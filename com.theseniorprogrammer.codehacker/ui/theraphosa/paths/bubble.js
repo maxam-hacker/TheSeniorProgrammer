@@ -40,11 +40,10 @@ define(function(require, exports, module) {
     var event = require("../lib/event");
 
 
-    var BubbleEditor = function(el) {
+    var BubbleEditor = function(el, maxLines) {
         var renderer = new Renderer(el);
     
-        renderer.$maxLines = 16;
-        renderer.$keepTextAreaAtCursor = true;
+        renderer.$maxLines = maxLines;
 
         var doc = new EditSession("", new Mode());
         doc.setUndoManager(new UndoManager());
@@ -66,6 +65,7 @@ define(function(require, exports, module) {
     var Bubble = function(container, editor, expander) {
         this.container = container;
         this.editor = editor;
+        this.text = expander.callMarker.originalCall.method.text;
 
         this.bubbleElem = dom.createElement("div");
         this.headerElem = dom.createElement("div");
@@ -82,7 +82,7 @@ define(function(require, exports, module) {
         dom.addCssClass(this.footerElem, "bubble-footer");
         dom.setStyle(this.editorElem.style, "position", "relative");
 
-        this.bubbleEditor = new BubbleEditor(this.editorElem);
+        this.bubbleEditor = new BubbleEditor(this.editorElem, this.text.split("\n").length);
         this.bubbleEditor.renderer.setStyle("ace_autocomplete");
         this.bubbleEditor.renderer.setMargin(0, 15, 0, 15);
         dom.setStyle(this.bubbleEditor.renderer.container.style, "resize", "both");
@@ -101,7 +101,7 @@ define(function(require, exports, module) {
         dom.setStyle(this.bubbleElem.style, "left", `${x}px`);
         dom.setStyle(this.bubbleElem.style, "top", `${y}px`);
 
-        this.bubbleEditor.setValue(expander.callMarker.originalCall.method.text);
+        this.bubbleEditor.setValue(this.text);
 
         this.theMainElem = document.getElementById("mainContainer");
         event.addListener(this.headerElem, "mousedown", this.onHeaderMouseDown.bind(this));
