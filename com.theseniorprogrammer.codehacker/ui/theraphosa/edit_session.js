@@ -760,7 +760,8 @@ EditSession.$uid = 0;
                 column: callMarker.endColumn
             },
             action: "create",
-            event: event
+            event: event,
+            callMarker: callMarker
         };
         callMarker.expander = expander;
         this._signal("changeCallExpander", expander);

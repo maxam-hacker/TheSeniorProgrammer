@@ -40,8 +40,8 @@ class Theraphosa extends Component {
     Bubbler.setEditor(this.phosaEditor).setContainer(document.getElementById('bubbles' + this.props.id));
     this.phosaEditor.renderer.bubbler = Bubbler;
 
-    OpenBubbleCommander.subscribe(args => {
-      Bubbler.openFor(args);
+    OpenBubbleCommander.subscribe(expander => {
+      Bubbler.openFor(expander);
     });
 
     this.FileAndFolderClick = function(browserFile) {

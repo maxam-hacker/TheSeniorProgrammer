@@ -101,11 +101,7 @@ define(function(require, exports, module) {
         dom.setStyle(this.bubbleElem.style, "left", `${x}px`);
         dom.setStyle(this.bubbleElem.style, "top", `${y}px`);
 
-        this.bubbleEditor.setValue(
-            `var bubleEditor = new $singleLineEditor(el);\n
-            var bubleEditor = new $singleLineEditor(el);\n
-            var bubleEditor = new $singleLineEditor(el);\n
-            var bubleEditor = new $singleLineEditor(el);`);
+        this.bubbleEditor.setValue(expander.callMarker.originalCall.method.text);
 
         this.theMainElem = document.getElementById("mainContainer");
         event.addListener(this.headerElem, "mousedown", this.onHeaderMouseDown.bind(this));
