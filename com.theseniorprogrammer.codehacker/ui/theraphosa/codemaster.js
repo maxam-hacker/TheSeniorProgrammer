@@ -5,6 +5,7 @@ var Editor = require("./editor").Editor;
 var oop = require("./lib/oop");
 var PathsRegistry = require("./paths/registry").PathsRegistry;
 var CallMarker = require("./paths/marker").CallMarker;
+var openBubbleCommander = require("./paths/eventbus").OpenBubbleCommander;
 
 
 var CodeMaster = function(renderer, session, options) {
@@ -26,9 +27,29 @@ oop.inherits(CodeMaster, Editor);
 
         var target = CallMarker.checkHit(this.callMarkers, row, column);
         if (target) {
-            target.hide();
-            this.expandCall(target.originalCall, target.deltaX, target.deltaY);
-            this.session.addExpanderForCallMarker(target, event);
+            if (event.domEvent.shiftKey === true) {
+
+                var expander = {
+                    start: {
+                        line: target.startLine, 
+                        column: target.startColumn
+                    },
+                    end: {
+                        line: target.endLine, 
+                        column: target.endColumn
+                    },
+                    action: "create",
+                    event: event,
+                    callMarker: target
+                };
+                target.expander = expander;
+                openBubbleCommander.publish(expander);
+
+            } else {
+                target.hide();
+                this.expandCall(target.originalCall, target.deltaX, target.deltaY);
+                this.session.addExpanderForCallMarker(target, event);
+            }
         }
     };
 

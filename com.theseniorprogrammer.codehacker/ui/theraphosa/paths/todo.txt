@@ -1,6 +1,20 @@
 Expanders:
 
-    1. To show method in a separate bubble window;
+Date: 11.02.2020
+
+    1. Header for bubble windows;
+        - cross field;
+        - path master line;
+
+    2. Closing expanders and bubbles;
+
+    3. SHIFT for buubles;
+
+
+
+Date: 01.02.2020
+
+    1. To show method in a separate bubble window; +
 
     2. Header for bubble windows;
         - cross field;

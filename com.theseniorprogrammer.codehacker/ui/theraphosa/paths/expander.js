@@ -73,7 +73,7 @@ define(function(require, exports, module) {
 
             expander.x2 = x2;
             expander.y2 = y2;
-            openBubbleCommander.publish(expander);
+           //openBubbleCommander.publish(expander);
             
             var wrapper = this.dom.createElement("div");
             wrapper.setAttribute('class', 'expander-wrapper');
