@@ -270,6 +270,10 @@ Editor.$uid = 0;
         }
     };
 
+    this.onOpenBubble = function() {
+        this.openBubble = true;
+    }
+
     /**
      * Returns the keyboard handler, such as "vim" or "windows".
      *

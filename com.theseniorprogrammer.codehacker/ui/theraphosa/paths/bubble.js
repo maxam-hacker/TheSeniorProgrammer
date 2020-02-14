@@ -62,10 +62,10 @@ define(function(require, exports, module) {
         return editor;
     };
     
-    var Bubble = function(container, editor, expander) {
+    var Bubble = function(container, editor, callMarker) {
         this.container = container;
         this.editor = editor;
-        this.text = expander.callMarker.originalCall.method.text;
+        this.text = callMarker.originalCall.method.text;
 
         this.bubbleElem = dom.createElement("div");
         this.headerElem = dom.createElement("div");
@@ -95,8 +95,10 @@ define(function(require, exports, module) {
 
         //var x = expander.x2 + (expander.event.domEvent.pageX - expander.event.domEvent.offsetX);
         //var y = expander.y2 + (expander.event.domEvent.pageY - expander.event.domEvent.offsetY);
-        var x = expander.x2;
-        var y = expander.y2;
+        //var x = expander.x2;
+        //var y = expander.y2;
+        var x = 0;
+        var y = 0;
         dom.setStyle(this.bubbleElem.style, "position", "absolute");
         dom.setStyle(this.bubbleElem.style, "left", `${x}px`);
         dom.setStyle(this.bubbleElem.style, "top", `${y}px`);

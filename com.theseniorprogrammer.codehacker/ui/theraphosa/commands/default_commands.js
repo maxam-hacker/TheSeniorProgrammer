@@ -80,6 +80,12 @@ exports.commands = [{
     exec: function(editor) { editor.selectAll(); },
     readOnly: true
 }, {
+    name: "openbubble",
+    description: "Open Bubble",
+    bindKey: bindKey("Ctrl-W", "Command-W"),
+    exec: function(editor) { editor.onOpenBubble(); },
+    readOnly: true
+},{
     name: "centerselection",
     description: "Center selection",
     bindKey: bindKey(null, "Ctrl-L"),

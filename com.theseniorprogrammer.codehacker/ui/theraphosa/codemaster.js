@@ -14,6 +14,7 @@ var CodeMaster = function(renderer, session, options) {
     this.pathsRegistry = new PathsRegistry();
     this.callMarkers = [];
     this.addEventListener('click', this.onMouseClick.bind(this));
+    this.openBubble = false;
 };
 oop.inherits(CodeMaster, Editor);
 
@@ -27,30 +28,16 @@ oop.inherits(CodeMaster, Editor);
 
         var target = CallMarker.checkHit(this.callMarkers, row, column);
         if (target) {
-            if (event.domEvent.shiftKey === true) {
-
-                var expander = {
-                    start: {
-                        line: target.startLine, 
-                        column: target.startColumn
-                    },
-                    end: {
-                        line: target.endLine, 
-                        column: target.endColumn
-                    },
-                    action: "create",
-                    event: event,
-                    callMarker: target
-                };
-                target.expander = expander;
-                openBubbleCommander.publish(expander);
-
+            if (this.openBubble === true) {
+                openBubbleCommander.publish(target);
             } else {
                 target.hide();
                 this.expandCall(target.originalCall, target.deltaX, target.deltaY);
                 this.session.addExpanderForCallMarker(target, event);
             }
         }
+
+        this.openBubble = false;
     };
 
     this.setValueWithTag = function (val, tag) {

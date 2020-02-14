@@ -70,10 +70,6 @@ define(function(require, exports, module) {
             var x2 = expander.end.column * charWidth;
             var height = y2 - y0;
             var length = x2 - x0;
-
-            expander.x2 = x2;
-            expander.y2 = y2;
-           //openBubbleCommander.publish(expander);
             
             var wrapper = this.dom.createElement("div");
             wrapper.setAttribute('class', 'expander-wrapper');
