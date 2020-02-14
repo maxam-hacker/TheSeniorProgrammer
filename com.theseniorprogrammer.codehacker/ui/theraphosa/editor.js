@@ -271,7 +271,8 @@ Editor.$uid = 0;
     };
 
     this.onOpenBubble = function() {
-        this.openBubble = true;
+        if (this.onOpenBubbleHandler)
+            this.onOpenBubbleHandler();
     }
 
     /**

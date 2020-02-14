@@ -21,6 +21,10 @@ oop.inherits(CodeMaster, Editor);
 
 (function() {
 
+    this.onOpenBubbleHandler = function() {
+        this.openBubble = true;
+    }
+
     this.onMouseClick = function(event) {
         var cursor = event.getDocumentPosition();
         var row = cursor.row;
@@ -36,7 +40,6 @@ oop.inherits(CodeMaster, Editor);
                 this.session.addExpanderForCallMarker(target, event);
             }
         }
-
         this.openBubble = false;
     };
 

@@ -82,7 +82,7 @@ exports.commands = [{
 }, {
     name: "openbubble",
     description: "Open Bubble",
-    bindKey: bindKey("Ctrl-W", "Command-W"),
+    bindKey: bindKey("Ctrl-Z", "Ctrl-Z"),
     exec: function(editor) { editor.onOpenBubble(); },
     readOnly: true
 },{
