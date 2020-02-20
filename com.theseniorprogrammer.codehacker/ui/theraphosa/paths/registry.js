@@ -93,6 +93,6 @@ define(function(require, exports, module) {
       
     }).call(PathsRegistry.prototype);
     
-    exports.PathsRegistry = PathsRegistry;
+    exports.PathsRegistry = new PathsRegistry();
     
 });

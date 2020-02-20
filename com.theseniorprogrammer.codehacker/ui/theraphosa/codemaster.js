@@ -11,7 +11,7 @@ var openBubbleCommander = require("./paths/eventbus").OpenBubbleCommander;
 var CodeMaster = function(renderer, session, options) {
     Editor.call(this, renderer, session, options);
     this.currentFile = undefined;
-    this.pathsRegistry = new PathsRegistry();
+    this.pathsRegistry = PathsRegistry;
     this.callMarkers = [];
     this.addEventListener('click', this.onMouseClick.bind(this));
     this.openBubble = false;
@@ -47,7 +47,14 @@ oop.inherits(CodeMaster, Editor);
         this.session.doc.setValue(val, tag);
     };
 
-    this.setCurrentFile = function(filename) {
+    this.setCurrentFile = function(filename, deltaX, deltaY) {
+        var offsetX = 0;
+        var offsetY = 0;
+        if (deltaX !== undefined)
+            offsetX = deltaX;
+        if (deltaY !== undefined)
+            offsetY = deltaY;
+
         this.currentFile = filename;
         this.callMarkers.forEach(callMarker => {
             callMarker.hide()
@@ -60,8 +67,10 @@ oop.inherits(CodeMaster, Editor);
                 var callMarker = new CallMarker(this.session);
                 callMarker
                     .setOriginalCall(path.call)
-                    .setLineParams(path.call.start.line, path.call.end.line)
-                    .setColumnParams(path.call.start.column, path.call.end.column)
+                    .setLineParams(path.call.start.line + offsetY, path.call.end.line + offsetY)
+                    .setColumnParams(path.call.start.column + offsetX, path.call.end.column + offsetX)
+                    .setDeltaX(offsetX)
+                    .setDeltaY(offsetY)
                     .build();
                 this.callMarkers.push(callMarker);
             });

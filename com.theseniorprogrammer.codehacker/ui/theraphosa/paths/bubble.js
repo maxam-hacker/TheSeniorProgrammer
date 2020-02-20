@@ -65,7 +65,9 @@ define(function(require, exports, module) {
     var Bubble = function(container, editor, callMarker) {
         this.container = container;
         this.editor = editor;
+        this.method = callMarker.originalCall.method;
         this.text = callMarker.originalCall.method.text;
+        this.file = callMarker.originalCall.method.file;
 
         this.bubbleElem = dom.createElement("div");
         this.headerElem = dom.createElement("div");
@@ -103,7 +105,8 @@ define(function(require, exports, module) {
         dom.setStyle(this.bubbleElem.style, "left", `${x}px`);
         dom.setStyle(this.bubbleElem.style, "top", `${y}px`);
 
-        this.bubbleEditor.setValue(this.text);
+        this.bubbleEditor.setValueWithTag(this.text, { file: this.file, deltaX: 0, deltaY: 0 });
+        this.bubbleEditor.setCurrentFile(this.file, 0, -this.method.start.line);
 
         this.theMainElem = document.getElementById("mainContainer");
         event.addListener(this.headerElem, "mousedown", this.onHeaderMouseDown.bind(this));
