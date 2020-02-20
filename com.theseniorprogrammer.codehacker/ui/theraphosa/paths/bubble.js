@@ -36,8 +36,9 @@ define(function(require, exports, module) {
     var dom = require("../lib/dom");
     var EditSession = require("../edit_session").EditSession;
     var UndoManager = require("../undomanager").UndoManager;
-    var Mode =require("../mode/javascript").Mode;
+    var Mode = require("../mode/javascript").Mode;
     var event = require("../lib/event");
+    var PhosaTheme = require("../theme/monokai.js");
 
 
     var BubbleEditor = function(el, maxLines) {
@@ -105,6 +106,8 @@ define(function(require, exports, module) {
         dom.setStyle(this.bubbleElem.style, "left", `${x}px`);
         dom.setStyle(this.bubbleElem.style, "top", `${y}px`);
 
+        this.bubbleEditor.setTheme(PhosaTheme);
+        this.bubbleEditor.getSession().setMode(new Mode());
         this.bubbleEditor.setValueWithTag(this.text, { file: this.file, deltaX: 0, deltaY: 0 });
         this.bubbleEditor.setCurrentFile(this.file, 0, -this.method.start.line);
 
