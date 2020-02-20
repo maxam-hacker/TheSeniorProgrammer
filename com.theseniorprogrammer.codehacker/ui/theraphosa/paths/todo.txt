@@ -8,7 +8,9 @@ Date: 11.02.2020
 
     2. Closing expanders and bubbles;
 
-    3. SHIFT for buubles;
+    3. SHIFT for buubles; +
+
+    4. Is there a need to have 2 modes: view and edit???
 
 
 
