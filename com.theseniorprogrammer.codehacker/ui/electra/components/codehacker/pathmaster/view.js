@@ -37,7 +37,6 @@ export default class PathMasterView extends Component {
               BindToTheraphosaEventBus.publish(savedLinkedPathMasterCall);
               this.calls.push(savedLinkedPathMasterCall);
               this.methods.push(savedLinkedPathMasterCall.method);
-              sleep(500);
             },
             error => {
               console.log("Download path file error:");

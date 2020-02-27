@@ -66,7 +66,6 @@ class GoogleDriver {
 
                     if (token) {
                         this.listFiles(fileId, callback, onerror, token, result);
-                        sleep(1000);
                         return;
                     }
 
