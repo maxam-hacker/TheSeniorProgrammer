@@ -1,4 +1,5 @@
 import {google} from 'googleapis';
+import { SSL_OP_EPHEMERAL_RSA } from 'constants';
 
 //https://github.com/googleapis/google-api-nodejs-client/tree/master/samples/drive
 
@@ -65,6 +66,7 @@ class GoogleDriver {
 
                     if (token) {
                         this.listFiles(fileId, callback, onerror, token, result);
+                        sleep(1000);
                         return;
                     }
 

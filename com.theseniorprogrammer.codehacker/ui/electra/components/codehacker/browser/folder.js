@@ -18,26 +18,32 @@ class BrowserFolderView extends Component {
       folderOpen: false,
     };
 
+    this.getFolderContent = function() {
+      Googler.listFiles(this.folder.originalObject.id, driveFiles => {
+        driveFiles.forEach(driveFile => {
+          var browserFile = new BrowserFile();
+          browserFile
+            .setId(driveFile.id)
+            .setName(driveFile.name)
+            .setType(driveFile.mimeType)
+            .setFullName(this.folder.name + '/' + driveFile.name)
+            .setOriginalObject(driveFile)
+          this.folderContent.push(browserFile);
+        });
+      });
+    }
+
     this.onFolderClick = function(event) {
       event.stopPropagation();
+      if (this.folderContent.length === 0) 
+        this.getFolderContent();
       this.setState({folderOpen: !this.state.folderOpen});
     }
   }
 
   componentDidMount(){
-    Googler.listFiles(this.folder.originalObject.id, driveFiles => {
-      driveFiles.forEach(driveFile => {
-        var browserFile = new BrowserFile();
-        browserFile
-          .setId(driveFile.id)
-          .setName(driveFile.name)
-          .setType(driveFile.mimeType)
-          .setFullName(this.folder.name + '/' + driveFile.name)
-          .setOriginalObject(driveFile)
-        this.folderContent.push(browserFile);
-      });
-      this.setState({ updateSource: 'componentDidMount' });
-    })
+    this.getFolderContent();
+    this.setState({ updateSource: 'componentDidMount' });
   }
 
   render() {
