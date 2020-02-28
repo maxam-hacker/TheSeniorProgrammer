@@ -6,6 +6,7 @@ var oop = require("./lib/oop");
 var PathsRegistry = require("./paths/registry").PathsRegistry;
 var CallMarker = require("./paths/marker").CallMarker;
 var openBubbleCommander = require("./paths/eventbus").OpenBubbleCommander;
+var codeMasterToPathMasterLineEventBus = require("../electra/components/codehacker/eventbus").CodeMasterToPathMasterLineEventBus;
 
 
 var CodeMaster = function(renderer, session, options) {
@@ -29,6 +30,11 @@ oop.inherits(CodeMaster, Editor);
         var cursor = event.getDocumentPosition();
         var row = cursor.row;
         var column = cursor.column;
+
+        var tag = this.session.doc.getTag(row);
+        if (tag.file !== undefined) {
+            codeMasterToPathMasterLineEventBus.publish(tag.file);
+        }
 
         var target = CallMarker.checkHit(this.callMarkers, row, column);
         if (target) {

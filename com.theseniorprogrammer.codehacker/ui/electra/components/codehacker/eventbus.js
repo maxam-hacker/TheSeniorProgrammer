@@ -21,10 +21,14 @@ const CallToTheraphosaEventBus = new EventBus();
 const MethodToTheraphosaEventBus = new EventBus();
 const BindToTheraphosaEventBus = new EventBus();
 
+// codemaster ---> pathmaster line
+const CodeMasterToPathMasterLineEventBus = new EventBus();
+
 export {
     BrowserToTheraphosaCallsEventBus, 
     BrowserToTheraphosaMethodsEventBus, 
     CallToTheraphosaEventBus, 
     MethodToTheraphosaEventBus,
-    BindToTheraphosaEventBus
+    BindToTheraphosaEventBus,
+    CodeMasterToPathMasterLineEventBus
 }
