@@ -26,7 +26,7 @@ class BrowserFolderView extends Component {
             .setId(driveFile.id)
             .setName(driveFile.name)
             .setType(driveFile.mimeType)
-            .setFullName(this.folder.name + '/' + driveFile.name)
+            .setFullName(this.folder.fullName + '/' + driveFile.name)
             .setOriginalObject(driveFile)
           this.folderContent.push(browserFile);
         });
@@ -39,6 +39,9 @@ class BrowserFolderView extends Component {
         this.getFolderContent();
       this.setState({folderOpen: !this.state.folderOpen});
     }
+
+    this.getFolderContent = this.getFolderContent.bind(this);
+    this.onFolderClick = this.onFolderClick.bind(this);
   }
 
   componentDidMount(){
