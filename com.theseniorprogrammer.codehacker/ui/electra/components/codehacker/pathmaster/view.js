@@ -27,23 +27,30 @@ export default class PathMasterView extends Component {
     this.getSelectedCall = this.getSelectedCall.bind(this);
     this.getSelectedMethod = this.getSelectedMethod.bind(this);
 
+    this.callFiles = [];
+    this.getCallFile = function() {
+      if (this.callFiles.length === 0)
+        return;
+      var file = this.callFiles.pop();
+      if (file !== undefined) {
+        Googler.downloadFile(
+          file.id, 
+          savedLinkedPathMasterCall => {
+            BindToTheraphosaEventBus.publish(savedLinkedPathMasterCall);
+            this.calls.push(savedLinkedPathMasterCall);
+            this.methods.push(savedLinkedPathMasterCall.method);
+          }
+        );
+        setTimeout(this.getCallFile, 300);
+      }
+    }
+    this.getCallFile = this.getCallFile.bind(this);
+
     Googler.listFiles(
       this.pathFolderDescriptor,
       driveFiles => {
-        driveFiles.forEach(driveFile => {
-          Googler.downloadFile(
-            driveFile.id, 
-            savedLinkedPathMasterCall => {
-              BindToTheraphosaEventBus.publish(savedLinkedPathMasterCall);
-              this.calls.push(savedLinkedPathMasterCall);
-              this.methods.push(savedLinkedPathMasterCall.method);
-            },
-            error => {
-              console.log("Download path file error:");
-              console.log(error);
-            }
-          );
-        });
+        driveFiles.forEach(driveFile => { this.callFiles.push(driveFile); })
+        setTimeout(this.getCallFile, 300);
       }
     );
   }

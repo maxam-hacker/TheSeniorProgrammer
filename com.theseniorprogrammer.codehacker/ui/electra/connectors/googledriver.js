@@ -23,6 +23,8 @@ class GoogleDriver {
 
         this.result = [];
 
+        this.listFiles = this.listFiles.bind(this);
+
         this.authorize();
     }
 
@@ -65,7 +67,7 @@ class GoogleDriver {
                     }
 
                     if (token) {
-                        this.listFiles(fileId, callback, onerror, token, result);
+                        setTimeout(this.listFiles(fileId, callback, onerror, token, result), 300);
                         return;
                     }
 
