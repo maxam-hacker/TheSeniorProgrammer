@@ -18,35 +18,51 @@ class BrowserFolderView extends Component {
       folderOpen: false,
     };
 
-    this.getFolderContent = function() {
-      Googler.listFiles(this.folder.originalObject.id, driveFiles => {
-        driveFiles.forEach(driveFile => {
-          var browserFile = new BrowserFile();
-          browserFile
-            .setId(driveFile.id)
-            .setName(driveFile.name)
-            .setType(driveFile.mimeType)
-            .setFullName(this.folder.fullName + '/' + driveFile.name)
-            .setOriginalObject(driveFile)
-          this.folderContent.push(browserFile);
-        });
-      });
+    this.getFolderContent = function(update) {
+      Googler.listFiles(
+        this.folder.originalObject.id, 
+        driveFiles => {
+          driveFiles.forEach(driveFile => {
+            var browserFile = new BrowserFile();
+            browserFile
+              .setId(driveFile.id)
+              .setName(driveFile.name)
+              .setType(driveFile.mimeType)
+              .setFullName(this.folder.fullName + '/' + driveFile.name)
+              .setOriginalObject(driveFile)
+            this.folderContent.push(browserFile);
+          });
+          if (update !== undefined)
+            update();
+        },
+        error => console.log('List files command error [Folder]: ', error)
+      );
     }
 
     this.onFolderClick = function(event) {
       event.stopPropagation();
       if (this.folderContent.length === 0) 
-        this.getFolderContent();
+        this.getFolderContent(this.updateFolderContentOnClick);
+      else
+        this.updateFolderContentOnClick();
+    }
+
+    this.updateFolderContentOnClick = function() {
       this.setState({folderOpen: !this.state.folderOpen});
+    };
+
+    this.updateFolderContentOnMount = function() {
+      this.setState({ updateSource: 'componentDidMount' });
     }
 
     this.getFolderContent = this.getFolderContent.bind(this);
     this.onFolderClick = this.onFolderClick.bind(this);
+    this.updateFolderContentOnClick = this.updateFolderContentOnClick.bind(this);
+    this.updateFolderContentOnMount = this.updateFolderContentOnMount.bind(this);
   }
 
   componentDidMount(){
-    this.getFolderContent();
-    this.setState({ updateSource: 'componentDidMount' });
+    this.getFolderContent(this.updateFolderContentOnMount);
   }
 
   render() {

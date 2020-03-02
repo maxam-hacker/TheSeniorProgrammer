@@ -23,19 +23,23 @@ class Browser extends Component {
   }
 
   componentDidMount(){
-    Googler.listFiles(this.srcFolderDescriptor, driveFiles => {
-      driveFiles.forEach(driveFile => {
-        var browserFile = new BrowserFile();
-        browserFile
-          .setId(driveFile.id)
-          .setName(driveFile.name)
-          .setType(driveFile.mimeType)
-          .setFullName(driveFile.name)
-          .setOriginalObject(driveFile);
-        this.rootFolderContent.push(browserFile);
-      });
-      this.setState({ updateSource: 'componentDidMount' });
-    })
+    Googler.listFiles(
+      this.srcFolderDescriptor, 
+      driveFiles => {
+        driveFiles.forEach(driveFile => {
+          var browserFile = new BrowserFile();
+          browserFile
+            .setId(driveFile.id)
+            .setName(driveFile.name)
+            .setType(driveFile.mimeType)
+            .setFullName(driveFile.name)
+            .setOriginalObject(driveFile);
+          this.rootFolderContent.push(browserFile);
+        });
+        this.setState({ updateSource: 'componentDidMount' });
+      },
+      error => console.log('List files command error [Browser]: ', error)
+    );
   }
 
   render() {
