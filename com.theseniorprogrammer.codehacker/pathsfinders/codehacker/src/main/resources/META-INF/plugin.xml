@@ -1,0 +1,32 @@
+<idea-plugin>
+
+    <id>com.maxamhacker.codehacker</id>
+    <name>CodeHacker. IDEAs</name>
+    <vendor email="maxam.hacker@gmail.com" url="http://www.theseniorprogrammer.com">Maxam Hacker</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+
+        <group id="CodeHackerActionsGroup" text="CodeHacker">
+            <action id="ExpandCall" text="Expand Call" class="com.maxamhacker.codehacker.ideas.ExpandCallAction">
+                <keyboard-shortcut keymap="$default" first-keystroke="control Z"/>
+                <mouse-shortcut keymap="$default" keystroke="control button3"/>
+            </action>
+            <add-to-group group-id="MainMenu" relative-to-action="CodeMenu" anchor="before"/>
+        </group>
+
+        <group id="CodeHackerActionsGroupPopupMenu">
+            <group id="EditorPopupMenu.CodeHacker" text="CodeHacker" popup="true">
+                <reference ref="ExpandCall"/>
+            </group>
+            <separator/>
+            <add-to-group group-id="EditorPopupMenu" relative-to-action="EditorLangPopupMenu" anchor="before"/>
+        </group>
+
+    </actions>
+
+</idea-plugin>

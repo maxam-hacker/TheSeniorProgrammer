@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="725441b2-4d1d-44d1-9140-f245c249b227" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Yvxi9OP2McyY9mn3sHNzOatxwM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Plugin" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":runIde" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="725441b2-4d1d-44d1-9140-f245c249b227" name="Default Changelist" comment="" />
+      <created>1583836993931</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583836993931</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2238" y="202" key="#Project_Structure" timestamp="1583837470435">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2238" y="202" key="#Project_Structure/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583837470435" />
+    <state x="2451" y="248" key="#com.intellij.ide.util.MemberChooser" timestamp="1583837647611">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2451" y="248" key="#com.intellij.ide.util.MemberChooser/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583837647611" />
+    <state x="544" y="184" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1583844080195">
+      <screen x="0" y="23" width="1680" height="974" />
+    </state>
+    <state x="544" y="184" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1680.974@0.23.1680.974" timestamp="1583844080195" />
+    <state width="484" height="466" key="DebuggerActiveHint" timestamp="1583858003799">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="479" height="430" key="DebuggerActiveHint/0.23.1680.975@0.23.1680.975" timestamp="1583846751758" />
+    <state width="484" height="466" key="DebuggerActiveHint/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858003799" />
+    <state width="1374" height="325" key="GridCell.Tab.0.bottom" timestamp="1583858010114">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.0.bottom/0.23.1680.974@0.23.1680.974" timestamp="1583846679191" />
+    <state width="1374" height="325" key="GridCell.Tab.0.bottom/0.23.1680.975@0.23.1680.975" timestamp="1583846707212" />
+    <state width="1374" height="325" key="GridCell.Tab.0.bottom/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703680" />
+    <state width="1374" height="325" key="GridCell.Tab.0.bottom/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010114" />
+    <state width="1374" height="325" key="GridCell.Tab.0.center" timestamp="1583858010114">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.0.center/0.23.1680.974@0.23.1680.974" timestamp="1583846679190" />
+    <state width="1374" height="325" key="GridCell.Tab.0.center/0.23.1680.975@0.23.1680.975" timestamp="1583846707211" />
+    <state width="1374" height="325" key="GridCell.Tab.0.center/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703679" />
+    <state width="1374" height="325" key="GridCell.Tab.0.center/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010114" />
+    <state width="1374" height="325" key="GridCell.Tab.0.left" timestamp="1583858010113">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.0.left/0.23.1680.974@0.23.1680.974" timestamp="1583846679190" />
+    <state width="1374" height="325" key="GridCell.Tab.0.left/0.23.1680.975@0.23.1680.975" timestamp="1583846707211" />
+    <state width="1374" height="325" key="GridCell.Tab.0.left/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703678" />
+    <state width="1374" height="325" key="GridCell.Tab.0.left/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010113" />
+    <state width="1374" height="325" key="GridCell.Tab.0.right" timestamp="1583858010114">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.0.right/0.23.1680.974@0.23.1680.974" timestamp="1583846679191" />
+    <state width="1374" height="325" key="GridCell.Tab.0.right/0.23.1680.975@0.23.1680.975" timestamp="1583846707284" />
+    <state width="1374" height="325" key="GridCell.Tab.0.right/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703680" />
+    <state width="1374" height="325" key="GridCell.Tab.0.right/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010114" />
+    <state width="1374" height="325" key="GridCell.Tab.1.bottom" timestamp="1583858010115">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.1.bottom/0.23.1680.974@0.23.1680.974" timestamp="1583846679058" />
+    <state width="1374" height="325" key="GridCell.Tab.1.bottom/0.23.1680.975@0.23.1680.975" timestamp="1583846707212" />
+    <state width="1374" height="325" key="GridCell.Tab.1.bottom/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703569" />
+    <state width="1374" height="325" key="GridCell.Tab.1.bottom/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010115" />
+    <state width="1374" height="325" key="GridCell.Tab.1.center" timestamp="1583858010115">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.1.center/0.23.1680.974@0.23.1680.974" timestamp="1583846679057" />
+    <state width="1374" height="325" key="GridCell.Tab.1.center/0.23.1680.975@0.23.1680.975" timestamp="1583846707212" />
+    <state width="1374" height="325" key="GridCell.Tab.1.center/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703569" />
+    <state width="1374" height="325" key="GridCell.Tab.1.center/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010115" />
+    <state width="1374" height="325" key="GridCell.Tab.1.left" timestamp="1583858010115">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.1.left/0.23.1680.974@0.23.1680.974" timestamp="1583846679057" />
+    <state width="1374" height="325" key="GridCell.Tab.1.left/0.23.1680.975@0.23.1680.975" timestamp="1583846707212" />
+    <state width="1374" height="325" key="GridCell.Tab.1.left/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703569" />
+    <state width="1374" height="325" key="GridCell.Tab.1.left/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010115" />
+    <state width="1374" height="325" key="GridCell.Tab.1.right" timestamp="1583858010115">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1374" height="325" key="GridCell.Tab.1.right/0.23.1680.974@0.23.1680.974" timestamp="1583846679057" />
+    <state width="1374" height="325" key="GridCell.Tab.1.right/0.23.1680.975@0.23.1680.975" timestamp="1583846707212" />
+    <state width="1374" height="325" key="GridCell.Tab.1.right/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583856703569" />
+    <state width="1374" height="325" key="GridCell.Tab.1.right/1680.23.1920.1057/0.23.1680.975@1680.23.1920.1057" timestamp="1583858010115" />
+    <state width="525" height="445" key="SwitcherDM" timestamp="1583844200090">
+      <screen x="0" y="23" width="1680" height="974" />
+    </state>
+    <state width="525" height="445" key="SwitcherDM/0.23.1680.974@0.23.1680.974" timestamp="1583844200090" />
+    <state x="544" y="243" width="587" height="623" key="search.everywhere.popup" timestamp="1583844021789">
+      <screen x="0" y="23" width="1680" height="974" />
+    </state>
+    <state x="544" y="243" width="587" height="623" key="search.everywhere.popup/0.23.1680.974@0.23.1680.974" timestamp="1583844021789" />
+    <state x="2302" y="262" width="670" height="676" key="search.everywhere.popup/1680.23.1920.1057/0.23.1680.974@1680.23.1920.1057" timestamp="1583841105562" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/actions/ShowUsagesAction.java</url>
+          <line>277</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/actions/ShowUsagesAction.java</url>
+          <line>291</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>282</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>304</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>312</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>322</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>336</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>356</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>369</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>275</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>267</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>1849</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>1910</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>2130</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/usages/impl/UsageViewImpl.java</url>
+          <line>2092</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/findUsages/FindUsagesManager.java</url>
+          <line>404</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/findUsages/FindUsagesManager.java</url>
+          <line>435</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/findUsages/FindUsagesManager.java</url>
+          <line>485</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/findUsages/FindUsagesManager.java</url>
+          <line>480</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/find/findUsages/FindUsagesManager.java</url>
+          <line>607</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/codeInsight/navigation/GotoImplementationHandler.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/codeInsight/navigation/GotoTargetHandler.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/codeInsight/navigation/GotoTargetHandler.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2019.3.2/db705bd2f3911c2e35b53c9084ed96c3c0b7e900/ideaIC-2019.3.2-sources.jar!/com/intellij/codeInsight/navigation/GotoTargetHandler.java</url>
+          <line>161</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
