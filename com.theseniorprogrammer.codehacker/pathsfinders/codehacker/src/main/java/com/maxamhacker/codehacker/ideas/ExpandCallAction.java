@@ -64,10 +64,10 @@ public class ExpandCallAction extends GotoImplementationAction {
             try {
                 GotoData gotoData = getSourceAndTargetElements(editor, file);
                 if (gotoData != null) {
-                    show(project, editor, file, gotoData, true);
+                    show(project, editor, file, gotoData);
                 }
                 else {
-                    chooseFromAmbiguousSources(editor, file, data -> show(project, editor, file, data, true));
+                    chooseFromAmbiguousSources(editor, file, data -> show(project, editor, file, data));
                 }
             }
             catch (IndexNotReadyException e) {
@@ -78,8 +78,7 @@ public class ExpandCallAction extends GotoImplementationAction {
         private void show(@NotNull Project project,
                           @NotNull Editor editor,
                           @NotNull PsiFile file,
-                          @NotNull GotoData gotoData,
-                          @NotNull boolean codeHackerFlag) {
+                          @NotNull GotoData gotoData) {
             try {
                 Method m = GotoTargetHandler.class.getDeclaredMethod("show",
                         Project.class,
