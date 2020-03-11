@@ -2,19 +2,27 @@ package com.maxamhacker.codehacker.ideas;
 
 
 import com.intellij.codeInsight.CodeInsightActionHandler;
+import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.navigation.GotoImplementationHandler;
 import com.intellij.codeInsight.navigation.GotoTargetHandler;
+import com.intellij.codeInsight.navigation.ImplementationSearcher;
 import com.intellij.codeInsight.navigation.actions.GotoImplementationAction;
 import com.intellij.featureStatistics.FeatureUsageTracker;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.Caret;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
+import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
@@ -22,13 +30,32 @@ public class ExpandCallAction extends GotoImplementationAction {
 
     private static final Logger LOG = Logger.getInstance(ExpandCallAction.class);
 
+    private AnActionEvent myAction;
+    private Project myProject;
+    private Editor myEditor;
+    private PsiElement myCall;
+
+    @Override
+    public void actionPerformed(@NotNull AnActionEvent e) {
+        myAction = e;
+        super.actionPerformed(e);
+    }
+
+    public void actionPerformedImpl(@NotNull final Project project, final Editor editor) {
+        myProject = project;
+        myEditor = editor;
+        int offset = myEditor.getCaretModel().getOffset();
+        myCall = TargetElementUtil.getInstance().findTargetElement(myEditor, ImplementationSearcher.getFlags(), offset);
+        super.actionPerformedImpl(project, editor);
+    }
+
     @Override
     protected CodeInsightActionHandler getHandler(){
         return new MyCodeInsightActionHandler();
     }
 
 
-    public static class MyCodeInsightActionHandler extends GotoImplementationHandler {
+    public class MyCodeInsightActionHandler extends GotoImplementationHandler {
 
         @Override
         public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
@@ -63,6 +90,20 @@ public class ExpandCallAction extends GotoImplementationAction {
                 m.invoke(this, project, editor, file, gotoData);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void navigateToElement(@NotNull Navigatable descriptor) {
+            if (descriptor instanceof PsiElement) {
+                String methodText = ((PsiElement) descriptor).getOriginalElement().getText();
+                Document document = ExpandCallAction.this.myEditor.getDocument();
+                Caret primaryCaret = ExpandCallAction.this.myEditor.getCaretModel().getPrimaryCaret();
+                int start = myCall.getTextOffset();
+                int length = myCall.getTextLength();
+                WriteCommandAction.runWriteCommandAction(ExpandCallAction.this.myProject, () -> {
+                    document.insertString(start + length - 1, methodText + "\n");
+                });
             }
         }
     }
