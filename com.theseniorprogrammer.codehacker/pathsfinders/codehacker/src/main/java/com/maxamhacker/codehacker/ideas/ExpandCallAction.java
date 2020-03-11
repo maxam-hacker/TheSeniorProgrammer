@@ -98,10 +98,13 @@ public class ExpandCallAction extends GotoImplementationAction {
                 String methodText = ((PsiElement) descriptor).getOriginalElement().getText();
                 Document document = ExpandCallAction.this.myEditor.getDocument();
                 Caret primaryCaret = ExpandCallAction.this.myEditor.getCaretModel().getPrimaryCaret();
-                int start = myCall.getTextOffset();
-                int length = myCall.getTextLength();
+                int start = myCall.getOriginalElement().getTextOffset();
+                int length = myCall.getOriginalElement().getTextLength();
+                int p0 = myCall.getTextRange().getStartOffset();
+                int p1 = myCall.getTextRange().getEndOffset();
+                int p2 = myCall.getTextRange().getLength();
                 WriteCommandAction.runWriteCommandAction(ExpandCallAction.this.myProject, () -> {
-                    document.insertString(start + length - 1, methodText + "\n");
+                    document.insertString(p1, "\n" + methodText + "\n");
                 });
             }
         }
